@@ -23,7 +23,6 @@ interface Product {
 
 const ShopPage = () => {
   const [productCount, setProductCount] = useState<number>(0);
-  
 
   useEffect(() => {
     fetch('http://localhost:3001/api/products/count')
@@ -33,6 +32,7 @@ const ShopPage = () => {
   }, []);
 
   //เทสเฉยๆ 12ตัว
+    //const products = Array.from({ length: 12 }, (_, index) => ({ id: index, name: `Product ${index + 1}` }));
     const products: Product[] = Array.from({ length: 12 }, (_, index) => ({
       ProductId: index,
       ProductName: `Product ${index + 1}`,

@@ -14,6 +14,7 @@ interface Product {
   CategoryId: number;
   ImagePath: string;
 }
+ 
 
 interface ProductCardProps {
   product: Product;
@@ -23,8 +24,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const products = [
-    { id: 'product1', name: 'Product 1' },
-    { id: 'product2', name: 'Product 2' },
+    { ProductId: '1', ProductName: 'Product 1', Description: 'Product 1', Price: 'Product 1', StockQuantity: 'Product 1', Color: 'Product 1', IsTrend: 'Product 1', IsNew: 'Product 1', CategoryId: 'Product 1', ImagePath: 'Product 1' },
+    { ProductId: '2', ProductName: 'Product 2', Description: 'Product 2', Price: 'Product 2', StockQuantity: 'Product 2', Color: 'Product 2', IsTrend: 'Product 2', IsNew: 'Product 2', CategoryId: 'Product 2', ImagePath: 'Product 2' },
     // Add more products as needed
   ];
 
@@ -87,10 +88,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
                     <ul>
                     {products.map((product) => (
-                      <li key={product.id}>
+                      <li key={product.ProductId}>
                         {/* Replace the <a> tag with a <span> or <div> */}
-                        <Link href={`/detail/${product.id}`}>
-                          <span>{product.name}</span>
+                        <Link href={`/detail/${product.ProductId}`}>
+                          <span>{product.ProductName}</span>
                         </Link>
                       </li>
                     ))}

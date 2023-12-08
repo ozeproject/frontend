@@ -7,7 +7,7 @@ import '../../app/globals.css';
 const Edit = () => {
   return (
     <div className=''>
-        <Navbar />
+    <Navbar />
         <div>
 
             <div>
@@ -57,7 +57,7 @@ const Edit = () => {
 
         </div>
 
-        <Footer /> 
+    <Footer /> 
     </div>
   );
 };
