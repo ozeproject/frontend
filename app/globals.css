@@ -17,11 +17,66 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow: hidden; 
+  background-color: #FAF9F6;
+  font-family: 'IBM Plex Mono', monospace;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+.menutitle {
+  width: fit-content;
+  color: #818181;
+}
+
+
+
+.footerin {
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+}
+
+.modalproduct{
+  width: 60%;
+  height: 70%;
+}
+
+.pdcard {
+  background-color: #FAF9F6;
+  border: 1px solid ;
+  border-color: #B9B9B9;
+}
+
+.ckbtn {
+  background-color: #F2EEE3;
+}
+
+.addcrt {
+  background-color: #3B3B3B;
+  color: #FAF9F6;
+}
+
+.inputCard {
+  background-color: #F2EEE3;
+  border-color:  #B9B9B9;
+}
+
+.colorinput {
+  border-color:  #B9B9B9;
+}
+
+.quickbtn {
+  background-color:#F2EEE3;
+  border-color: #B9B9B9;
+}
+
+.topMenu {
+  color: #818181;
 }
