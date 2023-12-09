@@ -1,11 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import '../../app/globals.css';
 
 const Signup = () => {
+    const router = useRouter();
+    const [error, setError] = useState<null | string>(null);
+
+     // State to hold form data
+    const [user, setFormData] = useState({
+        Username: '',
+        Password: '',
+        Email: '',
+        Name: '',
+        Address: '',
+        Phone: '',
+    });
+
+    // Handler to update form data on input change
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+    setFormData({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Handler for form submission
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:3001/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (response.ok) {
+        router.push('/authen/login'); // Redirect to login page after successful signup
+      } else {
+        console.error('Failed to create user');
+        setError('Failed to create user. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error creating user:', error);
+      setError('Error creating user. Please try again.');
+    }
+  };
+  
     return (
         <div>
             <div className='mx-auto w-1/6'>
+            <form onSubmit={handleSubmit}>
                 <div className='mt-20'>
                     <div>
                         <div className='m-auto w-1/2'>
@@ -25,24 +73,23 @@ const Signup = () => {
 
                     <div className='flex justify-between space-x-2'>
                         <div className=''>
-                            <label>First Name *</label><br />
-                            <input className='border border-gray-600 w-full  rounded h-8 placeholder:pl-3' type='text' placeholder='Firstname'></input>
+                            <label>Username *</label><br />
+                            <input className='border border-gray-600 w-full  rounded h-8 placeholder:pl-3' type='text' placeholder='Username' name="Username" value={user.Username} onChange={handleInputChange}></input>
                         </div>
                         <div className=''>
-                            <label className=''>Last Name</label><br />
-                            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='text' placeholder='Lastname'></input>
+                            <label className=''>Name *</label><br />
+                            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='text' placeholder='Name' name="Name" value={user.Name} onChange={handleInputChange}></input>
                         </div>
-
                     </div>
 
                     <div className='mt-8'>
                         <label>Email *</label><br />
-                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='text' placeholder='Enter your email'></input>
+                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='text' placeholder='Enter your email' name="Email" value={user.Email} onChange={handleInputChange}></input>
                         <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid login, please correct your email </p>
                     </div>
                     <div className='mt-3'>
                         <label>Password *</label><br />
-                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='password' placeholder='••••••••'></input>
+                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='password' placeholder='••••••••' name="Password" value={user.Password} onChange={handleInputChange}></input>
                     </div>
                     <div className='mt-3'>
                         <label>Confirm Password *</label><br />
@@ -64,6 +111,7 @@ const Signup = () => {
                         <p className='text-center'>Already a member? <span className='font-bold'><Link href="/authen/login">Log in</Link></span></p>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     );

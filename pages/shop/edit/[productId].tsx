@@ -39,7 +39,7 @@ const EditProduct: React.FC = () => {
   }, [productId]);
 
   // Handler to update form data on input change
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     setProduct({
       ...product,
       [e.target.name]: e.target.value,
@@ -47,7 +47,7 @@ const EditProduct: React.FC = () => {
   };
 
   // Handler for form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     try {
