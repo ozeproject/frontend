@@ -1,6 +1,5 @@
-// pages/detail/[productId].tsx
-import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter ,} from 'next/router';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import '../../app/globals.css';
@@ -8,42 +7,67 @@ import '../../app/globals.css';
 const ProductDetail = () => {
     const router = useRouter();
     const { productId } = router.query;
+    const [product, setProduct] = useState({
+        ProductName: '',
+        Description: '',
+        Price: '',
+        StockQuantity: '',
+        Color: '',
+        IsTrend: '',
+        IsNew: '',
+        CategoryId: '',
+        ImagePath: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWsPfSz6bOW4iOxwZ8krfFxShTYYFVrXM7Q&usqp=CAU',
+      });
 
-    // Fetch product details based on the productId (replace this with your data fetching logic)
-    const productDetails = {
-        name: `Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc (${productId})`,
-        description: `Description for Product ${productId}`,
-        // Add more details as needed
+  // Fetch product details based on productId
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/products/${productId}`);
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      }
     };
+
+    if (productId) {
+      fetchProduct();
+    }
+  }, [productId]);
 
     return (
         <div>
             <Navbar />
-            {/* <h1>{productDetails.name} Detail Page</h1>
-            <p>{productDetails.description}</p> */}
-            <div className='flex my-5'>
+            <div className='flex mb-5'>
 
-                <div className='flex w-4/6'>
-                    <div className='w-full'>
-                        <div>IMG1</div>
-                        <div>IMG2</div>
+                <div className='flex w-7/12'>
+                    <div className='w-full h-full'>
+                        <div className='border-b-2 border-x-2 h-fit'><img className=" w-fit " src={product.ImagePath} alt="White" /></div>
+                        <div className='border-2 h-fit'><img className=" w-fit " src={product.ImagePath} alt="White" /></div>
                     </div>
                     <div className='w-full'>
-                        <div>IMG3</div>
-                        <div>IMG4</div>
+                        <div className='border-b-2 border-x-2 h-fit'><img className=" w-fit " src={product.ImagePath} alt="White" /></div>
+                        <div className='border-2 h-fit'><img className=" w-fit " src={product.ImagePath} alt="White" /></div>
                     </div>
                 </div>
 
-                <div className='w-2/6'>
-                    <p className='text-2xl font-semibold tracking-normal'>{productDetails.name} </p>
-                    <p className='text-2xl font-semibold mt-2 tracking-normal'>฿99,999</p>
+                <div className='w-5/12 pl-5'>
+                    <p className='text-2xl mt-5 font-semibold tracking-normal'>{product.ProductName} </p>
+                    <p className='text-2xl font-semibold mt-2 tracking-normal'>฿{product.Price}</p>
+                    
                     <div className='mt-4'>
                         <p className='font-semibold tracking-normal'>COLORS:</p>
                         <div className='flex mt-2'>
-                            <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
-                            <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1 ml-3 bg-black"></button>
+                            {product.Color === 'White' ? (
+                                <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
+                            ) : product.Color === 'Black' ? (
+                                <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-black"></button>
+                            ) : null}
                         </div>
                     </div>
+
+                    
                     <div className='mt-6'>
                         <p className='font-semibold tracking-normal'>SIZES:</p>
                         <p className='text-red-700 tracking-wide text-sm mt-2'>Please select your size first</p>
@@ -53,18 +77,20 @@ const ProductDetail = () => {
                         </div>
                         <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
                     </div>
+
                     <div>
-                        <p className='font-semibold tracking-normal mt-5'>QUANTITY::</p>
+                        <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
                         <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left you cannot add to the cart</p>
                         <div className='flex mt-1'>
                             <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
                             <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
                             <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
+                            <span className='mt-4 ml-2'>{'('}{product.StockQuantity}{')'}</span>
                         </div>
                     </div>
                     <div>
                         <p className='font-semibold tracking-normal mt-5'>INFORMATION:</p>
-                        <p className='tracking-wide text-sm mt-2 pr-10'>Worem ipsum dolor sit amet, consectetur adipiscing elit.Worem ipsum dolor sit amet, consectetur adipiscing elit.Worem ipsum dolor sit amet, consectetur adipiscing </p>
+                        <p className='tracking-wide text-sm mt-2 pr-10'>{product.Description} </p>
                     </div>
                     <div className='mt-8'>
                         <div className='flex '>

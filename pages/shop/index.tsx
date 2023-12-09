@@ -24,7 +24,6 @@ interface Product {
 const ShopPage = () => {
 
   //เทสเฉยๆ 12ตัว
-    //const products = Array.from({ length: 12 }, (_, index) => ({ id: index, name: `Product ${index + 1}` }));
     const products: Product[] = Array.from({ length: 6 }, (_, index) => ({
       ProductId: index,
       ProductName: `Product ${index + 1}`,
@@ -42,7 +41,7 @@ const ShopPage = () => {
       return (
         <div className={`grid grid-cols-4 border-b-2 border-gray-500`}>
           {products.map((product, index) => (
-            <div key={product.ProductId} className={`border-t-2 border-gray-500 ${index % 4 !== 3 ? 'border-r-2' : ''}`}>
+            <div key={product.ProductId} className={` border-t-2 border-gray-500 ${index % 4 !== 3 ? 'border-r-2' : ''}`}>
               <ProductCard product={product} />
             </div>
           ))}
@@ -51,7 +50,7 @@ const ShopPage = () => {
     };
 
   return (
-    <div className="wrapper">
+    <div className="">
         <Navbar />
         <Title />
         <Filter />
