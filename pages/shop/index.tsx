@@ -22,18 +22,10 @@ interface Product {
 }
 
 const ShopPage = () => {
-  const [productCount, setProductCount] = useState<number>(0);
-
-  useEffect(() => {
-    fetch('http://localhost:3001/api/products/count')
-      .then((response) => response.json())
-      .then((data) => setProductCount(data.count))
-      .catch((error) => console.error('Error fetching product count:', error));
-  }, []);
 
   //เทสเฉยๆ 12ตัว
     //const products = Array.from({ length: 12 }, (_, index) => ({ id: index, name: `Product ${index + 1}` }));
-    const products: Product[] = Array.from({ length: 12 }, (_, index) => ({
+    const products: Product[] = Array.from({ length: 6 }, (_, index) => ({
       ProductId: index,
       ProductName: `Product ${index + 1}`,
       Description: `Description ${index + 1}`,
@@ -63,9 +55,6 @@ const ShopPage = () => {
         <Navbar />
         <Title />
         <Filter />
-        <div>
-          <p>Total Products: {productCount}</p>
-        </div>
         
         {renderProductGrid(products)}
         

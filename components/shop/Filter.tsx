@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Filter = () => {
+    const [productCount, setProductCount] = useState<number>(0);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/api/productCount')
+      .then((response) => response.json())
+      .then((data) => setProductCount(data.count))
+      .catch((error) => console.error('Error fetching product count:', error));
+  }, []);
   return (
     <div className=' p-10'>
         <div className="filter flex justify-between ">
@@ -14,7 +22,7 @@ const Filter = () => {
                 </select>
             </div>
             <div>
-                <span>{'[ '}999{' }'}</span>
+                <span>{'[ '}{productCount}{' }'}</span>
             </div>
         </div>
     </div>

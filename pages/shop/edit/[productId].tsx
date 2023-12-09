@@ -73,46 +73,47 @@ const EditProduct: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <h1>Edit Product {productId}</h1>
-      <form onSubmit={handleSubmit}>
-        {/* Render form fields similar to the create page */}
-        <div>
-          <label>ProductName:</label>
-          <input type="text" name="ProductName" value={product.ProductName} onChange={handleInputChange} />
-        </div>
-        <div>
+      <div className='w-1/3 mx-auto my-12'>
+        <form onSubmit={handleSubmit}>
+        <div className='m-auto w-1/2 text-center text-5xl font-semibold'>Edit {productId}</div>
+          <div className='mt-3'>
+            <label>ProductName:</label>
+            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="ProductName" value={product.ProductName} onChange={handleInputChange} />
+          </div>
+          <div className='mt-3'>
             <label>Description:</label>
-            <input type="text" name="Description" value={product.Description} onChange={handleInputChange} />
+            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="Description" value={product.Description} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='mt-3'>
             <label>Price:</label>
-            <input type="number" name="Price" value={product.Price} onChange={handleInputChange} />
+            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="Price" value={product.Price} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='mt-3'>
             <label>StockQuantity:</label>
-            <input type="number" name="StockQuantity" value={product.StockQuantity} onChange={handleInputChange} />
+            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="StockQuantity" value={product.StockQuantity} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='mt-3'>
             <label>Color:</label>
-            <input type="text" name="Color" value={product.Color} onChange={handleInputChange} />
+            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="Color" value={product.Color} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='mt-3'>
             <label>IsTrend:</label>
-            <input type="text" name="IsTrend" value={product.IsTrend} onChange={handleInputChange} />
+            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="IsTrend" value={product.IsTrend} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='mt-3'>
             <label>IsNew:</label>
-            <input type="text" name="IsNew" value={product.IsNew} onChange={handleInputChange} />
+            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="IsNew" value={product.IsNew} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='mt-3'>
             <label>CategoryId:</label>
-            <input type="number" name="CategoryId" value={product.CategoryId} onChange={handleInputChange} min="1" max="2" />
+            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="CategoryId" value={product.CategoryId} onChange={handleInputChange} min="1" max="2" />
           </div>
-        {/* Add more fields based on your product structure */}
-        <div>
-          <button type="submit">Update Product</button>
-        </div>
-      </form>
+
+          <div className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-gray-600 text-center '>
+            <button type="submit">Edit</button>
+          </div>
+        </form>
+      </div>
       <Footer />
     </div>
   );
