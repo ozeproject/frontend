@@ -24,8 +24,8 @@ const ProductCard = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/products'); // Update the URL accordingly
-        //const response = await fetch('http://10.4.85.33:8080/api/products'); // Update the URL accordingly
+        //const response = await fetch('http://localhost:8080/api/products'); // Update the URL accordingly
+        const response = await fetch('http://10.4.85.33:8080/api/products'); // Update the URL accordingly
         if (response.ok) {
           const data = await response.json();
           console.log("HEllo OK")
