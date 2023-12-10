@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter ,} from 'next/router';
+import Image from 'next/image'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import '../../app/globals.css';
@@ -16,7 +17,7 @@ const ProductDetail = () => {
         IsTrend: '',
         IsNew: '',
         CategoryId: '',
-        ImagePath: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWsPfSz6bOW4iOxwZ8krfFxShTYYFVrXM7Q&usqp=CAU',
+        ImagePath: '',
       });
 
   // Fetch product details based on productId
@@ -44,12 +45,12 @@ const ProductDetail = () => {
 
                 <div className='flex w-7/12'>
                     <div className='w-full h-full'>
-                        <div className='border-b-2 border-x-2 h-fit'><img className=" w-fit " src={product.ImagePath} alt="White" /></div>
-                        <div className='border-2 h-fit'><img className=" w-fit " src={product.ImagePath} alt="White" /></div>
+                        <div className='border-b-2 border-x-2 h-fit'><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
+                        <div className='border-2 h-fit'><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
                     </div>
                     <div className='w-full'>
-                        <div className='border-b-2 border-x-2 h-fit'><img className=" w-fit " src={product.ImagePath} alt="White" /></div>
-                        <div className='border-2 h-fit'><img className=" w-fit " src={product.ImagePath} alt="White" /></div>
+                        <div className='border-b-2 border-x-2 h-fit'><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
+                        <div className='border-2 h-fit'><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
                     </div>
                 </div>
 

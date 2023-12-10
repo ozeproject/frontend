@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image'
 import '../../app/globals.css';
  
 interface Product {
@@ -107,7 +108,7 @@ const ProductCard = () => {
               </g>
             </svg></span></div>
 
-            <div className='text-center '><img src={product.ImagePath} alt="White" /></div>
+            <div className='text-center '><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
 
             <div className='text-center'><span>{product.ProductName} </span></div>
             
@@ -154,16 +155,16 @@ const ProductCard = () => {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
+                              <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
                           </div>
                           
                           <div className='h-1/4'>
                               <div className='flex justify-between'>
                              
-                                  <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
-                                  <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
-                                  <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
-                                  <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
+                                  <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
+                                  <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
+                                  <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
+                                  <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
                               </div>
                           </div>
                       </div>
