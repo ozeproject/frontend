@@ -16,19 +16,19 @@ interface Product {
 }
 
 const ProductCard = () => {
-  const itemsToMap = [1, 2, 3, 4, 5];
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null); 
   const [products, setProducts] = useState<Product[]>([]);
-  
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://10.4.85.33:8080/api/products'); // Update the URL accordingly
+        const response = await fetch('http://localhost:3301/api/products'); // Update the URL accordingly
+        //const response = await fetch('http://10.4.85.33:8080/api/products'); // Update the URL accordingly
         if (response.ok) {
           const data = await response.json();
+          console.log("HEllo OK")
           setProducts(data);
         } else {
           setError('Failed to fetch products. Please try again.');
@@ -44,12 +44,14 @@ const ProductCard = () => {
 
   const handleDelete = async (productId: number) => {
     try {
-      const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
+      const response = await fetch(`http://localhost:3301/api/products/${productId}`, {
         method: 'DELETE',
       });
-
+  
       if (response.ok) {
-        // If the deletion was successful, update the products state
+        // If the deletion was successful, close the modal
+        closeModal();
+        // Update the products state
         setProducts((prevProducts) => prevProducts.filter((product) => product.ProductId !== productId));
       } else {
         setError('Failed to delete product. Please try again.');
@@ -60,9 +62,10 @@ const ProductCard = () => {
     }
   };
 
-    const openModal = () => {
-      setIsModalOpen(true);
-    };
+  const openModal = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
   
     const closeModal = () => {
       setIsModalOpen(false);
@@ -91,9 +94,9 @@ const ProductCard = () => {
      {/* {itemsToMap.map((product, index) => (  */}
      {products.map((product, index) => (
     <div className=" border-gray-500 border-b-2 border-r-2">
-      <Link href={`/detail/${product.ProductId}`}>
         <div className="product p-6 ">
-                        
+      <Link href={`/detail/${product.ProductId}`}>
+            <div className='detail'>
             <div className='text-right'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
               <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
               <rect width="32" height="32" fill="#D9D9D9"/>
@@ -117,12 +120,22 @@ const ProductCard = () => {
                               <button className="black-button  border-solid border-2 colorinput w-5 h-5 p-1  bg-black"></button>
                             ) : null}
                 </div>
+            </div>
+            
+            </div>
+            </Link>
             
                 <div className='mt-4'>
-                    <button className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-full"
+                    {/* <button className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-full"
                     onClick={openModal}>
                         Quick Shop
-                    </button>
+                    </button> */}
+                    <button
+                    className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-full"
+                    onClick={() => openModal(product)}
+                  >
+                    Quick Shop
+                  </button>
                     
                     <button
                     className="white-button border-solid border-2 deletebtn rounded-md mt-3 p-2 mx-2 w-full"
@@ -131,26 +144,25 @@ const ProductCard = () => {
                     </button>
                 </div>
                 
-            </div>
             
             <div></div>
 
-            {isModalOpen && (
+            {isModalOpen && selectedProduct && (
               //Modal Product
                 <div className="fixed inset-0 flex items-center justify-center">
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><img src={product.ImagePath}  alt="White" /></p>
+                              <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
                           </div>
                           
                           <div className='h-1/4'>
                               <div className='flex justify-between'>
                              
-                                  <p><img src={product.ImagePath}  alt="White" /></p>
-                                  <p><img src={product.ImagePath}  alt="White" /></p>
-                                  <p><img src={product.ImagePath}  alt="White" /></p>
-                                  <p><img src={product.ImagePath}  alt="White" /></p>
+                                  <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
+                                  <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
+                                  <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
+                                  <p><img src={selectedProduct.ImagePath}  alt="White" /></p>
                               </div>
                           </div>
                       </div>
@@ -166,14 +178,14 @@ const ProductCard = () => {
                           </div>
                           
                           <div>
-                              <p className='text-2xl font-semibold tracking-normal'>{product.ProductName}  </p>
-                              <p className='text-2xl font-semibold mt-2 tracking-normal'>฿{product.Price} </p>
+                              <p className='text-2xl font-semibold tracking-normal'>{selectedProduct.ProductName}  </p>
+                              <p className='text-2xl font-semibold mt-2 tracking-normal'>฿{selectedProduct.Price} </p>
                               <div className='mt-4'>
                                   <p className='font-semibold tracking-normal'>COLORS:</p>
                                   <div className='flex mt-2'>
-                                  {product.Color === 'White' ? (
+                                  {selectedProduct.Color === 'White' ? (
                                         <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
-                                    ) : product.Color === 'Black' ? (
+                                    ) : selectedProduct.Color === 'Black' ? (
                                       <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-black"></button>
                                     ) : null}
                                   </div>
@@ -194,7 +206,7 @@ const ProductCard = () => {
                                       <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
                                       <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
                                       <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
-                                      <span className='mt-4 ml-2'>{'('}{product.StockQuantity}{')'}</span>
+                                      <span className='mt-4 ml-2'>{'('}{selectedProduct.StockQuantity}{')'}</span>
                                   </div>
                               </div>
                           </div>
@@ -228,7 +240,7 @@ const ProductCard = () => {
             )}
 
         </div> 
-        </Link>
+        
         </div>
         ))}
         </div>

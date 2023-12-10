@@ -49,8 +49,8 @@ const Signup = () => {
   
 
     try {
-    //const response = await fetch('http://localhost:3001/api/signup', {
-      const response = await fetch('http://10.4.85.33:8080/api/signup', {
+      const response = await fetch('http://localhost:3301/api/signup', {
+      //const response = await fetch('http://10.4.85.33:8080/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
