@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import '../../app/globals.css';
-
+ 
 interface Product {
   ProductId: number;
   ProductName: string;
   Description: string;
-  Price: number;
-  StockQuantity: number;
+  Price: string;
+  StockQuantity: string;
   Color: string;
   IsTrend: string;
   IsNew: string;
-  CategoryId: number;
+  CategoryId: string;
   ImagePath: string;
 }
- 
 
-interface ProductCardProps {
-  product: Product;
-}
+const ProductCard = () => {
+  const itemsToMap = [1, 2, 3, 4, 5];
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null); 
+  const [products, setProducts] = useState<Product[]>([]);
+  
+  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://10.4.85.33:8080/api/products'); // Update the URL accordingly
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        } else {
+          setError('Failed to fetch products. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setError('Error fetching products. Please try again.');
+      }
+    };
 
-  //Mockup
-  const products = [
-    { ProductId: '1', ProductName: 'Product 1', Description: 'Product 1', Price: 'Product 1', StockQuantity: 'Product 1', Color: 'Product 1', IsTrend: 'Product 1', IsNew: 'Product 1', CategoryId: 'Product 1', ImagePath: 'Product 1' },
-    { ProductId: '2', ProductName: 'Product 2', Description: 'Product 2', Price: 'Product 2', StockQuantity: 'Product 2', Color: 'Product 2', IsTrend: 'Product 2', IsNew: 'Product 2', CategoryId: 'Product 2', ImagePath: 'Product 2' },
-    // Add more products as needed
-  ];
+    fetchProducts();
+  }, []); // Run the effect only once when the component mounts
 
     const openModal = () => {
       setIsModalOpen(true);
@@ -57,7 +69,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   
   
   return (
-        <div className="product p-6">
+  <div className={`grid grid-cols-4   border-gray-500`}>
+     {/* {itemsToMap.map((product, index) => (  */}
+     {products.map((product, index) => (
+    <div className=" border-gray-500 border-b-2 border-r-2">
+      <Link href={`/detail/${product.ProductId}`}>
+        <div className="product p-6 ">
                         
             <div className='text-right'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
               <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
@@ -68,17 +85,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </g>
             </svg></span></div>
 
-            <div className='text-center '><img src="https://down-th.img.susercontent.com/file/th-11134207-23020-bxv2btfzjenv3b" alt="White" /></div>
+            <div className='text-center '><img src={product.ImagePath} alt="White" /></div>
 
-            <div className='text-center'><span>Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc Worem ipsum dolor sit amet  </span></div>
+            <div className='text-center'><span>{product.ProductName} </span></div>
             
-            <div className='text-center font-bold text-3xl mt-4'><span>฿X,XXX</span></div>
+            <div className='text-center font-bold text-3xl mt-4'><span>฿{product.Price}</span></div>
             
             <div className="hideforhold mt-4">
                 <div className="color-options text-center">
-                    
-                    <button className="white-button  border-solid border-2 colorinput  w-5 h-5 p-1 m-1 bg-white"></button>
-                    <button className="black-button  border-solid border-2 colorinput w-5 h-5 p-1 mx-1 bg-black"></button>
+                    {product.Color === 'White' ? (
+                                <button className="white-button  border-solid border-2 colorinput  w-5 h-5 p-1  bg-white"></button>
+                            ) : product.Color === 'Black' ? (
+                              <button className="black-button  border-solid border-2 colorinput w-5 h-5 p-1  bg-black"></button>
+                            ) : null}
                 </div>
             
                 <div className='mt-4'>
@@ -86,18 +105,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     onClick={openModal}>
                         Quick Shop
                     </button>
-
-                    {/* Test Code For loop */}
-                    <ul>
-                    {products.map((product) => (
-                      <li key={product.ProductId}>
-                        {/* Replace the <a> tag with a <span> or <div> */}
-                        <Link href={`/detail/${product.ProductId}`}>
-                          <span>{product.ProductName}</span>
-                        </Link>
-                      </li>
-                    ))}
-                    </ul>
                 </div>
                 
             </div>
@@ -110,16 +117,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p>BIG THUM</p>
+                              <p><img src={product.ImagePath}  alt="White" /></p>
                           </div>
                           
                           <div className='h-1/4'>
                               <div className='flex justify-between'>
                              
-                                  <p>Thumb1</p>
-                                  <p>Thumb2</p>
-                                  <p>Thumb3</p>
-                                  <p>Thumb4</p>
+                                  <p><img src={product.ImagePath}  alt="White" /></p>
+                                  <p><img src={product.ImagePath}  alt="White" /></p>
+                                  <p><img src={product.ImagePath}  alt="White" /></p>
+                                  <p><img src={product.ImagePath}  alt="White" /></p>
                               </div>
                           </div>
                       </div>
@@ -135,13 +142,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                           </div>
                           
                           <div>
-                              <p className='text-2xl font-semibold tracking-normal'>Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc </p>
-                              <p className='text-2xl font-semibold mt-2 tracking-normal'>฿99,999</p>
+                              <p className='text-2xl font-semibold tracking-normal'>{product.ProductName}  </p>
+                              <p className='text-2xl font-semibold mt-2 tracking-normal'>฿{product.Price} </p>
                               <div className='mt-4'>
                                   <p className='font-semibold tracking-normal'>COLORS:</p>
                                   <div className='flex mt-2'>
-                                    <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
-                                    <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1 ml-3 bg-black"></button>
+                                  {product.Color === 'White' ? (
+                                        <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
+                                    ) : product.Color === 'Black' ? (
+                                      <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-black"></button>
+                                    ) : null}
                                   </div>
                               </div>
                               <div className='mt-6'>
@@ -160,6 +170,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                                       <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
                                       <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
                                       <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
+                                      <span className='mt-4 ml-2'>{'('}{product.StockQuantity}{')'}</span>
                                   </div>
                               </div>
                           </div>
@@ -193,6 +204,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             )}
 
         </div> 
+        </Link>
+        </div>
+        ))}
+        </div>
     
   );
 };
