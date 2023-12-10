@@ -42,6 +42,24 @@ const ProductCard = () => {
     fetchProducts();
   }, []); // Run the effect only once when the component mounts
 
+  const handleDelete = async (productId: number) => {
+    try {
+      const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // If the deletion was successful, update the products state
+        setProducts((prevProducts) => prevProducts.filter((product) => product.ProductId !== productId));
+      } else {
+        setError('Failed to delete product. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      setError('Error deleting product. Please try again.');
+    }
+  };
+
     const openModal = () => {
       setIsModalOpen(true);
     };
@@ -104,6 +122,12 @@ const ProductCard = () => {
                     <button className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-full"
                     onClick={openModal}>
                         Quick Shop
+                    </button>
+                    
+                    <button
+                    className="white-button border-solid border-2 deletebtn rounded-md mt-3 p-2 mx-2 w-full"
+                    onClick={() => handleDelete(product.ProductId)}>
+                        Delete
                     </button>
                 </div>
                 
