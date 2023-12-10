@@ -25,7 +25,7 @@ const EditProduct: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3301/api/products/${productId}`);
+        const response = await fetch(`http://localhost:8080/api/products/${productId}`);
         //const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`);
         const data = await response.json();
         setProduct(data);
@@ -53,7 +53,7 @@ const EditProduct: React.FC = () => {
 
     try {
         //10.4.85.33:8080
-        const response = await fetch(`http://localhost:3301/api/products/${productId}`, {
+        const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
         //const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
             method: 'PUT',
             headers: {

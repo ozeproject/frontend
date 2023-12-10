@@ -5,6 +5,7 @@ import Title from '../../components/Title';
 import LoadMore from '../../components/Loadmore';
 import Filter from '../../components/shop/Filter';
 import ProductCard from '../../components/shop/ProductCard';
+import '../../setupEnv';
 import '../../app/globals.css';
 
 const ShopPage = () => {

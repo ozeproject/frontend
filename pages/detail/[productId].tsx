@@ -23,7 +23,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3301/api/products/${productId}`);
+        const response = await fetch(`http://localhost:8080/api/products/${productId}`);
         //const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`);
         const data = await response.json();
         setProduct(data);
