@@ -94,8 +94,8 @@ const ProductCard = () => {
   return (
   <div className={`grid grid-cols-4   border-gray-500`}>
      {/* {itemsToMap.map((product, index) => (  */}
-     {products.map((product, index) => (
-    <div className=" border-gray-500 border-b-2 border-r-2">
+     {products.map((product) => (
+    <div key={product.ProductId} className=" border-gray-500 border-b-2 border-r-2">
         <div className="product p-6 ">
       <Link href={`/detail/${product.ProductId}`}>
             <div className='detail'>
