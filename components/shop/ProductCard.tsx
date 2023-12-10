@@ -44,7 +44,7 @@ const ProductCard = () => {
 
   const handleDelete = async (productId: number) => {
     try {
-      const response = await fetch(`http://localhost:3301/api/products/${productId}`, {
+      const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
       //const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
         method: 'DELETE',
       });
