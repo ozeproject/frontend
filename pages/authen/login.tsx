@@ -17,9 +17,8 @@ const Login = () => {
 
       const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-    
+      
         try {
-            //10.4.85.33:8080
           //const response = await fetch('http://localhost:3001/api/login', {
           const response = await fetch('http://10.4.85.33:8080/api/login', {
             method: 'POST',
@@ -28,17 +27,24 @@ const Login = () => {
             },
             body: JSON.stringify(user),
           });
-    
+      
           if (response.ok) {
             const data = await response.json();
             console.log(data); // Log the token
           } else {
-            console.error('Login failed');
+            const errorData = await response.json();
+            if (errorData.error === 'Invalid password') {
+              // Password is incorrect, show an alert
+              alert('Invalid password');
+            } else {
+              console.error('Login failed');
+            }
           }
         } catch (error) {
           console.error('Error during login:', error);
         }
       };
+      
 
     return (
         <div>

@@ -23,6 +23,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  //Mockup
   const products = [
     { ProductId: '1', ProductName: 'Product 1', Description: 'Product 1', Price: 'Product 1', StockQuantity: 'Product 1', Color: 'Product 1', IsTrend: 'Product 1', IsNew: 'Product 1', CategoryId: 'Product 1', ImagePath: 'Product 1' },
     { ProductId: '2', ProductName: 'Product 2', Description: 'Product 2', Price: 'Product 2', StockQuantity: 'Product 2', Color: 'Product 2', IsTrend: 'Product 2', IsNew: 'Product 2', CategoryId: 'Product 2', ImagePath: 'Product 2' },
@@ -86,6 +87,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                         Quick Shop
                     </button>
 
+                    {/* Test Code For loop */}
                     <ul>
                     {products.map((product) => (
                       <li key={product.ProductId}>

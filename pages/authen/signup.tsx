@@ -11,26 +11,44 @@ const Signup = () => {
     const [user, setFormData] = useState({
         Username: '',
         Password: '',
+        ConfirmPassword: '', // New field for password confirmation
         Email: '',
         Name: '',
         Address: '',
         Phone: '',
     });
 
+    const [emailError, setEmailError] = useState<string | null>(null);
+    const [passwordError, setPasswordError] = useState<string | null>(null);
+
+
     // Handler to update form data on input change
-  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
-    setFormData({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+        setFormData({
+          ...user,
+          [e.target.name]: e.target.value,
+        });
+    
+        // Validate email format
+        if (e.target.name === 'Email') {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const isValidEmail = emailRegex.test(e.target.value);
+    
+          setEmailError(isValidEmail ? null : 'Invalid email format');
+        }
+         // Validate password confirmation
+        if (e.target.name === 'ConfirmPassword') {
+            const isPasswordMatch = e.target.value === user.Password;
+            setPasswordError(isPasswordMatch ? null : 'Passwords do not match');
+         }
+      };
 
   // Handler for form submission
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+  
 
     try {
-        //10.4.85.33:8080
     //const response = await fetch('http://localhost:3001/api/signup', {
       const response = await fetch('http://10.4.85.33:8080/api/signup', {
         method: 'POST',
@@ -88,7 +106,8 @@ const Signup = () => {
                     <div className='mt-8'>
                         <label>Email *</label><br />
                         <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='text' placeholder='Enter your email' name="Email" value={user.Email} onChange={handleInputChange}></input>
-                        <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid login, please correct your email </p>
+                        {emailError && <p className='text-red-700 tracking-wide text-sm mt-2'>{emailError}</p>}
+                        {/* <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid login, please correct your email </p> */}
                     </div>
                     <div className='mt-3'>
                         <label>Password *</label><br />
@@ -97,7 +116,8 @@ const Signup = () => {
                     <div className='mt-3'>
                         <label>Confirm Password *</label><br />
                         <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='password' placeholder='••••••••'></input>
-                        <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid password, please correct your password  </p>
+                        {passwordError && <p className='text-red-700 tracking-wide text-sm mt-2'>{passwordError}</p>}
+                        {/* <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid password, please correct your password  </p> */}
                     </div>
 
                     <div className='mt-3'>
