@@ -4,13 +4,14 @@ const Filter = () => {
     const [productCount, setProductCount] = useState<number>(0);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/productCount')
+    //fetch('http://localhost:3001/api/productCount')
+    fetch('http://10.4.85.33:8080/api/productCount')
       .then((response) => response.json())
       .then((data) => setProductCount(data.count))
       .catch((error) => console.error('Error fetching product count:', error));
   }, []);
   return (
-    <div className=' p-10'>
+    <div className=' p-10 border-b-2  border-gray-500'>
         <div className="filter flex justify-between ">
             <div className=''>
                 <select>
