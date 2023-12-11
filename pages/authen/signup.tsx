@@ -62,10 +62,10 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
     alert('Passwords do not match');
     return; // Stop execution if passwords do not match
   }
-
+  
   try {
-    const response = await fetch('http://localhost:8080/api/signup', {
-    //const response = await fetch('http://10.4.85.33:8080/api/signup', {
+    //const response = await fetch('http://localhost:8080/api/signup', {
+    const response = await fetch('http://10.4.85.33:8080/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

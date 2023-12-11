@@ -25,8 +25,8 @@ const ProductCard = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/products'); // Update the URL accordingly
-        //const response = await fetch('http://10.4.85.33:8080/api/products'); // Update the URL accordingly
+        //const response = await fetch('http://localhost:8080/api/products'); // Update the URL accordingly
+        const response = await fetch('http://10.4.85.33:8080/api/products'); // Update the URL accordingly
         if (response.ok) {
           const data = await response.json();
           console.log("HEllo OK")
@@ -45,8 +45,8 @@ const ProductCard = () => {
 
   const handleDelete = async (productId: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
-      //const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
+      //const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
+      const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
         method: 'DELETE',
       });
   
@@ -108,7 +108,8 @@ const ProductCard = () => {
               </g>
             </svg></span></div>
 
-            <div className='text-center '><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
+            <div className='text-center '><img className='mx-auto' src={product.ImagePath} width={400} height={400} alt="Picture of the author" loading="lazy"/></div>
+              {/* <Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/> */}
 
             <div className='text-center'><span>{product.ProductName} </span></div>
             
@@ -128,10 +129,6 @@ const ProductCard = () => {
             </Link>
             
                 <div className='mt-4'>
-                    {/* <button className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-full"
-                    onClick={openModal}>
-                        Quick Shop
-                    </button> */}
                     <button
                     className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-full"
                     onClick={() => openModal(product)}
@@ -155,16 +152,16 @@ const ProductCard = () => {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
+                              <p><img className='m-auto' src={product.ImagePath} width={500} height={500} alt="Picture of the author" loading="lazy"/></p>
                           </div>
                           
                           <div className='h-1/4'>
                               <div className='flex justify-between'>
                              
-                                  <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
-                                  <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
-                                  <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
-                                  <p><Image src={selectedProduct.ImagePath} width={500} height={500} alt="Picture of the author"/></p>
+                                  <p><img className='mx-auto' src={product.ImagePath} width={200} height={200} alt="Picture of the author" loading="lazy"/></p>
+                                  <p><img className='mx-auto' src={product.ImagePath} width={200} height={200} alt="Picture of the author" loading="lazy"/></p>
+                                  <p><img className='mx-auto' src={product.ImagePath} width={200} height={200} alt="Picture of the author" loading="lazy"/></p>
+                                  <p><img className='mx-auto' src={product.ImagePath} width={200} height={200} alt="Picture of the author" loading="lazy"/></p>
                               </div>
                           </div>
                       </div>

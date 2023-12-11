@@ -8,6 +8,7 @@ import '../../app/globals.css';
 const ProductDetail = () => {
     const router = useRouter();
     const { productId } = router.query;
+    const imagePath = `/img/products/1.jpg`;
     const [product, setProduct] = useState({
         ProductName: '',
         Description: '',
@@ -24,8 +25,8 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/products/${productId}`);
-        //const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`);
+        //const response = await fetch(`http://localhost:8080/api/products/${productId}`);
+        const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -45,12 +46,12 @@ const ProductDetail = () => {
 
                 <div className='flex w-7/12'>
                     <div className='w-full h-full'>
-                        <div className='border-b-2 border-x-2 h-fit'><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
-                        <div className='border-2 h-fit'><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
+                        <div className='border-b-2 border-x-2 h-fit '><img className='mx-auto' src={product.ImagePath} width={500} height={500} alt="Product Image" loading="lazy"/></div>
+                        <div className='border-2 h-fit'><img  className='mx-auto'  src={product.ImagePath} width={500} height={500} alt="Picture of the author" loading="lazy"/></div>
                     </div>
                     <div className='w-full'>
-                        <div className='border-b-2 border-x-2 h-fit'><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
-                        <div className='border-2 h-fit'><Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/></div>
+                        <div className='border-b-2 border-x-2 h-fit'><img className='mx-auto'  src={product.ImagePath} width={500} height={500} alt="Picture of the author" loading="lazy"/></div>
+                        <div className='border-2 h-fit'><img className='mx-auto'  src={product.ImagePath} width={500} height={500} alt="Picture of the author" loading="lazy"/></div>
                     </div>
                 </div>
 

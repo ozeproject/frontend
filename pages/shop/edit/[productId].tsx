@@ -25,8 +25,8 @@ const EditProduct: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/products/${productId}`);
-        //const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`);
+        //const response = await fetch(`http://localhost:8080/api/products/${productId}`);
+        const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -52,8 +52,8 @@ const EditProduct: React.FC = () => {
     e.preventDefault();
 
     try {
-        const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
-        //const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
+        //const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
+        const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
