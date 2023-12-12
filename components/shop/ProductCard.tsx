@@ -108,8 +108,7 @@ const ProductCard = () => {
               </g>
             </svg></span></div>
 
-            <div className='text-center '><img className='mx-auto' src={product.ImagePath} width={400} height={400} alt="Picture of the author" loading="lazy"/></div>
-              {/* <Image src={product.ImagePath} width={500} height={500} alt="Picture of the author"/> */}
+            <div className='text-center '><img className='mx-auto' src="" width={400} height={400} alt={product.ImagePath} loading="lazy"/></div>
 
             <div className='text-center'><span>{product.ProductName} </span></div>
             
@@ -152,16 +151,16 @@ const ProductCard = () => {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><img className='m-auto' src={product.ImagePath} width={500} height={500} alt="Picture of the author" loading="lazy"/></p>
+                              <p><img className='m-auto' src=''  width={500} height={500} alt={product.ImagePath} loading="lazy"/></p>
                           </div>
                           
                           <div className='h-1/4'>
                               <div className='flex justify-between'>
                              
-                                  <p><img className='mx-auto' src={product.ImagePath} width={200} height={200} alt="Picture of the author" loading="lazy"/></p>
-                                  <p><img className='mx-auto' src={product.ImagePath} width={200} height={200} alt="Picture of the author" loading="lazy"/></p>
-                                  <p><img className='mx-auto' src={product.ImagePath} width={200} height={200} alt="Picture of the author" loading="lazy"/></p>
-                                  <p><img className='mx-auto' src={product.ImagePath} width={200} height={200} alt="Picture of the author" loading="lazy"/></p>
+                                  <p><img className='mx-auto' src='' width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
                               </div>
                           </div>
                       </div>
