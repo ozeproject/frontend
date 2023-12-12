@@ -45,12 +45,12 @@ const ProductDetail = () => {
 
                 <div className='flex w-7/12'>
                     <div className='w-full h-full'>
-                        <div className='border-b-2 border-x-2 h-fit '><img className='mx-auto' src=''  width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
-                        <div className='border-2 h-fit'><img  className='mx-auto'  src=''  width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-b-2 border-x-2 h-fit '><Image className='mx-auto' src=''  width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-2 h-fit'><Image  className='mx-auto'  src=''  width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                     </div>
                     <div className='w-full'>
-                        <div className='border-b-2 border-x-2 h-fit'><img className='mx-auto'  src="" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
-                        <div className='border-2 h-fit'><img className='mx-auto'  src="" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-b-2 border-x-2 h-fit'><Image className='mx-auto'  src="" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-2 h-fit'><Image className='mx-auto'  src="" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                     </div>
                 </div>
 
