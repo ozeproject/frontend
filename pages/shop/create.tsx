@@ -89,8 +89,8 @@ const Create = () => {
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="CategoryId" value={formData.CategoryId} onChange={handleInputChange} min="1" max="2" />
           </div>
 
-          <div className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-gray-600 text-center '>
-            <button type="submit">Create</button>
+          <div>
+            <button className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-gray-600 text-center ' type="submit">Create</button>
           </div>
         </form>
       </div>

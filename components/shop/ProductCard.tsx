@@ -75,14 +75,11 @@ const ProductCard = () => {
   
     useEffect(() => {
       if (isModalOpen) {
-        // Disable scrolling on the body when the modal is open
         document.body.style.overflow = 'hidden';
       } else {
-        // Enable scrolling on the body when the modal is closed
         document.body.style.overflow = 'auto';
       }
   
-      // Clean up the effect
       const cleanup = () => {
         document.body.style.overflow = 'auto';
       };
@@ -93,13 +90,12 @@ const ProductCard = () => {
   
   return (
   <div className={`grid grid-cols-4   border-gray-500`}>
-     {/* {itemsToMap.map((product, index) => (  */}
      {products.map((product) => (
     <div key={product.ProductId} className=" border-gray-500 border-b-2 border-r-2">
         <div className="product p-6 ">
       <Link href={`/detail/${product.ProductId}`}>
             <div className='detail'>
-            <div className='text-right'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <div className='flex justify-end'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
               <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
               <rect width="32" height="32" fill="#D9D9D9"/>
               </mask>
@@ -142,11 +138,7 @@ const ProductCard = () => {
                     </button>
                 </div>
                 
-            
-            <div></div>
-
             {isModalOpen && selectedProduct && (
-              //Modal Product
                 <div className="fixed inset-0 flex items-center justify-center">
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>

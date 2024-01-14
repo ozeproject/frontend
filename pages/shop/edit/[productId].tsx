@@ -111,8 +111,8 @@ const EditProduct: React.FC = () => {
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="CategoryId" value={product.CategoryId} onChange={handleInputChange} min="1" max="2" />
           </div>
 
-          <div className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-gray-600 text-center '>
-            <button type="submit">Edit</button>
+          <div>
+            <button className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-gray-600 text-center' type="submit">Edit</button>
           </div>
         </form>
       </div>
