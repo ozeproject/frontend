@@ -27,10 +27,10 @@ const Navbar = () => {
                     </svg></Link>
                 </div>
                 <div className='flex justify-between m-4'>
-                    <div className='mr-10'><Link href="/shop/">ALL ITEMS</Link></div>
-                    <div className='mr-10'>MENS</div>
-                    <div className='mr-10'>WOMENS</div>
-                    <div className='mr-10'>ACCESSORIES</div>
+                    <div className='mr-10 hover:underline'><Link href="/shop/">ALL ITEMS</Link></div>
+                    <div className='mr-10 hover:underline'><Link href="/shop/menshop">MENS</Link></div>
+                    <div className='mr-10 hover:underline'><Link href="/shop/womenshop">WOMENS</Link></div>
+                    <div className='mr-10 hover:underline'><Link href="/shop/accessorie">ACCESSORIES</Link></div>
                 </div>
             </div>
 

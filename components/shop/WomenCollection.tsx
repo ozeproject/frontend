@@ -14,9 +14,6 @@ const WomenCollection = () => {
 
   return (
     <div className=''>
-        <div className="filter flex justify-between p-10 border-b-2  border-gray-500">
-            <div className='m-auto font-semibold text-xl '>MEN COLLECTION</div>
-        </div>
 
         <div className={`grid grid-cols-4   border-gray-500`}>
             <div  className=" border-gray-500 border-b-2 border-r-2">
@@ -34,7 +31,7 @@ const WomenCollection = () => {
 
                     <div className='text-center '><img className='mx-auto' src="https://down-th.img.susercontent.com/file/a4d1d6a621f68c3abd9a44bfd3ae57c6" width={400} height={400} alt="Test" loading="lazy"/></div>
 
-                    <div className='text-center'><span>Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc  </span></div>
+                    <div className='text-center'><span>*Women Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc  </span></div>
                     
                     <div className='text-center font-bold text-3xl mt-4'><span>฿xx,xxx</span></div>
                     
@@ -56,9 +53,6 @@ const WomenCollection = () => {
             </div>
           </div>
 
-        <div className="filter flex justify-between p-10">
-            <button className='m-auto font-semibold text-sm rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'>VIEW MORE</button>
-        </div>
 
     </div>
   );

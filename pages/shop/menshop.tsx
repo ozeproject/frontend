@@ -4,11 +4,11 @@ import Footer from '../../components/Footer';
 import Title from '../../components/Title';
 import LoadMore from '../../components/Loadmore';
 import Filter from '../../components/shop/Filter';
-import ProductCard from '../../components/shop/ProductCard';
+import MenCollection from '../../components/shop/MenCollection';
 import '../../setupEnv';
 import '../../app/globals.css';
 
-const ShopPage = () => {
+const MenShopPage = () => {
 
 
   return (
@@ -16,7 +16,7 @@ const ShopPage = () => {
         <Navbar />
         <Title />
         <Filter />
-        <ProductCard />
+        <MenCollection />
         <LoadMore />
          <Footer /> 
         
@@ -24,4 +24,4 @@ const ShopPage = () => {
   );
 };
 
-export default ShopPage;
+export default MenShopPage;

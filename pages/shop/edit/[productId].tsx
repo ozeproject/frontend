@@ -75,39 +75,48 @@ const EditProduct: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className='w-1/3 mx-auto my-12'>
+      <div className="border-b-2 border-gray-500">
+            <div className="lay2 p-12">
+                <div className="text-center text-4xl font-semibold">EDIT {productId}</div>
+            </div>
+      </div>
+      <div className='w-1/4 mx-auto my-12'>
         <form onSubmit={handleSubmit}>
-        <div className='m-auto w-1/2 text-center text-5xl font-semibold'>Edit {productId}</div>
           <div className='mt-3'>
-            <label>ProductName:</label>
+            <div className="border-2 border-gray-500 p-2 h-44 rounded-md">
+              <div className=' '>Upload file</div>
+            </div>
+          </div>
+          <div className='mt-3'>
+            <label>Product name</label>
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="ProductName" value={product.ProductName} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Description:</label>
+            <label>Description</label>
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="Description" value={product.Description} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Price:</label>
+            <label>Price</label>
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="Price" value={product.Price} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>StockQuantity:</label>
+            <label>Stock</label>
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="StockQuantity" value={product.StockQuantity} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Color:</label>
+            <label>Color</label>
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="Color" value={product.Color} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>IsTrend:</label>
+            <label>Trend</label>
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="IsTrend" value={product.IsTrend} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>IsNew:</label>
+            <label>New</label>
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="IsNew" value={product.IsNew} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>CategoryId:</label>
+            <label>Category</label>
             <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="CategoryId" value={product.CategoryId} onChange={handleInputChange} min="1" max="2" />
           </div>
 

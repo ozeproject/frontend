@@ -4,11 +4,11 @@ import Footer from '../../components/Footer';
 import Title from '../../components/Title';
 import LoadMore from '../../components/Loadmore';
 import Filter from '../../components/shop/Filter';
-import WomenCollection from '../../components/shop/WomenCollection';
+import Accessories from '../../components/shop/AccessoriesCollection';
 import '../../setupEnv';
 import '../../app/globals.css';
 
-const WomenShopPage = () => {
+const AccessorieShopPage = () => {
 
 
   return (
@@ -16,7 +16,7 @@ const WomenShopPage = () => {
         <Navbar />
         <Title />
         <Filter />
-        <WomenCollection />
+        <Accessories />
         <LoadMore />
          <Footer /> 
         
@@ -24,4 +24,4 @@ const WomenShopPage = () => {
   );
 };
 
-export default WomenShopPage;
+export default AccessorieShopPage;

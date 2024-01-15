@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
 
-const MenCollection = () => {
+const AccessoriesCollection = () => {
     const [productCount, setProductCount] = useState<number>(0);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const MenCollection = () => {
 
                     <div className='text-center '><img className='mx-auto' src="https://down-th.img.susercontent.com/file/a4d1d6a621f68c3abd9a44bfd3ae57c6" width={400} height={400} alt="Test" loading="lazy"/></div>
 
-                    <div className='text-center'><span>*Men Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc  </span></div>
+                    <div className='text-center'><span>*Accessories Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc  </span></div>
                     
                     <div className='text-center font-bold text-3xl mt-4'><span>฿xx,xxx</span></div>
                     
@@ -56,4 +56,4 @@ const MenCollection = () => {
   );
 };
 
-export default MenCollection;
+export default AccessoriesCollection;
