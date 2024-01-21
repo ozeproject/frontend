@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Title from '../../components/Title';
-import LoadMore from '../../components/Loadmore';
-import Filter from '../../components/shop/Filter';
-import ProductCard from '../../components/shop/ProductCard';
+import Shopbag from '../../components/cart/shopbag';
+import EmtyBag from '../../components/cart/emtybag';
 import '../../app/globals.css';
+
 
 const CartPage = () => {
 
@@ -13,10 +12,12 @@ const CartPage = () => {
   return (
     <div className="">
         <Navbar />
-        <Title />
-        <Filter />
-        <ProductCard />
-        <LoadMore />
+        <div className="border-b-2 border-gray-500">
+            <div className=" p-12">
+                <div className="text-center text-4xl font-semibold">YOUR SHOPPING BAGS</div>
+            </div>
+        </div>
+        <EmtyBag /> 
          <Footer /> 
         
     </div>
