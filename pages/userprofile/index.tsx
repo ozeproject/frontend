@@ -19,13 +19,13 @@ const UserProfile = () => {
         <div className="border-b-2 border-gray-500">
           <div className=" m-auto w-1/2 mt-12 lay1">
             <div>
-              <h1 className='text-center text-5xl'>PROFILE</h1>
+              <h1 className='text-center text-5xl text-[#3B3B3B]'>PROFILE</h1>
             </div>
           </div>
 
           <div className='menutitle m-auto w-1/2 p-2 lay1 flex flex-row '>
             <span
-              className={`m-4 text-black hover:underline ${
+              className={`m-4 text-[#3B3B3B] hover:underline ${
                 activeTab === 'information' ? 'underline' : ''
               }`}
               onClick={() => handleTabChange('information')}
@@ -33,7 +33,7 @@ const UserProfile = () => {
               Information
             </span>
             <span
-              className={`m-4 text-black hover:underline ${
+              className={`m-4 text-[#3B3B3B] hover:underline ${
                 activeTab === 'orderHistory' ? 'underline' : ''
               }`}
               onClick={() => handleTabChange('orderHistory')}

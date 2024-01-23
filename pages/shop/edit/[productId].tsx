@@ -121,7 +121,7 @@ const EditProduct: React.FC = () => {
           </div>
 
           <div>
-            <button className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-[#3B3B3B] text-center bg-[#3B3B3B] text-[#FAF9F6]' type="submit">UPDATE</button>
+            <button className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-[#3B3B3B] text-center bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]' type="submit">UPDATE</button>
           </div>
         </form>
       </div>

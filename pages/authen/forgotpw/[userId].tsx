@@ -35,7 +35,7 @@ const ForgotPW = () => {
                     
                     
                     <div className='mt-10'>
-                        <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] text-[#FAF9F6]">SAVE NEW PASSWORD</button>
+                        <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]">SAVE NEW PASSWORD</button>
                     </div>
 
                 </div>
