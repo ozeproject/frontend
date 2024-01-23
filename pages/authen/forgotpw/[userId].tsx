@@ -22,20 +22,20 @@ const ForgotPW = () => {
                         </svg></Link>
                         </div>
                     </div>
-                    <h1 className='text-center font-semibold text-xl mt-2'>ENTER YOUR NEW PASSWORD</h1>
+                    <h1 className='text-center font-semibold text-xl mt-2 text-[#3B3B3B]'>ENTER YOUR NEW PASSWORD</h1>
                     
                     <div className='mt-8'>
-                        <label>NEW PASSWORD</label><br />
-                        <input className='mt-1 border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='password' placeholder='Enter your new password'></input>
+                        <label className='text-[#3B3B3B]'>NEW PASSWORD</label><br />
+                        <input className='mt-1 border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='Enter your new password'></input>
                     </div>
                     <div className='mt-5'>
-                        <label>CONFIRM NEW PASSWORD</label><br />
-                        <input className='mt-1 border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='password' placeholder='Confirm your new password'></input>
+                        <label className='text-[#3B3B3B]'>CONFIRM NEW PASSWORD</label><br />
+                        <input className='mt-1 border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='Confirm your new password'></input>
                     </div>
                     
                     
                     <div className='mt-10'>
-                        <button className=" border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-full h-10  bg-white">SAVE NEW PASSWORD</button>
+                        <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] text-[#FAF9F6]">SAVE NEW PASSWORD</button>
                     </div>
 
                 </div>

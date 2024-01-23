@@ -106,48 +106,48 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
                         </svg></Link>
                         </div>
                     </div>
-                    <h1 className='text-center font-semibold text-xl mt-2'>CREATE YOUR ACCOUNT</h1>
+                    <h1 className='text-center font-semibold text-xl mt-2 text-[#3B3B3B]'>CREATE YOUR ACCOUNT</h1>
 
                     <div className='flex justify-between space-x-2'>
                         <div className=''>
-                            <label>Username *</label><br />
-                            <input className='border border-gray-600 w-full  rounded h-8 placeholder:pl-3' type='text' placeholder='Username' name="Username" value={user.Username} onChange={handleInputChange}></input>
+                            <label className='text-[#3B3B3B]'>Username *</label><br />
+                            <input className='border border-[#B9B9B9] w-full  rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='text' placeholder='Username' name="Username" value={user.Username} onChange={handleInputChange}></input>
                         </div>
                         <div className=''>
-                            <label className=''>Name *</label><br />
-                            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='text' placeholder='Name' name="Name" value={user.Name} onChange={handleInputChange}></input>
+                            <label className='text-[#3B3B3B]'>Name *</label><br />
+                            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='text' placeholder='Name' name="Name" value={user.Name} onChange={handleInputChange}></input>
                         </div>
                     </div>
 
                     <div className='mt-8'>
-                        <label>Email *</label><br />
-                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='text' placeholder='Enter your email' name="Email" value={user.Email} onChange={handleInputChange}></input>
+                        <label className='text-[#3B3B3B]'>Email *</label><br />
+                        <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='text' placeholder='Enter your email' name="Email" value={user.Email} onChange={handleInputChange}></input>
                         {emailError && <p className='text-red-700 tracking-wide text-sm mt-2'>{emailError}</p>}
                         {/* <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid login, please correct your email </p> */}
                     </div>
                     <div className='mt-3'>
-                        <label>Password *</label><br />
-                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='password' placeholder='••••••••' name="Password" value={user.Password} onChange={handleInputChange}></input>
+                        <label className='text-[#3B3B3B]'>Password *</label><br />
+                        <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='••••••••' name="Password" value={user.Password} onChange={handleInputChange}></input>
                     </div>
                     <div className='mt-3'>
-                        <label>Confirm Password *</label><br />
-                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='password' placeholder='••••••••' name="ConfirmPassword"  onChange={handleInputChange}></input>
+                        <label className='text-[#3B3B3B]'>Confirm Password *</label><br />
+                        <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='••••••••' name="ConfirmPassword"  onChange={handleInputChange}></input>
                         {passwordError && <p className='text-red-700 tracking-wide text-sm mt-2'>{passwordError}</p>}
                         {/* <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid password, please correct your password  </p> */}
                     </div>
 
                     <div className='mt-3'>
                         <input type='checkbox'></input>
-                        <label className='ml-1'>Sign up for  newsletter. </label>
+                        <label className='ml-1 text-[#3B3B3B]'>Sign up for  newsletter. </label>
                     </div>
 
 
                     <div className='mt-10'>
-                        <button className=" border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-full h-10  bg-black text-white">CREATE ACCOUNT</button>
+                        <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] text-[#FAF9F6]">CREATE ACCOUNT</button>
                     </div>
 
                     <div className='mt-8'>
-                        <p className='text-center'>Already a member? <span className='font-bold'><Link href="/authen/login">Log in</Link></span></p>
+                        <p className='text-center text-[#818181]'>Already a member? <span className='font-bold text-[#3B3B3B]'><Link href="/authen/login">Log in</Link></span></p>
                     </div>
                 </div>
                 </form>

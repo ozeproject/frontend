@@ -55,51 +55,51 @@ const Create = () => {
       <Navbar />
       <div className="border-b-2 border-gray-500">
             <div className="lay2 p-12">
-                <div className="text-center text-4xl font-semibold">CREATE</div>
+                <div className="text-center text-4xl font-semibold text-[#3B3B3B]">CREATE</div>
             </div>
       </div>
       <div className='w-1/4 mx-auto my-12'>
         <form onSubmit={handleSubmit}>
         <div className='mt-3'>
-        <div className="border-2 border-gray-500 p-2 h-44 rounded-md">
-            <div className=' '>Upload file</div>
+        <div className="border-2 border-[#B9B9B9] p-2 h-44 rounded-md bg-[#F2EEE3]">
+            <div className='text-[#3B3B3B]'>Upload file</div>
         </div>
           </div>
           <div className='mt-3'>
-            <label>Product Name</label>
-            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="ProductName" value={formData.ProductName} onChange={handleInputChange} />
+            <label className='text-[#3B3B3B]'>Product Name</label>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" value={formData.ProductName} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Description</label>
-            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="Description" value={formData.Description} onChange={handleInputChange} />
+            <label className='text-[#3B3B3B]'>Description</label>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="Description" value={formData.Description} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Price</label>
-            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="Price" value={formData.Price} onChange={handleInputChange} />
+            <label className='text-[#3B3B3B]'>Price</label>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="Price" value={formData.Price} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Stock</label>
-            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="StockQuantity" value={formData.StockQuantity} onChange={handleInputChange} />
+            <label className='text-[#3B3B3B]'>Stock</label>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="StockQuantity" value={formData.StockQuantity} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Color</label>
-            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="Color" value={formData.Color} onChange={handleInputChange} />
+            <label className='text-[#3B3B3B]'>Color</label>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="Color" value={formData.Color} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Trend</label>
-            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="IsTrend" value={formData.IsTrend} onChange={handleInputChange} />
+            <label className='text-[#3B3B3B]'>Trend</label>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="IsTrend" value={formData.IsTrend} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>New</label>
-            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="text" name="IsNew" value={formData.IsNew} onChange={handleInputChange} />
+            <label className='text-[#3B3B3B]'>New</label>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="IsNew" value={formData.IsNew} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
-            <label>Category</label>
-            <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type="number" name="CategoryId" value={formData.CategoryId} onChange={handleInputChange} min="1" max="2" />
+            <label className='text-[#3B3B3B]'>Category</label>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="CategoryId" value={formData.CategoryId} onChange={handleInputChange} min="1" max="2" />
           </div>
 
           <div>
-            <button className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-gray-600 text-center ' type="submit">Create</button>
+            <button className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-[#3B3B3B] text-center bg-[#3B3B3B] text-[#FAF9F6]' type="submit">CREATE</button>
           </div>
         </form>
       </div>

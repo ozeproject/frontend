@@ -66,33 +66,33 @@ const Login = () => {
                         </svg></Link>
                         </div>
                     </div>
-                    <h1 className='text-center font-semibold text-xl mt-2'>LOGIN TO YOUR ACCOUNT</h1>
+                    <h1 className='text-center font-semibold text-xl mt-2 text-[#3B3B3B]'>LOGIN TO YOUR ACCOUNT</h1>
                     
                     <div className='mt-8'>
-                        <label>Username</label><br />
-                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='text' placeholder='Enter your username' name="Username"  value={user.Username} onChange={handleInputChange}></input>
+                        <label className='text-[#3B3B3B]'>Username</label><br />
+                        <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='text' placeholder='Enter your username' name="Username"  value={user.Username} onChange={handleInputChange}></input>
                     </div>
                     <div className='mt-3'>
-                        <label>Password</label><br />
-                        <input className='border border-gray-600 w-full rounded h-8 placeholder:pl-3' type='password' placeholder='••••••••' name="Password"  value={user.Password} onChange={handleInputChange}></input>
+                        <label className='text-[#3B3B3B]'>Password</label><br />
+                        <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='••••••••' name="Password"  value={user.Password} onChange={handleInputChange}></input>
                     </div>
                     
                     <div className='flex justify-between mt-3'>
                         <div>
                             <input type='checkbox'></input>
-                            <label className='ml-1'>Remember me</label>
+                            <label className='ml-1 text-[#818181]'>Remember me</label>
                         </div>
                         <div className=''>
-                            <p className='underline'><Link href="/authen/forgotpw/1">Forgot password</Link></p>
+                            <p className='underline text-[#818181]'><Link href="/authen/forgotpw/1">Forgot password</Link></p>
                         </div>
                     </div>
                     <div className='mt-10'>
-                        <button className=" border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-full h-10  bg-white">LOG IN</button>
-                        <button className=" border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-full h-10  bg-white mt-4">LOG IN WITH FACEBOOK</button>
+                        <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] text-[#FAF9F6]">LOG IN</button>
+                        <button className=" border-y-2 border-r-2 border-2 border-[#B9B9B9] rounded-lg p-2  w-full h-10  bg-[#F2EEE3] mt-4 text-[#3B3B3B]">LOG IN WITH FACEBOOK</button>
                     </div>
 
                     <div className='mt-8'>
-                        <p className='text-center'>Don’t have an account? <span className='font-bold'>  <Link href="/authen/signup">Sign up</Link></span></p>
+                        <p className='text-center text-[#818181]'>Don’t have an account? <span className='font-bold text-[#3B3B3B]'>  <Link href="/authen/signup">Sign up</Link></span></p>
                     </div>
                 </div>
             </form>
