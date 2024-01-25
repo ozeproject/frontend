@@ -5,7 +5,7 @@ module.exports = {
     async redirects() {
       return [
         {
-          basePath: '/sj3/shop',
+          basePath: '/sj3/',
           source: '/',
           destination: '/home', // Your desired default path
           permanent: true,
