@@ -17,7 +17,7 @@ const CartPage = () => {
                 <div className="text-center text-4xl font-semibold">YOUR SHOPPING BAGS</div>
             </div>
         </div>
-        <EmtyBag /> 
+        <Shopbag /> 
          <Footer /> 
         
     </div>

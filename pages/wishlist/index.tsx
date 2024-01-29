@@ -29,7 +29,7 @@ const WishlistPage = () => {
                             </svg></span>
                         </div>
 
-                        <div className='text-center '><img className='mx-auto'  src="" width={400} height={400} alt="Test IMG" loading="lazy"/></div>
+                        <div className='text-center '><Image className='mx-auto'  src="" width={400} height={400} alt="Test IMG" loading="lazy"/></div>
 
                         <div className='text-center mt-8'><span>Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc  ProductName </span></div>
                         

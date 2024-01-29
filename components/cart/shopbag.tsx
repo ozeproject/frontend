@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image'
 
 const ShopBags = () => {
     const [productCount, setProductCount] = useState<number>(0);
@@ -25,7 +26,7 @@ const ShopBags = () => {
                     </svg></span>
                     </div>
 
-                    <div><img className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
+                    <div><Image className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className='w-9/12 p-4'>
                     <div className='flex justify-between text-2xl'>
@@ -69,7 +70,7 @@ const ShopBags = () => {
                     </svg></span>
                     </div>
 
-                    <div><img className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
+                    <div><Image className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className='w-9/12 p-4'>
                     <div className='flex justify-between text-2xl'>
@@ -113,7 +114,7 @@ const ShopBags = () => {
                     </svg></span>
                     </div>
 
-                    <div><img className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
+                    <div><Image className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className='w-9/12 p-4'>
                     <div className='flex justify-between text-2xl'>

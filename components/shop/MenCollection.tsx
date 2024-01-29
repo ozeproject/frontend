@@ -28,7 +28,7 @@ const MenCollection = () => {
                       </g>
                     </svg></span></div>
 
-                    <div className='text-center '><img className='mx-auto' src="" width={400} height={400} alt="Test" loading="lazy"/></div>
+                    <div className='text-center '><Image className='mx-auto' src="" width={400} height={400} alt="Test" loading="lazy"/></div>
 
                     <div className='text-center'><span>*Men Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc  </span></div>
                     
