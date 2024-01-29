@@ -57,7 +57,7 @@ const Navbar = () => {
                 </div>
 
                 <div className='lay3 flex justify-between'>
-                    {/* searchbar */}
+                    {/* search */}
                     <div className='m-4'
                         onClick={() => setSearchValue(!searchValue)}
                     >
