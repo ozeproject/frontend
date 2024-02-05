@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import '../../app/globals.css';
+import Shopbag from '../../components/cart/shopbag';
 
 const Login = () => {
     const [user, setFormData] = useState({
@@ -20,7 +21,8 @@ const Login = () => {
       
         try {
           //const response = await fetch('http://localhost:8080/api/login', {
-          const response = await fetch('http://10.4.85.33:8080/api/login', {
+            //https://capstone23.sit.kmutt.ac.th/sj3/api/products
+          const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

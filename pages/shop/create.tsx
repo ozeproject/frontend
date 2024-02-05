@@ -31,7 +31,7 @@ const Create = () => {
 
     try {
       //const response = await fetch('http://localhost:8080/api/products', {
-      const response = await fetch('http://10.4.85.33:8080/api/products', {
+      const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

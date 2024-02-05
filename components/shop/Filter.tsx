@@ -3,7 +3,7 @@ const Filter = () => {
     const [productCount, setProductCount] = useState<number>(0);
 
   useEffect(() => {
-    fetch('http://10.4.85.33:8080/api/productCount')
+    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/productCount')
       .then((response) => response.json())
       .then((data) => setProductCount(data.count))
       .catch((error) => console.error('Error fetching product count:', error));

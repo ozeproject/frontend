@@ -26,7 +26,7 @@ const ProductCard = () => {
     const fetchProducts = async () => {
       try {
         //const response = await fetch('http://localhost:8080/api/products'); // Update the URL accordingly
-        const response = await fetch('http://10.4.85.33:8080/api/products'); // Update the URL accordingly
+        const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products'); // Update the URL accordingly
         if (response.ok) {
           const data = await response.json();
           console.log("HEllo OK")
@@ -46,7 +46,7 @@ const ProductCard = () => {
   const handleDelete = async (productId: number) => {
     try {
       //const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
-      const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
+      const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`, {
         method: 'DELETE',
       });
   
