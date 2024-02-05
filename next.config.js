@@ -2,6 +2,7 @@
 const nextConfig = {}
 
 module.exports = {
+    assetPrefix: '/sj3' ,
     async redirects() {
       return [
         {
