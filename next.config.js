@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
+const isProduction = process.env.NODE_ENV === 'production';
 const nextConfig = {}
 
 module.exports = {
-    assetPrefix: '/sj3' ,
+  assetPrefix: isProduction ? '/sj3' : '' ,
     async redirects() {
       return [
         {
