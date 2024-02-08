@@ -2,55 +2,82 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import '../../app/globals.css';
 import Shopbag from '../../components/cart/shopbag';
+import Fail from '../../components/validation/LoginFail';
+import Success from '../../components/validation/LoginSuccess';
 
 const Login = () => {
-    const [user, setFormData] = useState({
-        Username: '',
-        Password: '',
+  const [user, setFormData] = useState({
+    Username: '',
+    Password: '',
+});
+const [showFailModal, setShowFailModal] = useState(false);
+const [showSuccessModal, setShowSuccessModal] = useState(false);
+const [failMessage, setFailMessage] = useState('');
+const [successMessage, setSuccessMessage] = useState('');
+
+const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+    setFormData({
+        ...user,
+        [e.target.name]: e.target.value,
+    });
+};
+
+const handleCloseFailModal = () => {
+    setShowFailModal(false);
+};
+
+const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+};
+
+const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  e.preventDefault();
+
+  try {
+      const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/login', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user),
       });
 
-      const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
-        setFormData({
-          ...user,
-          [e.target.name]: e.target.value,
-        });
-      };
-
-      const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-      
-        try {
-          //const response = await fetch('http://localhost:8080/api/login', {
-            //https://capstone23.sit.kmutt.ac.th/sj3/api/products
-          const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
-          });
-      
-          if (response.ok) {
-            const data = await response.json();
-            console.log(data); // Log the token
+      if (response.ok) {
+          const data = await response.json();
+          console.log(data); // Log the token
+          setShowSuccessModal(true);
+          setSuccessMessage('Login successful!');
+      } else {
+          const errorData = await response.json();
+          console.log(errorData);
+          if (response.status === 401) {
+              // Handle invalid credentials
+              setFailMessage(errorData.error || 'Invalid username or password');
           } else {
-            const errorData = await response.json();
-            if (errorData.error === 'Invalid password') {
-              // Password is incorrect, show an alert
-              alert('Invalid password');
-            } else {
+              // Handle other errors
               console.error('Login failed');
-            }
+              setFailMessage('Login failed. Please try again later.');
           }
-        } catch (error) {
-          console.error('Error during login:', error);
-        }
-      };
+          setShowFailModal(true);
+      }
+  } catch (error) {
+      console.error('Error during login:', error);
+      setFailMessage('An error occurred during login. Please try again later.');
+      setShowFailModal(true);
+  }
+};
       
 
     return (
         <div>
             <div className='mx-auto w-1/6'>
+              
+             {/* Fail Modal */}
+             {showFailModal && <Fail onClose={handleCloseFailModal} message={failMessage} />}
+
+              {/* Success Modal */}
+              {showSuccessModal && <Success onClose={handleCloseSuccessModal} message={successMessage} />}
+
             <form onSubmit={handleSubmit}>
                 <div className='mt-20'>
                     <div>

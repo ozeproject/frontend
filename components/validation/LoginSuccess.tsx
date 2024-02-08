@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 interface LoginSuccessProps {
     onClose: () => void;
+    message: string;
 }
 
-const LoginSuccess: React.FC<LoginSuccessProps> = ({ onClose }) => {
-
+const LoginSuccess: React.FC<LoginSuccessProps> = ({ onClose, message }) => {
     const handleDoneClick = () => {
         onClose();
     };

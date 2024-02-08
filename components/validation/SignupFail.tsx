@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-interface LoginFailProps {
+interface SignupFailProps {
     onClose: () => void;
     message: string;
 }
 
-const LoginFail: React.FC<LoginFailProps> = ({ onClose, message }) => {
+const SignupFail: React.FC<SignupFailProps> = ({ onClose, message }) => {
     const handleDoneClick = () => {
         onClose();
     };
@@ -21,7 +21,7 @@ const LoginFail: React.FC<LoginFailProps> = ({ onClose, message }) => {
                     </div>
                 </div>
                 <div className='text-center'>
-                    <div className='text-red-600 mt-8 text-2xl'>Login failed!</div>
+                    <div className='text-red-600 mt-8 text-2xl'>Signup failed!</div>
                     <div className='mt-4 font-semibold'>{message}</div> {/* Display the message here */}
                     <div>
                         <button
@@ -38,4 +38,4 @@ const LoginFail: React.FC<LoginFailProps> = ({ onClose, message }) => {
     );
 };
 
-export default LoginFail;
+export default SignupFail;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import '../../app/globals.css';
+import Fail from '../../components/validation/SignupFail';
 
 const Signup = () => {
     const router = useRouter();
@@ -20,6 +21,8 @@ const Signup = () => {
 
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
+    const [showModal, setShowModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
 
     // Handler to update form data on input change
@@ -44,46 +47,34 @@ const Signup = () => {
       };
 
   // Handler for form submission
-const handleSubmit = async (e: { preventDefault: () => void; }) => {
-  e.preventDefault();
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
 
-  // Validate email format
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const isValidEmail = emailRegex.test(user.Email);
+    // Your email and password validation logic here
 
-  if (!isValidEmail) {
-    alert('Invalid email format');
-    return; // Stop execution if email is invalid
-  }
+    try {
+        const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        });
 
-  // Validate password confirmation
-  const isPasswordMatch = user.ConfirmPassword === user.Password;
-  if (!isPasswordMatch) {
-    alert('Passwords do not match');
-    return; // Stop execution if passwords do not match
-  }
-  
-  try {
-    //const response = await fetch('http://localhost:8080/api/signup', {
-    const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-
-    if (response.ok) {
-      console.log("create success")
-      //router.push('/authen/login'); // Redirect to login page after successful signup
-    } else {
-      console.error('Failed to create user');
-      setError('Failed to create user. Please try again.');
+        if (response.ok) {
+            console.log("create success")
+            router.push('/authen/login'); // Redirect to login page after successful signup
+        } else {
+            console.error('Failed to create user');
+            const data = await response.json();
+            setErrorMessage(data.error); // Set the error message from the response
+            setShowModal(true); // Show the modal
+        }
+    } catch (error) {
+        console.error('Error creating user:', error);
+        setErrorMessage('Error creating user. Please try again.');
+        setShowModal(true); // Show the modal
     }
-  } catch (error) {
-    console.error('Error creating user:', error);
-    setError('Error creating user. Please try again.');
-  }
 };
   
     return (
@@ -152,6 +143,12 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
                 </div>
                 </form>
             </div>
+            {showModal && (
+                <Fail
+                    onClose={() => setShowModal(false)}
+                    message={errorMessage}
+                />
+            )}
         </div>
     );
 };
