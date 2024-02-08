@@ -112,21 +112,42 @@ const EditProduct: React.FC = () => {
             <label>Stock</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="StockQuantity" value={product.StockQuantity} onChange={handleInputChange} />
           </div>
+          
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Color</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="Color" value={product.Color} onChange={handleInputChange} />
+            {/* <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="Color" value={product.Color} onChange={handleInputChange} /> */}
+            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="Color" value={product.Color} onChange={handleInputChange}>
+              <option value="Black">Black</option>
+              <option value="White">White</option>
+            </select>
           </div>
+
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Trend</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="IsTrend" value={product.IsTrend} onChange={handleInputChange} />
+            {/* <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="IsTrend" value={product.IsTrend} onChange={handleInputChange} /> */}
+            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsTrend" value={product.IsTrend} onChange={handleInputChange}>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
           </div>
+          
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>New</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="IsNew" value={product.IsNew} onChange={handleInputChange} />
+            {/* <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="IsNew" value={product.IsNew} onChange={handleInputChange} /> */}
+            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsNew" value={product.IsNew} onChange={handleInputChange}>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
           </div>
+          
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Category</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="CategoryId" value={product.CategoryId} onChange={handleInputChange} min="1" max="2" />
+            {/* <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="CategoryId" value={product.CategoryId} onChange={handleInputChange} min="1" max="2" /> */}
+            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="CategoryId" value={product.CategoryId} onChange={handleInputChange}>
+              <option value="Shirt">Shirt</option>
+              <option value="Bag">Bag</option>
+              <option value="Accessories">Accessories</option>
+            </select>
           </div>
 
           <div className='mt-5'>

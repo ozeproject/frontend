@@ -22,10 +22,10 @@ const EditSuccess: React.FC<EditSuccessProps> = ({ onClose }) => {
                 </div>
                 <div className='text-center'>
                     <div className='text-green-600 mt-8 text-2xl'>Updating Successful!</div>
-                    <div className='mt-4 font-semibold'>You have successfully updated item</div>
+                    <div className='mt-4 font-semibold '>You have successfully updated item</div>
                     <div>
                         <button
-                            className='mt-8 w-3/12 m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'
+                            className='mt-8 w-3/12 m-auto rounded-lg p-3 bg-[#3B3B3B] border border-gray-600 text-center text-[#FAF9F6]'
                             type="button"
                             onClick={handleDoneClick}
                         >
