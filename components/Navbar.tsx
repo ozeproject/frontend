@@ -29,25 +29,6 @@ const Navbar = () => {
                             </svg></Link>
                     </div>
 
-                    {/* search div */}
-                    {searchValue ?
-                        <div className='lay2'>
-                            <div className="m-4 flex justify-end items-end">
-                                <input
-                                    type="text"
-                                    placeholder="WHAT ARE YOU LOOKING FOR?"
-                                    className="border rounded-md p-2"
-                                    style={{
-                                        backgroundColor: '#f2eee3',
-                                        width: '420px',
-                                        height: '48px',
-                                        border: '1px solid #ccc',
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        : null}
-
                     <div className='flex justify-between m-4'>
                         <div className='mx-4 hover:underline'><Link href="/shop/">ALL ITEMS</Link></div>
                         <div className='mx-4 hover:underline'><Link href="/shop/menshop">MENS</Link></div>
@@ -56,8 +37,8 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <div className='lay3 flex justify-between'>
-                    {/* search */}
+                <div className='lay3'>
+                    <div className='flex justify-between'>
                     <div className='m-4'
                         onClick={() => setSearchValue(!searchValue)}
                     >
@@ -103,6 +84,25 @@ const Navbar = () => {
                                 </g>
                             </svg></Link>
                     </div>
+                    </div>
+                    {/* search div */}
+                    {searchValue ?
+                        <div className='w-60'>
+                            <div className="flex justify-end items-end">
+                                <input
+                                    type="text"
+                                    placeholder="WHAT ARE YOU LOOKING FOR?"
+                                    className="border rounded-md p-2"
+                                    style={{
+                                        backgroundColor: '#f2eee3',
+                                        width: '420px',
+                                        height: '48px',
+                                        border: '1px solid #ccc',
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        : null}
                 </div>
             </div>
         </div>

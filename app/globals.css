@@ -21,7 +21,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  overflow: hidden; 
+  /* overflow: hidden;  /* This line prevents scrolling */
   background-color: #FAF9F6;
   font-family: 'IBM Plex Mono', monospace;
 }

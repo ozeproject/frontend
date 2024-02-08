@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
-interface EditFailProps {
+interface DeleteProps {
     onClose: () => void;
+    onDelete: () => void; // Add onDelete prop
 }
 
-const EditFail: React.FC<EditFailProps> = ({ onClose }) => {
+const Delete: React.FC<DeleteProps> = ({ onClose, onDelete }) => {
 
     const handleDoneClick = () => {
         onClose();
+    };
+
+    const handleDeleteClick = () => {
+        onDelete();
     };
 
     return (
@@ -31,7 +36,7 @@ const EditFail: React.FC<EditFailProps> = ({ onClose }) => {
                     <div className='flex justify-center'>
                         <div className='w-1/3'>
                             <button
-                                className='mt-8  m-auto rounded-lg p-3 bg-slate-500 text-white border border-gray-600 text-center'
+                                className='mt-8  m-auto rounded-lg p-3 bg-[#F2EEE3] text-[#3B3B3B] border border-gray-600 text-center'
                                 type="button"
                                 onClick={handleDoneClick}
                             >
@@ -42,7 +47,7 @@ const EditFail: React.FC<EditFailProps> = ({ onClose }) => {
                             <button
                                 className='mt-8  m-auto rounded-lg p-3 bg-red-500 text-white border border-gray-600 text-center'
                                 type="button"
-                                onClick={handleDoneClick}
+                                onClick={handleDeleteClick}
                             >
                                 DELETE
                             </button>
@@ -54,4 +59,4 @@ const EditFail: React.FC<EditFailProps> = ({ onClose }) => {
     );
 };
 
-export default EditFail;
+export default Delete;

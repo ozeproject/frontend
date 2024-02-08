@@ -5,6 +5,8 @@ import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import { useRouter } from 'next/router';
 import '../../../app/globals.css';
+import Fail from '../../../components/validation/EditFail';
+import Success from '../../../components/validation/EditSuccess';
 
 const EditProduct: React.FC = () => {
     const router = useRouter();
@@ -21,11 +23,13 @@ const EditProduct: React.FC = () => {
       ImagePath: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWsPfSz6bOW4iOxwZ8krfFxShTYYFVrXM7Q&usqp=CAU',
     });
 
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showFailModal, setShowFailModal] = useState(false);
+
   // Fetch product details based on productId
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        //const response = await fetch(`http://localhost:8080/api/products/${productId}`);
         const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`);
         const data = await response.json();
         setProduct(data);
@@ -52,8 +56,7 @@ const EditProduct: React.FC = () => {
     e.preventDefault();
 
     try {
-        //const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
-        const response = await fetch(`http://10.4.85.33:8080/api/products/${productId}`, {
+      const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -62,14 +65,20 @@ const EditProduct: React.FC = () => {
           });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log(data); // Log the response
+        setShowSuccessModal(true);
       } else {
+        setShowFailModal(true);
         console.error('Failed to update product');
       }
     } catch (error) {
       console.error('Error updating product:', error);
+      setShowFailModal(true);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    setShowFailModal(false);
   };
 
   return (
@@ -89,7 +98,7 @@ const EditProduct: React.FC = () => {
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Product name</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" value={product.ProductName} onChange={handleInputChange} />
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" value={product.ProductName} onChange={handleInputChange} required/>
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Description</label>
@@ -120,12 +129,17 @@ const EditProduct: React.FC = () => {
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="CategoryId" value={product.CategoryId} onChange={handleInputChange} min="1" max="2" />
           </div>
 
-          <div>
-            <button className='mt-3 w-2/12 p-1 bg-slate-50 border rounded border-[#3B3B3B] text-center bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]' type="submit">UPDATE</button>
+          <div className='mt-5'>
+            <button className=' py-2 w-full p-1 bg-[#3B3B3B] border rounded-lg border-[#3B3B3B] text-center text-[#FAF9F6]' type="submit">UPDATE</button>
           </div>
         </form>
       </div>
       <Footer />
+
+      {/* Success Modal */}
+      {showSuccessModal && <Success onClose={handleCloseModal} />}
+      {/* Fail Modal */}
+      {showFailModal && <Fail onClose={handleCloseModal} />}
     </div>
   );
 };

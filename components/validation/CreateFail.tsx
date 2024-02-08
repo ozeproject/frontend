@@ -21,7 +21,7 @@ const CreateFail: React.FC<CreateFailProps> = ({ onClose }) => {
                     </div>
                 </div>
                 <div className='text-center'>
-                    <div className='text-red-600 mt-8 text-2xl'>Updating failed!</div>
+                    <div className='text-red-600 mt-8 text-2xl'>Create failed!</div>
                     <div className='mt-4 font-semibold'>Please check again that the information is correct.</div>
                     <div>
                         <button

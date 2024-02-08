@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
 import '../../app/globals.css';
+import Delete from '../../components/validation/DeleteValidate';
  
 interface Product {
   ProductId: number;
@@ -21,7 +22,18 @@ const ProductCard = () => {
   const [error, setError] = useState<string | null>(null); 
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<Product | null>(null); // State for product selected for deletion
   
+  const openDeleteModal = (product: Product) => {
+    setProductToDelete(product);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -43,24 +55,25 @@ const ProductCard = () => {
     fetchProducts();
   }, []); // Run the effect only once when the component mounts
 
-  const handleDelete = async (productId: number) => {
-    try {
-      //const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
-      const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`, {
-        method: 'DELETE',
-      });
-  
-      if (response.ok) {
-        // If the deletion was successful, close the modal
-        closeModal();
-        // Update the products state
-        setProducts((prevProducts) => prevProducts.filter((product) => product.ProductId !== productId));
-      } else {
-        setError('Failed to delete product. Please try again.');
+  const handleDelete = async () => {
+    if (productToDelete) {
+      try {
+        // Perform the deletion logic
+        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productToDelete.ProductId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          // If the deletion was successful, close the modal and update the product list
+          closeDeleteModal();
+          setProducts((prevProducts) => prevProducts.filter((product) => product.ProductId !== productToDelete.ProductId));
+        } else {
+          setError('Failed to delete product. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        setError('Error deleting product. Please try again.');
       }
-    } catch (error) {
-      console.error('Error deleting product:', error);
-      setError('Error deleting product. Please try again.');
     }
   };
 
@@ -131,11 +144,16 @@ const ProductCard = () => {
                     Quick Shop
                   </button>
                     
-                    <button
-                    className="white-button border-solid border-2 deletebtn rounded-md mt-3 p-2 mx-2 w-full"
-                    onClick={() => handleDelete(product.ProductId)}>
-                        Delete
-                    </button>
+                  {/* Delete Button */}
+                  <button onClick={() => openDeleteModal(product)}
+                  className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-full mt-2" >
+                    Delete
+                  </button>
+
+                  {/* Delete Modal */}
+                  {isDeleteModalOpen && (
+                    <Delete onClose={closeDeleteModal} onDelete={handleDelete} />
+                  )}
                 </div>
                 
             {isModalOpen && selectedProduct && (
