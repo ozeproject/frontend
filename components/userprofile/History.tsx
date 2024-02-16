@@ -2,21 +2,26 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const History = () => {
-  const [products, setProducts] = useState([]);
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-
+  const [orderHistory, setOrderHistory] = useState([]);
 
   useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Error fetching products:', error));
-  }, []);
+    if (token) {
+      fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/order/history', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setOrderHistory(data))
+        .catch((error) => console.error('Error fetching order history:', error));
+    }
+  }, [token]);
 
   return (
     <div className=''>
-      {/* {products.map((product, index) => ( */}
-        {/* <div key={index} className={`m-auto border-x-2 ${index !== products.length - 1 ? 'border-b-2' : ''} w-7/12 border-gray-500`}> */}
+      {orderHistory.map((order, index) => (
+        <div key={index} className={`m-auto border-x-2 ${index !== orderHistory.length - 1 ? 'border-b-2' : ''} w-7/12 border-gray-500`}> 
         <div  className={`m-auto border-x-2 border-b-2 w-7/12 border-gray-500`}>
           <div className='p-2 flex '>
                 <div className='w-3/12 p-3'>
@@ -44,7 +49,8 @@ const History = () => {
                 </div>
           </div>
         </div>
-      {/* ))} */}
+        </div>
+       ))}
     </div>
   );
 };
