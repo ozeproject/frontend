@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+type OrderHistoryItem = {
+  imageUrl: string;
+  productName: string;
+  color: string;
+  size: string;
+  quantity: number;
+  price: string;
+};
+
 const History = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-  const [orderHistory, setOrderHistory] = useState([]);
+  const [orderHistory, setOrderHistory] = useState<OrderHistoryItem[]>([]);
 
   useEffect(() => {
     if (token) {
@@ -37,15 +46,15 @@ const History = () => {
                     <div><Image className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className=' w-8/12 p-3 ml-5'>
-                    <div className='text-xl'>Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc </div>
+                    <div className='text-xl'>{order.productName} </div>
                     <div className='text-sm mt-6'>
-                        <div className='mt-1'>COLORS: Black</div>
-                        <div className='mt-1'>SIZES: L</div>
-                        <div className='mt-1'>QUANTITY: 1</div>
+                        <div className='mt-1'>COLORS: {order.color}</div>
+                        <div className='mt-1'>SIZES: {order.size}</div>
+                        <div className='mt-1'>QUANTITY: {order.quantity}</div>
                     </div>
                 </div>
                 <div className=' w-1/12 p-3 text-xl'>
-                    <div>฿99,999</div>
+                    <div>{order.price}</div>
                 </div>
           </div>
         </div>
