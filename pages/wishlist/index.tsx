@@ -6,8 +6,12 @@ import Image from 'next/image'
 import '../../app/globals.css';
 
 const WishlistPage = () => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
 
-
+    useEffect(() => {
+        
+    }, []); 
+    
   return (
     <div className="">
         <Navbar />

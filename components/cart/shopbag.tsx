@@ -4,6 +4,8 @@ import Image from 'next/image'
 
 const ShopBags = () => {
     const [productCount, setProductCount] = useState<number>(0);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+
 
   useEffect(() => {
     fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/productCount')

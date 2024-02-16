@@ -44,9 +44,11 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
 
       if (response.ok) {
           const data = await response.json();
+          localStorage.setItem('accessToken', data.token);
           console.log(data); // Log the token
           setShowSuccessModal(true);
           setSuccessMessage('Login successful!');
+          
       } else {
           const errorData = await response.json();
           console.log(errorData);

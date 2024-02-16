@@ -3,13 +3,15 @@ import Image from 'next/image';
 
 const History = () => {
   const [products, setProducts] = useState([]);
+  const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
 
-  // useEffect(() => {
-  //   fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products')
-  //     .then((response) => response.json())
-  //     .then((data) => setProducts(data))
-  //     .catch((error) => console.error('Error fetching products:', error));
-  // }, []);
+
+  useEffect(() => {
+    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products')
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error('Error fetching products:', error));
+  }, []);
 
   return (
     <div className=''>

@@ -4,6 +4,8 @@ import CreateFail from '../validation/PaymentFail';
 const EmtyBag = () => {
     const [productCount, setProductCount] = useState<number>(0);
     const [showModal, setShowModal] = useState(false);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+
 
     const handleGoShoppingClick = () => {
         setShowModal(true);

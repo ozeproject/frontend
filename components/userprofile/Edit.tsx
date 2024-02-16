@@ -1,15 +1,45 @@
 import React, { useEffect, useState } from 'react';
+
 const Edit = () => {
-    const [productCount, setProductCount] = useState<number>(0);
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+    const [userData, setUserData] = useState({
+      Name: '',
+      Username: '',
+      Email: '',
+      Phone: '',
+      Address: ''
+    });
+  
+    useEffect(() => {
+      const fetchUserProfile = async () => {
+          try {
+              const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/user/profile', {
+                  method: 'GET',
+                  headers: {
+                      'Authorization': `Bearer ${token}`
+                  }
+              });
+              if (response.ok) {
+                  const userData = await response.json();
+                  setUserData(userData);
+              } else {
+                  console.error('Failed to fetch user profile');
+              }
+          } catch (error) {
+              console.error('Error fetching user profile:', error);
+          }
+      };
+      fetchUserProfile();
+  }, [token]); 
 
-
-  useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/productCount')
-      .then((response) => response.json())
-      .then((data) => setProductCount(data.count))
-      .catch((error) => console.error('Error fetching product count:', error));
-  }, []);
+  // Handler to update form data on input change
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -19,9 +49,27 @@ const Edit = () => {
     setIsEditMode(false);
   };
 
-  const handleUpdateClick = () => {
-    // Implement logic to update data
-    setIsEditMode(false);
+  // Handler for form submission
+  const handleUpdateClick = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/user/profile`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+          });
+
+      if (response.ok) {
+        setIsEditMode(false);
+      } else {
+        console.error('Failed to update product');
+      }
+    } catch (error) {
+      console.error('Error updating product:', error);
+    }
   };
 
   return (
@@ -29,23 +77,23 @@ const Edit = () => {
         <form >
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Name:</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" placeholder="Admin User"/>
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" value={userData.Name} name="Name" placeholder="Admin User" readOnly={!isEditMode} onChange={handleInputChange}  />
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Username:</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="Description" placeholder="admin_user" />
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" value={userData.Username } name="Username" placeholder="admin_user" readOnly={!isEditMode} onChange={handleInputChange} />
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Email:</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="Price" placeholder="admin@example.com" />
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="email" value={userData.Email } name="Email" placeholder="admin@example.com" readOnly={!isEditMode} onChange={handleInputChange}  />
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Phone:</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="StockQuantity" placeholder="132-456-789" />
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" value={userData.Phone } name="Phone" placeholder="132-456-789" readOnly={!isEditMode} onChange={handleInputChange}  />
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Address:</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="Color" placeholder="13 Admin Street" />
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" value={userData.Address } name="Address" placeholder="13 Admin Street" readOnly={!isEditMode} onChange={handleInputChange}  />
           </div>
          
           <div className='mt-3 text-xs flex justify-end'>
@@ -70,7 +118,7 @@ const Edit = () => {
               </button>
 
               <button
-                className='w-3/12 rounded-lg p-3 bg-slate-50 border border-[#3B3B3B] text-center bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]'
+                className='w-3/12 rounded-lg p-3 border border-[#3B3B3B] text-center bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]'
                 type="button"
                 onClick={handleUpdateClick}
               >
