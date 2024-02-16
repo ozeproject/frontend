@@ -22,11 +22,15 @@ const WomenCollection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-      fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products/female')
-          .then((response) => response.json())
-          .then((data) => setProducts(data))
-          .catch((error) => console.error('Error fetching products:', error));
-  }, []);
+    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/product/female')
+        .then(response => response.json())
+        .then(data => {
+            setProducts(data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}, []);
 
   const openModal = (product: Product) => {
     setSelectedProduct(product);
