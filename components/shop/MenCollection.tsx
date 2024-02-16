@@ -22,11 +22,15 @@ const MenCollection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-      fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products/male')
-          .then((response) => response.json())
-          .then((data) => setProducts(data))
-          .catch((error) => console.error('Error fetching products:', error));
-  }, []);
+    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/product/male')
+        .then(response => response.json())
+        .then(data => {
+            setProducts(data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}, []);
 
   const openModal = (product: Product) => {
     setSelectedProduct(product);
@@ -54,6 +58,7 @@ const MenCollection = () => {
   return (
     <div className=''>
     <div className={`grid grid-cols-4   border-gray-500`}>
+      
      {products.map((product) => (
     <div key={product.ProductId} className=" border-gray-500 border-b-2 border-r-2">
         <div className="product p-6 ">
