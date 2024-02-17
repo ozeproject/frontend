@@ -5,13 +5,41 @@ import Link from 'next/link';
 import Image from 'next/image'
 import '../../app/globals.css';
 
+interface WishlistItem {
+    wishlist_id: number;
+    imageSrc: string;
+    productName: string;
+    price: number;
+}
+
 const WishlistPage = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+    const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
 
     useEffect(() => {
-        
+        fetchWishlist();
     }, []); 
-    
+
+    const fetchWishlist = async () => {
+        try {
+            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const wishlistItems = await response.json();
+                console.log('Wishlist Items:', wishlistItems);
+            } else {
+                console.error('Error fetching wishlist items:', response.status);
+            }
+        } catch (error: any) { // Specify 'any' type for the error
+            console.error('Error fetching wishlist items:', error.message);
+        }
+    };
+
   return (
     <div className="">
         <Navbar />
@@ -20,7 +48,8 @@ const WishlistPage = () => {
         </div>
         <div>
             <div className={`grid grid-cols-4   border-gray-500`}>
-                <div  className=" border-gray-500  border-r-2">
+            {wishlistItems.map(item => (
+                <div  key={item.wishlist_id} className=" border-gray-500  border-r-2">
                     <div className="product p-6 ">
                     <div className='detail'>
                         <div className='flex justify-end '><span><svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -35,9 +64,9 @@ const WishlistPage = () => {
 
                         <div className='text-center '><Image className='mx-auto'  src="" width={400} height={400} alt="Test IMG" loading="lazy"/></div>
 
-                        <div className='text-center mt-8'><span>Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc  ProductName </span></div>
+                        <div className='text-center mt-8'><span>{item.productName}</span></div>
                         
-                        <div className='text-center font-bold text-3xl mt-4'><span>Price</span></div>
+                        <div className='text-center font-bold text-3xl mt-4'><span>{item.price}</span></div>
                         
                         <div className="hideforhold mt-4">
                             <div className="color-options text-center">
@@ -73,6 +102,7 @@ const WishlistPage = () => {
                 </div> 
             
             </div>
+            ))}
         </div>
         </div>
          
