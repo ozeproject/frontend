@@ -80,7 +80,8 @@ const ProductCard = () => {
             const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     userId: userId,
@@ -109,6 +110,7 @@ const addToWishlist = async (product: Product) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     userId: userId,
