@@ -31,7 +31,7 @@ const AccessoriesCollection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products/accessories')
+    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/accessories')
         .then(response => response.json())
         .then(data => {
             setProducts(data);

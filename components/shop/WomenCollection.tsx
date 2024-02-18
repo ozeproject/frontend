@@ -31,7 +31,7 @@ const WomenCollection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/product/female')
+    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/female')
         .then(response => response.json())
         .then(data => {
             setProducts(data);

@@ -1,8 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import Link from 'next/link';
+import { jwtDecode } from "jwt-decode";
+
+interface MyToken {
+    userId: string;
+    username: string;
+    role: string;
+    exp: number;
+  }
 
 const Navbar = () => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const [searchValue, setSearchValue] = useState(false);
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        if (token) {
+          try {
+            const decodedToken = jwtDecode<MyToken>(token);
+            setUserName(decodedToken.username);
+          } catch (error) {
+            console.error('Error decoding JWT token:', error);
+          }
+        }
+      }, [token]);
 
     return (
         <div className='border-b-2 border-gray-500 py-5'>
@@ -51,16 +72,8 @@ const Navbar = () => {
                         </svg>
                     </div>
 
-                    <div className='m-4'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <mask id="mask0_510_543" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="33">
-                                <rect y="0.5" width="32" height="32" fill="#D9D9D9" />
-                            </mask>
-                            <g mask="url(#mask0_510_543)">
-                                <path d="M6.66663 25.5256V24.1923H8.82046V13.6282C8.82046 11.8863 9.37175 10.3543 10.4743 9.03207C11.5769 7.70982 12.9743 6.88631 14.6666 6.56153V5.83333C14.6666 5.46296 14.796 5.14813 15.0546 4.88887C15.3133 4.62962 15.6274 4.5 15.997 4.5C16.3665 4.5 16.6816 4.62962 16.9423 4.88887C17.2029 5.14813 17.3333 5.46296 17.3333 5.83333V6.56153C19.0256 6.88631 20.423 7.70982 21.5256 9.03207C22.6282 10.3543 23.1795 11.8863 23.1795 13.6282V24.1923H25.3333V25.5256H6.66663ZM15.9954 29.0128C15.4019 29.0128 14.8953 28.8019 14.4756 28.3801C14.0559 27.9583 13.8461 27.4513 13.8461 26.859H18.1538C18.1538 27.4555 17.9425 27.9637 17.5198 28.3833C17.0971 28.803 16.589 29.0128 15.9954 29.0128ZM10.1538 24.1923H21.8461V13.6282C21.8461 12.0077 21.2769 10.6282 20.1384 9.48973C19 8.35129 17.6205 7.78207 16 7.78207C14.3794 7.78207 13 8.35129 11.8615 9.48973C10.723 10.6282 10.1538 12.0077 10.1538 13.6282V24.1923Z" fill="#3B3B3B" />
-                            </g>
-                        </svg>
-                    </div>
+                    <div className='m-4'><Link href="/userprofile">{userName}</Link></div>
+
                     <div className='m-4'>
                         <Link href="/wishlist/">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
