@@ -32,14 +32,24 @@ const AccessoriesCollection = () => {
 
   useEffect(() => {
     fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/accessories')
-        .then(response => response.json())
-        .then(data => {
-            setProducts(data);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-}, []);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); 
+      })
+      .then(data => {
+        if (Array.isArray(data)) {
+          setProducts(data); 
+        } else {
+          throw new Error('Data received is not an array');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setError('Error fetching data. Please try again.'); 
+      });
+  }, []);
 
 const openModal = (product: Product) => {
   setSelectedProduct(product);
