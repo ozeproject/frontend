@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { jwtDecode } from "jwt-decode";
+
+interface MyToken {
+    userId: string;
+    username: string;
+    role: string;
+    exp: number;
+  }
 
 type OrderHistoryItem = {
   imageUrl: string;
@@ -15,17 +23,47 @@ const History = () => {
   const [orderHistory, setOrderHistory] = useState<OrderHistoryItem[]>([]);
 
   useEffect(() => {
-    if (token) {
-      fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/order/history', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => setOrderHistory(data))
-        .catch((error) => console.error('Error fetching order history:', error));
+    fetchHistory();
+}, []); 
+
+const fetchHistory = async () => {
+    try {
+        const userId = getUserId(); 
+        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/order/history?userId=${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+
+        if (response.ok) {
+            const wishlistItems = await response.json();
+            console.log('History Items:', wishlistItems);
+        } else {
+            console.error('Error fetching History items:', response.status);
+        }
+    } catch (error: any) { 
+        console.error('Error fetching History items:', error.message);
     }
-  }, [token]);
+};
+
+  function getUserId() {
+    const token = localStorage.getItem('accessToken');
+
+    if (token) {
+        try {
+            const decodedToken = jwtDecode<MyToken>(token);
+            const userId = decodedToken.userId;
+            return userId;
+        } catch (error) {
+            console.error('Error decoding JWT token:', error);
+            return null;
+        }
+    } else {
+        console.error('JWT token not found in local storage');
+        return null;
+    }
+}
 
   return (
     <div className=''>
