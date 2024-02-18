@@ -33,7 +33,6 @@ const Edit = () => {
       fetchUserProfile();
   }, [token]); 
 
-  // Handler to update form data on input change
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     setUserData({
       ...userData,
@@ -49,7 +48,6 @@ const Edit = () => {
     setIsEditMode(false);
   };
 
-  // Handler for form submission
   const handleUpdateClick = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 

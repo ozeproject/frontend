@@ -11,7 +11,6 @@ interface MyToken {
     username: string;
     role: string;
     exp: number;
-    // Add any other fields you expect in your JWT token payload
   }
 
 const ProductDetail = () => {
@@ -32,7 +31,7 @@ const ProductDetail = () => {
 
       const addToCart = async () => {
         try {
-            const userId = getUserId(); // Get the user ID from your authentication state
+            const userId = getUserId(); 
             if (userId) {
                 const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
                     method: 'POST',
@@ -41,12 +40,12 @@ const ProductDetail = () => {
                     },
                     body: JSON.stringify({
                         userId: userId,
-                        productId: product.ProductId, // Assuming product ID is available in your state
+                        productId: product.ProductId, 
                     }),
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data.message); // Log the response message
+                    console.log(data.message); 
                 } else {
                     console.error('Failed to add product to cart:', response.statusText);
                 }
@@ -60,7 +59,7 @@ const ProductDetail = () => {
     
     const addToWishlist = async () => {
         try {
-            const userId = getUserId(); // Get the user ID from your authentication state
+            const userId = getUserId(); 
             if (userId) {
                 const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
                     method: 'POST',
@@ -69,12 +68,12 @@ const ProductDetail = () => {
                     },
                     body: JSON.stringify({
                         userId: userId,
-                        productId: product.ProductId, // Assuming product ID is available in your state
+                        productId: product.ProductId, 
                     }),
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data.message); // Log the response message
+                    console.log(data.message); 
                 } else {
                     console.error('Failed to add product to wishlist:', response.statusText);
                 }
@@ -87,14 +86,11 @@ const ProductDetail = () => {
     };
     
     function getUserId() {
-        // Get the JWT token from local storage
         const token = localStorage.getItem('accessToken');
     
-        // Decode the JWT token to extract user information
         if (token) {
             try {
                 const decodedToken = jwtDecode<MyToken>(token);
-                // Assuming your user ID is stored in the 'userId' field of the token payload
                 const userId = decodedToken.userId;
                 return userId;
             } catch (error) {
@@ -102,7 +98,6 @@ const ProductDetail = () => {
                 return null;
             }
         } else {
-            // Handle case where token is not found in local storage
             console.error('JWT token not found in local storage');
             return null;
         }

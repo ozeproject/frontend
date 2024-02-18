@@ -15,7 +15,7 @@ const WomenShopPage = () => {
     <div className="">
         <Navbar />
         <Title />
-        <Filter />
+        {/* <Filter /> */}
         <WomenCollection />
         <LoadMore />
          <Footer /> 

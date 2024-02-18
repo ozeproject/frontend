@@ -15,7 +15,7 @@ const AccessorieShopPage = () => {
     <div className="">
         <Navbar />
         <Title />
-        <Filter />
+        {/* <Filter /> */}
         <Accessories />
         <LoadMore />
          <Footer /> 

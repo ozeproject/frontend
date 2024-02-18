@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
+import { jwtDecode } from "jwt-decode";
 
 interface Product {
   ProductId: number;
@@ -13,6 +14,13 @@ interface Product {
   IsNew: string;
   CategoryId: string;
   ImagePath: string;
+}
+
+interface MyToken {
+  userId: string;
+  username: string;
+  role: string;
+  exp: number;
 }
 
 const MenCollection = () => {
@@ -55,14 +63,87 @@ const MenCollection = () => {
       return cleanup;
     }, [isModalOpen]);
 
+    const addToCart = async (product: Product) => {
+      try {
+          const userId = getUserId(); 
+          if (userId) {
+              const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      userId: userId,
+                      productId: product.ProductId, 
+                  }),
+              });
+              if (response.ok) {
+                  const data = await response.json();
+                  console.log(data.message); 
+              } else {
+                  console.error('Failed to add product to cart:', response.statusText);
+              }
+          } else {
+              console.error('User ID not found.');
+          }
+      } catch (error) {
+          console.error('Error adding product to cart:', error);
+      }
+  };
+  
+  const addToWishlist = async (product: Product) => {
+      try {
+          const userId = getUserId(); 
+          if (userId) {
+              const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      userId: userId,
+                      productId: product.ProductId, 
+                  }),
+              });
+              if (response.ok) {
+                  const data = await response.json();
+                  console.log(data.message); 
+              } else {
+                  console.error('Failed to add product to wishlist:', response.statusText);
+              }
+          } else {
+              console.error('User ID not found.');
+          }
+      } catch (error) {
+          console.error('Error adding product to wishlist:', error);
+      }
+  };
+  
+  function getUserId() {
+      const token = localStorage.getItem('accessToken');
+  
+      if (token) {
+          try {
+              const decodedToken = jwtDecode<MyToken>(token);
+              const userId = decodedToken.userId;
+              return userId;
+          } catch (error) {
+              console.error('Error decoding JWT token:', error);
+              return null;
+          }
+      } else {
+          console.error('JWT token not found in local storage');
+          return null;
+      }
+  }
+
   return (
     <div className=''>
-    <div className={`grid grid-cols-4   border-gray-500`}>
-      
-     {products.map((product) => (
+    <div className={`grid grid-cols-4   border-gray-500`}>    
+    {products.map((product) => (
     <div key={product.ProductId} className=" border-gray-500 border-b-2 border-r-2">
         <div className="product p-6 ">
-      <Link href={`/detail/${product.ProductId}`}>
+        <Link href={`/detail/${product.ProductId}`}>
             <div className='detail'>
             <div className='flex justify-end'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
               <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
@@ -172,11 +253,13 @@ const MenCollection = () => {
                                   </div>
                                   
                                   <div className='ml-4'>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt">ADD TO BAG</button>
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt"
+                                    onClick={() => addToCart(selectedProduct)} >ADD TO BAG</button>
                                   </div>
                                   
                                   <div className='ml-4 '>
-                                    <button className="last-button    "><svg xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 32 33" fill="none">
+                                    <button className="last-button    "><svg xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 32 33" fill="none"
+                                    onClick={() => addToWishlist(selectedProduct)}>
                                     <mask id="mask0_510_546"  maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
                                         <rect y="0.5" width="32" height="32" fill="#D9D9D9"/>
                                     </mask>

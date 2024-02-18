@@ -27,7 +27,6 @@ const EmtyBag = () => {
             <div className="text-center">
                 <div className='text-xl font-semibold text-center'>Your cart is empty</div>
                 <div className='mt-8 text-base'>
-                    {/* Use an onClick event to trigger the modal display */}
                     <button
                         className='m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'
                         type="button"
@@ -37,7 +36,6 @@ const EmtyBag = () => {
                     </button>
                 </div>
             </div>
-            {/* Render the modal if showModal is true */}
             {showModal && <CreateFail onClose={handleCloseModal} />}
         </div>
     );

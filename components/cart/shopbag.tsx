@@ -2,27 +2,63 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
 
+interface CartItem {
+    cart_id: number;
+    ProductName: string;
+    Price: number;
+    Color: string;
+    Size: string;
+    quantity: number;
+    ImagePath: string;
+}
+
 const ShopBags = () => {
-    const [productCount, setProductCount] = useState<number>(0);
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [subtotal, setSubtotal] = useState(0); 
+    const [total, setTotal] = useState(0);
 
 
-  useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/productCount')
-      .then((response) => response.json())
-      .then((data) => setProductCount(data.count))
-      .catch((error) => console.error('Error fetching product count:', error));
-  }, []);
+    useEffect(() => {
+        fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => setCartItems(data))
+        .catch((error) => console.error('Error fetching cart items:', error));
+    }, [token]);
 
-  const toggleEditing = () => {
-    setIsEditing(!isEditing);
-};
+    
+    useEffect(() => {
+        const calculateSubtotal = () => {
+            let total = 0;
+            cartItems.forEach((item) => {
+                total += item.Price;
+            });
+            setSubtotal(total);
+        };
+
+        const calculateTotal = () => {
+            setTotal(subtotal); 
+        };
+
+        calculateSubtotal();
+        calculateTotal();
+    }, [cartItems, subtotal]);
+
+    const toggleEditing = () => {
+        setIsEditing(!isEditing);
+    };
 
   return (
     <div className=' flex '>
         <div className=" w-4/6">
-            <div className='border-b-2  border-gray-500 p-10 flex'>
+        {cartItems.map((item) => (
+            <div key={item.cart_id} className='border-b-2  border-gray-500 p-10 flex'>
                 <div className='w-3/12 p-4'>
                     <div className='flex justify-end'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
@@ -38,20 +74,20 @@ const ShopBags = () => {
                 </div>
                 <div className='w-9/12 p-4'>
                     <div className='flex justify-between text-2xl'>
-                        <div className=' '>Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc </div>
-                        <div className=' '>฿99,99{productCount}</div>
+                        <div className=' '>{item.ProductName} </div>
+                        <div className=' '>฿{item.Price}</div>
                     </div>
                     <div className='flex  text-lg mt-4'>
                         <div className=' '>COLORS:</div>
-                        <div className='ml-2 '>฿{productCount}</div>
+                        <div className='ml-2 '>{item.Color}</div>
                     </div>
                     <div className='flex  text-lg'>
                         <div className=' '>SIZES:</div>
-                        <div className=' ml-2'>฿{productCount}</div>
+                        <div className=' ml-2'>฿{item.Size}</div>
                     </div>
                     <div className='flex  text-lg'>
                         <div className=' '>QUANTITY:</div>
-                        <div className=' ml-2'>฿{productCount}</div>
+                        <div className=' ml-2'>{item.quantity}</div>
                     </div>
                     <div className='mt-4 text-lg flex justify-between'>
                         <div className='w-1/12'>
@@ -82,7 +118,7 @@ const ShopBags = () => {
                                       <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
                                       <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
                                       <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
-                                      <span className='mt-4 ml-2'>{'('}{productCount}{')'}</span>
+                                      <span className='mt-4 ml-2'>{'('}{item.quantity}{')'}</span>
                                   </div>
                               </div>
                               <div className='mt-5'>
@@ -98,25 +134,25 @@ const ShopBags = () => {
                     </div>
                 </div>
             </div>
-
+            ))}
         </div>
         
         <div className="border-l-2  border-gray-500 w-2/6 p-16">
             <div className='flex justify-between text-lg'>
                 <div className=' '>YOUR ORDER SUMMARY</div>
-                <div className=' '>{'[ '}{productCount}{' ]'}</div>
+                <div className=' '>{'[ '}[ {cartItems.length} ]{' ]'}</div>
             </div>
             <div className='flex justify-between text-base mt-4'>
                 <div className=' '>SUBTOTAL</div>
-                <div className=' '>฿{productCount}</div>
+                <div className=' '>฿{subtotal}</div>
             </div>
             <div className='flex justify-between text-base'>
                 <div className=' '>SHIPPING</div>
-                <div className=' '>฿{productCount}</div>
+                <div className=' '>฿0</div>
             </div>
             <div className='mt-4  flex justify-between text-2xl'>
                 <div className=' '>TOTAL</div>
-                <div className=' '>฿{productCount}</div>
+                <div className=' '>฿{total}</div>
             </div>
             <div className='mt-8 text-base'>
                     <Link href="/shop/">
