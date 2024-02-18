@@ -31,7 +31,7 @@ const AccessoriesCollection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/accessories')
+    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/pd/accessories')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
