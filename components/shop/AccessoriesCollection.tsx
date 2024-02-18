@@ -82,6 +82,7 @@ const openModal = (product: Product) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     userId: userId,
@@ -110,6 +111,7 @@ const addToWishlist = async (product: Product) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     userId: userId,

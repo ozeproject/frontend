@@ -72,6 +72,7 @@ const MenCollection = () => {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${token}`,
                   },
                   body: JSON.stringify({
                       userId: userId,
@@ -100,6 +101,7 @@ const MenCollection = () => {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${token}`,
                   },
                   body: JSON.stringify({
                       userId: userId,

@@ -90,6 +90,7 @@ const WishlistPage = () => {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
                         },
                         body: JSON.stringify({
                             userId: userId,
@@ -118,6 +119,7 @@ const WishlistPage = () => {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
                         },
                         body: JSON.stringify({
                             userId: userId,
