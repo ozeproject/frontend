@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 interface DeleteProps {
     onClose: () => void;
-    onDelete: () => void; // Add onDelete prop
+    onDelete: () => void; 
 }
 
 const Delete: React.FC<DeleteProps> = ({ onClose, onDelete }) => {

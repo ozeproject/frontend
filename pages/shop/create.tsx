@@ -6,7 +6,6 @@ import Fail from '../../components/validation/CreateFail';
 import Success from '../../components/validation/CreateSuccess';
 
 const Create = () => {
-  // State to hold form data
   const [formData, setFormData] = useState({
     ProductName: '',
     Description: '',
@@ -22,7 +21,6 @@ const Create = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailModal, setShowFailModal] = useState(false);
 
-  // Handler to update form data on input change
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     setFormData({
       ...formData,
@@ -30,7 +28,6 @@ const Create = () => {
     });
   };
 
-  // Handler for form submission
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 

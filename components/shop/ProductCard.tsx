@@ -26,12 +26,23 @@ interface MyToken {
 }
 
 const ProductCard = () => {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null); 
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [productToDelete, setProductToDelete] = useState<Product | null>(null); // State for product selected for deletion
+  const [productToDelete, setProductToDelete] = useState<Product | null>(null); 
+  let userRole: string | null = null;
+
+  if (token) {
+    try {
+      const decodedToken = jwtDecode<MyToken>(token);
+        userRole = decodedToken.role;
+    } catch (error) {
+        console.error('Error decoding JWT token:', error);
+    }
+}
   
   const openDeleteModal = (product: Product) => {
     setProductToDelete(product);
@@ -43,6 +54,7 @@ const ProductCard = () => {
   };
 
   useEffect(() => {
+    
     const fetchProducts = async () => {
       try {
         const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products'); 
@@ -223,7 +235,7 @@ function getUserId() {
                   </button>
                     
                   <button onClick={() => openDeleteModal(product)}
-                  className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-full mt-2" >
+                  className={`white-button border-solid border-2 quickbtn rounded-md p-2 mx-2 w-full mt-2 ${userRole !== 'admin' ? 'hidden' : ''}`}>
                     Delete
                   </button>
 

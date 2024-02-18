@@ -24,6 +24,7 @@ interface MyToken {
 }
 
 const WomenCollection = () => {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   const [products, setProducts] = useState<Product[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null); 

@@ -1,5 +1,3 @@
-// pages/shop/edit/[productId].tsx
-
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
@@ -9,6 +7,7 @@ import Fail from '../../../components/validation/EditFail';
 import Success from '../../../components/validation/EditSuccess';
 
 const EditProduct: React.FC = () => {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const router = useRouter();
     const { productId } = router.query;
     const [product, setProduct] = useState({
@@ -26,7 +25,6 @@ const EditProduct: React.FC = () => {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [showFailModal, setShowFailModal] = useState(false);
 
-  // Fetch product details based on productId
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -43,7 +41,6 @@ const EditProduct: React.FC = () => {
     }
   }, [productId]);
 
-  // Handler to update form data on input change
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     setProduct({
       ...product,
@@ -51,7 +48,6 @@ const EditProduct: React.FC = () => {
     });
   };
 
-  // Handler for form submission
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
@@ -115,7 +111,6 @@ const EditProduct: React.FC = () => {
           
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Color</label>
-            {/* <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="Color" value={product.Color} onChange={handleInputChange} /> */}
             <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="Color" value={product.Color} onChange={handleInputChange}>
               <option value="Black">Black</option>
               <option value="White">White</option>
@@ -124,7 +119,6 @@ const EditProduct: React.FC = () => {
 
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Trend</label>
-            {/* <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="IsTrend" value={product.IsTrend} onChange={handleInputChange} /> */}
             <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsTrend" value={product.IsTrend} onChange={handleInputChange}>
               <option value="true">Yes</option>
               <option value="false">No</option>
@@ -133,7 +127,6 @@ const EditProduct: React.FC = () => {
           
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>New</label>
-            {/* <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="IsNew" value={product.IsNew} onChange={handleInputChange} /> */}
             <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsNew" value={product.IsNew} onChange={handleInputChange}>
               <option value="true">Yes</option>
               <option value="false">No</option>
@@ -142,7 +135,6 @@ const EditProduct: React.FC = () => {
           
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Category</label>
-            {/* <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="CategoryId" value={product.CategoryId} onChange={handleInputChange} min="1" max="2" /> */}
             <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="CategoryId" value={product.CategoryId} onChange={handleInputChange}>
               <option value="Shirt">Shirt</option>
               <option value="Bag">Bag</option>
@@ -157,9 +149,7 @@ const EditProduct: React.FC = () => {
       </div>
       <Footer />
 
-      {/* Success Modal */}
       {showSuccessModal && <Success onClose={handleCloseModal} />}
-      {/* Fail Modal */}
       {showFailModal && <Fail onClose={handleCloseModal} />}
     </div>
   );

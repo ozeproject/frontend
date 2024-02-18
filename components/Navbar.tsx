@@ -1,4 +1,3 @@
-// components/Navbar.js
 import React, { useState } from 'react';
 import Link from 'next/link';
 
@@ -85,7 +84,6 @@ const Navbar = () => {
                             </svg></Link>
                     </div>
                     </div>
-                    {/* search div */}
                     {searchValue ?
                         <div className='w-60'>
                             <div className="flex justify-end items-end">

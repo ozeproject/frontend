@@ -6,12 +6,11 @@ import AdminShop from '../../components/shop/AdminShop';
 import LoadMore from '../../components/Loadmore';
 import Filter from '../../components/shop/Filter';
 import ProductCard from '../../components/shop/ProductCard';
-import Men from '../../components/shop/MenCollection';
 import '../../setupEnv';
 import '../../app/globals.css';
 
 const ShopPage = () => {
-
+  const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
 
   return (
     <div className="">
@@ -19,8 +18,6 @@ const ShopPage = () => {
         <Title />
         <Filter /> 
         <ProductCard />
-        {/* <AdminShop />
-        <Men /> */}
         <LoadMore />
          <Footer /> 
         
