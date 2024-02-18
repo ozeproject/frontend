@@ -41,11 +41,12 @@ const WishlistPage = () => {
 
     const fetchWishlist = async () => {
         try {
-            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist', {
+            const userId = getUserId(); 
+            const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist?userId=${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
-                }
+                },
             });
 
             if (response.ok) {
@@ -58,6 +59,7 @@ const WishlistPage = () => {
             console.error('Error fetching wishlist items:', error.message);
         }
     };
+
 
     const openModal = (product: WishlistItem) => {
         setSelectedProduct(product);
