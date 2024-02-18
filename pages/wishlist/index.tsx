@@ -6,6 +6,7 @@ import Image from 'next/image'
 import '../../app/globals.css';
 import { jwtDecode } from "jwt-decode";
 
+
 interface WishlistItem {
     wishlist_id: number;
     ProductId: number;
@@ -200,6 +201,7 @@ const WishlistPage = () => {
                         <div className='mt-4 flex justify-center'>
                             <button
                             className="white-button  border-solid border-2  quickbtn  rounded-md p-2 mx-2 w-4/6"
+                            onClick={() => openModal(item)}
                         >
                             CHOOSE OPTIONS
                         </button>
