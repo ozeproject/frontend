@@ -235,7 +235,7 @@ function getUserId() {
                   </button>
                     
                   <button onClick={() => openDeleteModal(product)}
-                  className={`white-button border-solid border-2 quickbtn rounded-md p-2 mx-2 w-full mt-2 ${userRole !== 'admin' ? 'hidden' : ''}`}>
+                  className={`white-button border-solid border-2 quickbtn rounded-md p-2 mx-2 w-full mt-2 ${userRole !== 'Admin' ? 'hidden' : ''}`}>
                     Delete
                   </button>
 
