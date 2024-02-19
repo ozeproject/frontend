@@ -62,26 +62,26 @@ const WishlistPage = () => {
         }
     };
 
-    // const handleDelete = async (item: WishlistItem) => {
-    //     try {
-    //         const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${item.wishlist_id}`, {
-    //             method: 'DELETE',
-    //             headers: {
-    //                 'Authorization': `Bearer ${token}`,
-    //             },
-    //         });
+    const handleDelete = async (item: WishlistItem) => {
+        try {
+            const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${item.wishlist_id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
     
-    //         if (response.ok) {
-    //             setWishlistItems(prevItems => prevItems.filter(wishlistItem => wishlistItem.wishlist_id !== item.wishlist_id));
-    //             console.log('Product deleted successfully from the wishlist.');
-    //         } else {
-    //             setError('Failed to delete product. Please try again.');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting product:', error);
-    //         setError('Error deleting product. Please try again.');
-    //     }
-    // };
+            if (response.ok) {
+                setWishlistItems(prevItems => prevItems.filter(wishlistItem => wishlistItem.wishlist_id !== item.wishlist_id));
+                console.log('Product deleted successfully from the wishlist.');
+            } else {
+                setError('Failed to delete product. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error deleting product:', error);
+            setError('Error deleting product. Please try again.');
+        }
+    };
 
     const openModal = (product: WishlistItem) => {
         setSelectedProduct(product);
@@ -106,35 +106,6 @@ const WishlistPage = () => {
           return cleanup;
         }, [isModalOpen]);
     
-        const addToCart = async (product: WishlistItem) => {
-            try {
-                const userId = getUserId(); 
-                if (userId) {
-                    const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`,
-                        },
-                        body: JSON.stringify({
-                            userId: userId,
-                            productId: product.ProductId, 
-                        }),
-                    });
-                    if (response.ok) {
-                        const data = await response.json();
-                        console.log(data.message); 
-                    } else {
-                        console.error('Failed to add product to cart:', response.statusText);
-                    }
-                } else {
-                    console.error('User ID not found.');
-                }
-            } catch (error) {
-                console.error('Error adding product to cart:', error);
-            }
-        };
-
         const addToCart2 = async (product: WishlistItem) => {
             try {
                 const userId = getUserId(); 
@@ -145,7 +116,7 @@ const WishlistPage = () => {
                             'Authorization': `Bearer ${token}`,
                         },
                     });
-        
+                    
                     if (deleteResponse.ok) {
                         // If the product is successfully deleted from the wishlist, proceed to add it to the cart
                         const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
@@ -160,6 +131,9 @@ const WishlistPage = () => {
                             }),
                         });
                         if (response.ok) {
+                            const updatedWishlistItems = wishlistItems.filter(item => item.ProductId !== product.ProductId);
+                            setWishlistItems(updatedWishlistItems);
+                            
                             const data = await response.json();
                             console.log(data.message); 
                         } else {
@@ -233,7 +207,7 @@ const WishlistPage = () => {
         <div>
             <div className={`grid grid-cols-4   border-gray-500`}>
             {wishlistItems.map(item => (
-                <div  key={item.wishlist_id} className=" border-gray-500  border-r-2">
+                <div  key={item.wishlist_id} className=" border-gray-500 border-b-2 border-r-2">
                     <div className="product p-6 ">
                     <div className='detail'>
                         <div className='flex justify-end '><span><svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -271,7 +245,7 @@ const WishlistPage = () => {
                             
                             <button
                             className="white-button  rounded-md  w-1/6 "
-                            // onClick={() => handleDelete(item)}
+                            onClick={() => handleDelete(item)}
                             >
                                 <svg className='' width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_726_2277"  maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

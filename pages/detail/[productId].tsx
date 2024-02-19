@@ -14,6 +14,7 @@ interface MyToken {
   }
 
 const ProductDetail = () => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const router = useRouter();
     const { productId } = router.query;
     const [product, setProduct] = useState({
@@ -37,6 +38,7 @@ const ProductDetail = () => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
                     },
                     body: JSON.stringify({
                         userId: userId,
@@ -65,6 +67,7 @@ const ProductDetail = () => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
                     },
                     body: JSON.stringify({
                         userId: userId,
@@ -107,7 +110,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/products/${productId}`);
+        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
