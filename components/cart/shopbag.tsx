@@ -58,7 +58,7 @@ const ShopBags = () => {
 
   const handleDelete = async (item: CartItem) => {
     try {
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${item.cart_id}`, {
+        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/cart/${item.cart_id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -67,7 +67,7 @@ const ShopBags = () => {
 
         if (response.ok) {
             setCartItems(prevItems => prevItems.filter(cartItem => cartItem.cart_id !== item.cart_id));
-            console.log('Product deleted successfully from the wishlist.');
+            console.log('Product deleted successfully from the Cart.');
         } else {
             setError('Failed to delete product. Please try again.');
         }
