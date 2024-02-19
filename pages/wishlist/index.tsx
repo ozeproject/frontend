@@ -134,6 +134,47 @@ const WishlistPage = () => {
                 console.error('Error adding product to cart:', error);
             }
         };
+
+        const addToCart2 = async (product: WishlistItem) => {
+            try {
+                const userId = getUserId(); 
+                if (userId) {
+                    const deleteResponse = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${product.wishlist_id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    });
+        
+                    if (deleteResponse.ok) {
+                        // If the product is successfully deleted from the wishlist, proceed to add it to the cart
+                        const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`,
+                            },
+                            body: JSON.stringify({
+                                userId: userId,
+                                productId: product.ProductId, 
+                            }),
+                        });
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log(data.message); 
+                        } else {
+                            console.error('Failed to add product to cart:', response.statusText);
+                        }
+                    } else {
+                        setError('Failed to delete product from wishlist. Please try again.');
+                    }
+                } else {
+                    console.error('User ID not found.');
+                }
+            } catch (error) {
+                console.error('Error adding product to cart:', error);
+            }
+        };
         
         const addToWishlist = async (product: WishlistItem) => {
             try {
@@ -316,7 +357,7 @@ const WishlistPage = () => {
                                   
                                   <div className='ml-4'>
                                     <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt"
-                                    onClick={() => addToCart(selectedProduct)} >ADD TO BAG</button>
+                                    onClick={() => addToCart2(selectedProduct)} >ADD TO BAG</button>
                                   </div>
                                   
                                   <div className='ml-4 '>
