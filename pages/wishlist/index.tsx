@@ -131,9 +131,7 @@ const WishlistPage = () => {
                             }),
                         });
                         if (response.ok) {
-                            const updatedWishlistItems = wishlistItems.filter(item => item.ProductId !== product.ProductId);
-                            setWishlistItems(updatedWishlistItems);
-                            
+                            setWishlistItems(prevItems => prevItems.filter(wishlistItem => wishlistItem.wishlist_id !== product.wishlist_id));
                             const data = await response.json();
                             console.log(data.message); 
                         } else {
