@@ -31,9 +31,10 @@ const MenCollection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/male')
+    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/pd/male')
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setProducts(data);
         })
         .catch(error => {

@@ -6,7 +6,6 @@ import Image from 'next/image'
 import '../../app/globals.css';
 import { jwtDecode } from "jwt-decode";
 
-
 interface WishlistItem {
     wishlist_id: number;
     ProductId: number;
@@ -35,6 +34,7 @@ const WishlistPage = () => {
     const [error, setError] = useState<string | null>(null); 
     const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
     const [selectedProduct, setSelectedProduct] = useState<WishlistItem | null>(null);
+    const [wishlistToDelete, setWishlistToDelete] = useState<WishlistItem | null>(null); 
 
     useEffect(() => {
         fetchWishlist();
@@ -52,7 +52,8 @@ const WishlistPage = () => {
 
             if (response.ok) {
                 const wishlistItems = await response.json();
-                console.log('Wishlist Items:', wishlistItems);
+                setWishlistItems(wishlistItems);
+                console.log('Hey Wishlist Items:', wishlistItems);
             } else {
                 console.error('Error fetching wishlist items:', response.status);
             }
@@ -61,6 +62,26 @@ const WishlistPage = () => {
         }
     };
 
+    const handleDelete = async (item: WishlistItem) => {
+        try {
+            const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${item.wishlist_id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+    
+            if (response.ok) {
+                setWishlistItems(prevItems => prevItems.filter(wishlistItem => wishlistItem.wishlist_id !== item.wishlist_id));
+                console.log('Product deleted successfully from the wishlist.');
+            } else {
+                setError('Failed to delete product. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error deleting product:', error);
+            setError('Error deleting product. Please try again.');
+        }
+    };
 
     const openModal = (product: WishlistItem) => {
         setSelectedProduct(product);
@@ -167,6 +188,7 @@ const WishlistPage = () => {
         <div className='border-gray-500 border-b-2 text-center text-3xl py-12 font-bold'>
             <div className='h2'>YOUR WISHLIST</div>
         </div>
+        
         <div>
             <div className={`grid grid-cols-4   border-gray-500`}>
             {wishlistItems.map(item => (
@@ -208,6 +230,7 @@ const WishlistPage = () => {
                             
                             <button
                             className="white-button  rounded-md  w-1/6 "
+                            onClick={() => handleDelete(item)}
                             >
                                 <svg className='' width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_726_2277"  maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">

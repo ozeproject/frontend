@@ -15,6 +15,7 @@ interface MyToken {
 
 interface CartItem {
   cart_id: number;
+  ProductId: number;
   ProductName: string;
   Price: number;
   Color: string;
@@ -43,6 +44,7 @@ const fetchCart = async () => {
 
       if (response.ok) {
           const cartItems = await response.json();
+          setCartItems(cartItems);
           console.log('Cart Items:', cartItems);
       } else {
           console.error('Error fetching Cart items:', response.status);

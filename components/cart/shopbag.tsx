@@ -12,6 +12,7 @@ interface MyToken {
 
 interface CartItem {
     cart_id: number;
+    ProductId: number;
     ProductName: string;
     Price: number;
     Color: string;
@@ -26,6 +27,8 @@ const ShopBags = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [subtotal, setSubtotal] = useState(0); 
     const [total, setTotal] = useState(0);
+    const [cartToDelete, setCartToDelete] = useState<CartItem | null>(null); 
+    const [error, setError] = useState<string | null>(null); 
   
   useEffect(() => {
     fetchCart();
@@ -43,6 +46,7 @@ const ShopBags = () => {
   
         if (response.ok) {
             const cartItems = await response.json();
+            setCartItems(cartItems);
             console.log('Cart Items:', cartItems);
         } else {
             console.error('Error fetching Cart items:', response.status);
@@ -51,6 +55,27 @@ const ShopBags = () => {
         console.error('Error fetching Cart items:', error.message);
     }
   };
+
+  const handleDelete = async (item: CartItem) => {
+    try {
+        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${item.cart_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+
+        if (response.ok) {
+            setCartItems(prevItems => prevItems.filter(cartItem => cartItem.cart_id !== item.cart_id));
+            console.log('Product deleted successfully from the wishlist.');
+        } else {
+            setError('Failed to delete product. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        setError('Error deleting product. Please try again.');
+    }
+};
 
   function getUserId() {
     const token = localStorage.getItem('accessToken');
@@ -165,9 +190,10 @@ const ShopBags = () => {
                               </div>
                         </div>
                         <div className='flex justify-end w-1/12  p-1'>
+                            <button onClick={() => handleDelete(item)}>
                             <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.2436 23.333C3.57864 23.333 3.0107 23.0976 2.53977 22.6266C2.06881 22.1557 1.83333 21.5877 1.83333 20.9228V3.99975H0.5V1.99978H6.49997V0.820312H14.5V1.99978H20.4999V3.99975H19.1666V20.9228C19.1666 21.5963 18.9333 22.1664 18.4666 22.633C17.9999 23.0997 17.4298 23.333 16.7563 23.333H4.2436ZM17.1666 3.99975H3.8333V20.9228C3.8333 21.0424 3.87177 21.1407 3.9487 21.2177C4.02563 21.2946 4.12393 21.3331 4.2436 21.3331H16.7563C16.8589 21.3331 16.9529 21.2903 17.0384 21.2049C17.1239 21.1194 17.1666 21.0254 17.1666 20.9228V3.99975ZM7.03847 18.6664H9.03843V6.66641H7.03847V18.6664ZM11.9615 18.6664H13.9615V6.66641H11.9615V18.6664Z" fill="#1C1B1F"/>
-                            </svg>
+                            </svg></button>
                         </div>
                     </div>
                 </div>

@@ -156,7 +156,7 @@ function getUserId() {
         {products.map((product) => (
             <div key={product.ProductId} className=" border-gray-500 border-b-2 border-r-2">
               <div className="product p-6 ">
-                <Link href={`/detail/`}>
+              <Link href={`/detail/${product.ProductId}`}>
                     <div className='detail'>
                     <div className='flex justify-end'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                       <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">

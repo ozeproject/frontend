@@ -11,11 +11,11 @@ interface MyToken {
 
 type OrderHistoryItem = {
   imageUrl: string;
-  productName: string;
+  ProductName: string;
   color: string;
   size: string;
   quantity: number;
-  price: string;
+  Price: string;
 };
 
 const History = () => {
@@ -37,8 +37,9 @@ const fetchHistory = async () => {
         });
 
         if (response.ok) {
-            const wishlistItems = await response.json();
-            console.log('History Items:', wishlistItems);
+            const Items = await response.json();
+            setOrderHistory(Items);
+            console.log('History Items:', Items);
         } else {
             console.error('Error fetching History items:', response.status);
         }
@@ -69,7 +70,6 @@ const fetchHistory = async () => {
     <div className=''>
       {orderHistory.map((order, index) => (
         <div key={index} className={`m-auto border-x-2 ${index !== orderHistory.length - 1 ? 'border-b-2' : ''} w-7/12 border-gray-500`}> 
-        <div  className={`m-auto border-x-2 border-b-2 w-7/12 border-gray-500`}>
           <div className='p-2 flex '>
                 <div className='w-3/12 p-3'>
                   <div className='flex justify-end'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -84,18 +84,17 @@ const fetchHistory = async () => {
                     <div><Image className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className=' w-8/12 p-3 ml-5'>
-                    <div className='text-xl'>{order.productName} </div>
+                    <div className='text-xl'>{order.ProductName} </div>
                     <div className='text-sm mt-6'>
                         <div className='mt-1'>COLORS: {order.color}</div>
                         <div className='mt-1'>SIZES: {order.size}</div>
                         <div className='mt-1'>QUANTITY: {order.quantity}</div>
                     </div>
                 </div>
-                <div className=' w-1/12 p-3 text-xl'>
-                    <div>{order.price}</div>
+                <div className=' w-1/12 ml-3 text-xl'>
+                    <div>฿{order.Price}</div>
                 </div>
           </div>
-        </div>
         </div>
        ))}
     </div>
