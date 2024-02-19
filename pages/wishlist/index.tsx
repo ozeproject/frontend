@@ -62,26 +62,26 @@ const WishlistPage = () => {
         }
     };
 
-    const handleDelete = async (item: WishlistItem) => {
-        try {
-            const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${item.wishlist_id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
+    // const handleDelete = async (item: WishlistItem) => {
+    //     try {
+    //         const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${item.wishlist_id}`, {
+    //             method: 'DELETE',
+    //             headers: {
+    //                 'Authorization': `Bearer ${token}`,
+    //             },
+    //         });
     
-            if (response.ok) {
-                setWishlistItems(prevItems => prevItems.filter(wishlistItem => wishlistItem.wishlist_id !== item.wishlist_id));
-                console.log('Product deleted successfully from the wishlist.');
-            } else {
-                setError('Failed to delete product. Please try again.');
-            }
-        } catch (error) {
-            console.error('Error deleting product:', error);
-            setError('Error deleting product. Please try again.');
-        }
-    };
+    //         if (response.ok) {
+    //             setWishlistItems(prevItems => prevItems.filter(wishlistItem => wishlistItem.wishlist_id !== item.wishlist_id));
+    //             console.log('Product deleted successfully from the wishlist.');
+    //         } else {
+    //             setError('Failed to delete product. Please try again.');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error deleting product:', error);
+    //         setError('Error deleting product. Please try again.');
+    //     }
+    // };
 
     const openModal = (product: WishlistItem) => {
         setSelectedProduct(product);
@@ -271,7 +271,7 @@ const WishlistPage = () => {
                             
                             <button
                             className="white-button  rounded-md  w-1/6 "
-                            onClick={() => handleDelete(item)}
+                            // onClick={() => handleDelete(item)}
                             >
                                 <svg className='' width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_726_2277"  maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
