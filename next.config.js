@@ -13,7 +13,7 @@ module.exports = {
         },
       ];
     },
-// Test images
+// Test images.
     images: {
       remotePatterns: [
         {
