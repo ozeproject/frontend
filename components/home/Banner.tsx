@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
+import Link from 'next/link';
 
 const Banner = () => {
     const [productCount, setProductCount] = useState<number>(0);
@@ -18,7 +19,7 @@ const Banner = () => {
         </div>
         <div className='mt-6'>
           <div className=' font-semibold text-xl'>New Arrival</div>
-          <div className='underline text-sm mt-3'>EXPLORE ITEMS</div>
+          <div className='underline text-sm mt-3'><Link href="/shop/">EXPLORE ITEMS</Link></div>
         </div>
     </div>
   );
