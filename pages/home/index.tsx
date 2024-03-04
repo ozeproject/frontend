@@ -4,6 +4,7 @@ import Footer from '../../components/Footer';
 import Banner from '../../components/home/Banner';
 import Men from '../../components/shop/MenCollection';
 import Women from '../../components/shop/WomenCollection';
+import Link from 'next/link';
 import '../../app/globals.css';
 
 const HomePage = () => {
@@ -21,7 +22,7 @@ const HomePage = () => {
           <Men /> 
           
           <div className="filter flex justify-between p-10">
-            <button className='m-auto font-semibold text-sm rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'>VIEW MORE</button>
+            <button className='m-auto font-semibold text-sm rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'><Link href="/shop/menshop">VIEW MORE</Link></button>
           </div>
 
         </div>
@@ -33,7 +34,7 @@ const HomePage = () => {
           <Women /> 
 
           <div className="filter flex justify-between p-10">
-            <button className='m-auto font-semibold text-sm rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'>VIEW MORE</button>
+            <button className='m-auto font-semibold text-sm rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'><Link href="/shop/womenshop">VIEW MORE</Link></button>
           </div>
           
         </div>
