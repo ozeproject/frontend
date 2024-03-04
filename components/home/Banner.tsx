@@ -12,7 +12,7 @@ const Banner = () => {
   return (
     <div className=' px-20 py-10 border-b-2  border-gray-500'>
         <div className="border-2 border-gray-500 p-2 h-96">
-            <div className=' '>Banner</div>
+        <img className='m-auto' src='https://i.pinimg.com/originals/ed/cd/32/edcd32b829a5c6e614a6d6383c562742.jpg'  width={500} height={500} alt="" loading="lazy"/>
         </div>
         <div className='mt-6'>
           <div className=' font-semibold text-xl'>New Arrival</div>
