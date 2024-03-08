@@ -22,7 +22,7 @@ const Filter = ({onChangeFilter}:{onChangeFilter:(sortBy:string)=>void}) => {
         <div className="filter flex justify-between ">
             <div className=''>
                 <label>Sort by:</label>
-                  <select onChange={(e) => handleSortChange(e.target.value)} value={selectedSort}>
+                  <select className='border-2 border-[#B9B9B9] bg-[#F2EEE3] rounded'  onChange={(e) => handleSortChange(e.target.value)} value={selectedSort}>
                     <option value=''>Recommended</option>
                     <option value='a-z'>A-Z</option>
                     <option value='z-a'>Z-A</option>
