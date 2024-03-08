@@ -191,7 +191,7 @@ const ProductDetail = () => {
                             </div>
 
                             <div className='ml-4 '>
-                                    <button className="hover:bg-[#D4CBB1] rounded-full" onClick={addToWishlist}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 32 33" fill="none">
+                                    <button className="hover:bg-[#D4CBB1] rounded-full" onClick={addToWishlist}><svg className="hover:bg-[#D4CBB1] rounded-full" xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 32 33" fill="none">
                                     <mask id="mask0_510_546"  maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
                                         <rect y="0.5" width="32" height="32" fill="#D9D9D9"/>
                                     </mask>
