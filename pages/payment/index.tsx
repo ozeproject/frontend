@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Title from '../../components/Title';
-import LoadMore from '../../components/Loadmore';
-import Filter from '../../components/shop/Filter';
-import ProductCard from '../../components/shop/ProductCard';
+import Guest from '../../components/checkout/guest';
+import User from '../../components/checkout/user';
 import '../../app/globals.css';
 
 const PaymentPage = () => {
@@ -13,10 +11,11 @@ const PaymentPage = () => {
   return (
     <div className="">
         <Navbar />
-        <Title />
-        <Filter />
-        <ProductCard />
-        <LoadMore />
+        <div className="border-b-2 border-gray-500">
+            <div className=" p-12">
+                <div className="text-center text-4xl font-semibold">CHECKOUT</div>
+            </div>
+        </div>
          <Footer /> 
         
     </div>
