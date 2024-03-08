@@ -4,6 +4,7 @@ import Image from 'next/image'
 import '../../app/globals.css';
 import Delete from '../../components/validation/DeleteValidate';
 import { jwtDecode } from "jwt-decode";
+import Filter from './Filter';
  
 interface Product {
   ProductId: number;
@@ -43,7 +44,22 @@ const ProductCard = () => {
         console.error('Error decoding JWT token:', error);
     }
 }
-  
+
+const fetchProducts = async (sortBy: string = '') => {
+  try {
+    const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products?sortBy=${sortBy}`);
+    if (response.ok) {
+      const data = await response.json();
+      setProducts(data);
+    } else {
+      setError('Failed to fetch products. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    setError('Error fetching products. Please try again.');
+  }
+};
+
   const openDeleteModal = (product: Product) => {
     setProductToDelete(product);
     setIsDeleteModalOpen(true);
@@ -53,25 +69,14 @@ const ProductCard = () => {
     setIsDeleteModalOpen(false);
   };
 
-  useEffect(() => {
-    
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products'); 
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data);
-        } else {
-          setError('Failed to fetch products. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setError('Error fetching products. Please try again.');
-      }
-    };
 
-    fetchProducts();
-  }, []); 
+  useEffect(() => {
+    fetchProducts(); // Pass an empty string or default value for sortBy
+  }, [])
+  
+    const handleSortChange = (sortBy: string) => {
+      fetchProducts(sortBy);
+    };
 
   const addToCart = async (product: Product) => {
     try {
@@ -194,6 +199,8 @@ function getUserId() {
   
   
   return (
+    <div>
+      <Filter onChangeFilter={fetchProducts}/>
   <div className={`grid grid-cols-4   border-gray-500`}>
      {products.map((product) => (
     <div key={product.ProductId} className=" border-gray-500 border-b-2 border-r-2">
@@ -344,7 +351,7 @@ function getUserId() {
         </div>
         ))}
         </div>
-    
+        </div>
   );
 };
 

@@ -32,6 +32,7 @@ const ShopPage = () => {
     }
   }, [token]);
 
+
   return (
     <div className="">
         <Navbar />
@@ -42,12 +43,12 @@ const ShopPage = () => {
         </>
       ) : (
         <>
-          <Filter />
+          
         </>
       )}
         <ProductCard />
         <LoadMore />
-         <Footer /> 
+        <Footer /> 
         
     </div>
   );
