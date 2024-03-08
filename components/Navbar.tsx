@@ -13,8 +13,14 @@ const Navbar = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const [searchValue, setSearchValue] = useState(false);
     const [userName, setUserName] = useState('');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            setIsAuthenticated(true);
+        }
+        
         if (token) {
           try {
             const decodedToken = jwtDecode<MyToken>(token);
@@ -25,11 +31,20 @@ const Navbar = () => {
         }
       }, [token]);
 
+      const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        setIsAuthenticated(false);
+    }
+
     return (
         <div className='border-b-2 border-gray-500 py-5'>
             <div className="flex justify-between">
                 <div className='lay1 flex justify-between'>
-                    <div className='m-4'><Link href="/authen/login">Login</Link></div>
+                {isAuthenticated ? (
+                    <div className='m-4 ' ><button className="rounded-lg px-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600" onClick={handleLogout}>Logout</button></div>
+                ) : (
+                    <div className='m-4'><Link href="/authen/login"><button>Login</button></Link></div>
+                )}
                     <div className='m-4'> <Link href="/tracking/">Tracking</Link></div>
                     <div className='m-4'> <Link href="/home/contact">Contact us</Link></div>
                 </div>
