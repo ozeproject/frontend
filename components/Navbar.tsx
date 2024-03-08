@@ -34,6 +34,7 @@ const Navbar = () => {
       const handleLogout = () => {
         localStorage.removeItem('accessToken');
         setIsAuthenticated(false);
+        window.location.reload();
     }
 
     return (
@@ -87,7 +88,12 @@ const Navbar = () => {
                         </svg>
                     </div>
 
+                    {isAuthenticated ? (
                     <div className='m-4'><Link href="/userprofile">{userName}</Link></div>
+                ) : (
+                    <div className=''></div>
+                )}
+                    {/* <div className='m-4'><Link href="/userprofile">{userName}</Link></div> */}
 
                     <div className='m-4'>
                         <Link href="/wishlist/">
