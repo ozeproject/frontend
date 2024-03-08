@@ -23,35 +23,35 @@ const TrackingPage = () => {
 
         <div className="w-1/6 mx-auto my-8 ">
                 <div className="flex">
-                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><clipPath id="clip0_1027_3471"><rect width="32" height="32" rx="16" fill="white"/></clipPath></defs>
+                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><rect width="32" height="32" rx="16" fill="white"/></defs>
                   </svg></div>
 
                   <div className='mx-6 mt-1'>เตรียมการฝากส่ง</div>
                 </div>
 
                 <div className="flex">
-                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><clipPath id="clip0_1027_3471"><rect width="32" height="32" rx="16" fill="white"/></clipPath></defs>
+                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><rect width="32" height="32" rx="16" fill="white"/></defs>
                   </svg></div>
 
                   <div className='mx-6 mt-1'>ออกจากที่ทำการ/ศูนย์ไปรษณีย์</div>
                 </div>
 
                 <div className="flex">
-                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><clipPath id="clip0_1027_3471"><rect width="32" height="32" rx="16" fill="white"/></clipPath></defs>
+                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><rect width="32" height="32" rx="16" fill="white"/></defs>
                   </svg></div>
 
                   <div className='mx-6 mt-1'>ถึงที่ทำการไปรษณีย์</div>
                 </div>
 
                 <div className="flex">
-                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><clipPath id="clip0_1027_3471"><rect width="32" height="32" rx="16" fill="white"/></clipPath></defs>
+                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><rect width="32" height="32" rx="16" fill="white"/></defs>
                   </svg></div>
 
                   <div className='mx-6 mt-1'>อยู่ระหว่างการนำจ่าย</div>
                 </div>
 
                 <div className="flex">
-                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><clipPath id="clip0_1027_3471"><rect width="32" height="32" rx="16" fill="white"/></clipPath></defs>
+                  <div><svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1027_3471)"><rect width="32" height="32" rx="16" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" fill="#D4CBB1"/><rect x="1" y="1" width="30" height="30" rx="15" stroke="#3B3B3B" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="#3B3B3B"/></g><rect x="15" y="36" width="2" height="20" rx="1" fill="#D4CBB1"/><defs><rect width="32" height="32" rx="16" fill="white"/></defs>
                   </svg></div>
 
                   <div className='mx-6 mt-1'>นำจ่ายสำเร็จ</div>
