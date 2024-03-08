@@ -79,7 +79,6 @@ const WishlistPage = () => {
   return (
     <div className="">
         <Navbar />
-        <WishlistCard />
         {wishlistItems.length == 0 ? (
         <>
           <EmtyCard />

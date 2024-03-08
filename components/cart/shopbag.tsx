@@ -221,7 +221,7 @@ const ShopBags = () => {
                 <div className=' '>฿{total}</div>
             </div>
             <div className='mt-8 text-base'>
-                    <Link href="/shop/">
+                    <Link href="/payment/">
                         <button className='m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center w-full' type="button">CHECK OUT</button>
                     </Link>
                 </div>
