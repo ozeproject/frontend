@@ -112,18 +112,13 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
                         <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='••••••••' name="Password"  value={user.Password} onChange={handleInputChange}></input>
                     </div>
                     
-                    <div className='flex justify-between mt-3'>
-                        <div>
-                            <input type='checkbox'></input>
-                            <label className='ml-1 text-[#818181]'>Remember me</label>
-                        </div>
+                    <div className='flex justify-end mt-3'>
                         <div className=''>
                             <p className='underline text-[#818181]'><Link href="/authen/forgotpw/1">Forgot password</Link></p>
                         </div>
                     </div>
                     <div className='mt-10'>
                         <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]">LOG IN</button>
-                        <button className=" border-y-2 border-r-2 border-2 border-[#B9B9B9] rounded-lg p-2  w-full h-10  bg-[#F2EEE3] hover:bg-[#D4CBB1] mt-4 text-[#3B3B3B]">LOG IN WITH FACEBOOK</button>
                     </div>
 
                     <div className='mt-8'>

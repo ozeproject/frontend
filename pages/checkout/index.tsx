@@ -7,7 +7,15 @@ import User from '../../components/checkout/user';
 
 
 const CheckoutPage = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        setIsAuthenticated(true);
+    }
+    
+  }, );
 
   return (
     <div className="">
@@ -17,7 +25,11 @@ const CheckoutPage = () => {
                 <div className="text-center text-4xl font-semibold">CHECKOUT</div>
             </div>
         </div>
-        <Guest /> 
+        {isAuthenticated ? (
+            <User /> 
+                ) : (
+            <Guest /> 
+                )}
          <Footer /> 
         
     </div>

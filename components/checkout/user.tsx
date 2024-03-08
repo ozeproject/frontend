@@ -14,7 +14,7 @@ const UserChkout = () => {
                 
                 <div className='w-7/12 mx-48'>
                     <div className='flex justify-between text-2xl'>
-                        <div className=' '>GUEST CHECKOUT</div>
+                        <div className=' '>SHIPPING ADDRESS</div>
                     </div>
                     <div className='text-lg mt-4'>
                         <div className=' '>NAME *</div>
