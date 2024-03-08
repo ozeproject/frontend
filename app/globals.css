@@ -80,3 +80,11 @@ body {
   color: #818181;
 }
 
+.svg-icon {
+  transition: fill 0.3s;
+}
+
+.svg-icon:hover {
+  fill: black; /* Change to the desired hover color */
+}
+
