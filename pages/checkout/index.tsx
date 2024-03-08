@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import '../../app/globals.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Enter from '../../components/tracking/enterno';
-import Status from '../../components/tracking/status';
-import '../../app/globals.css';
+import Chkout from '../../components/checkout/checkout';
 
-const HomePage = () => {
+
+const CheckoutPage = () => {
 
 
   return (
     <div className="">
         <Navbar />
-        <Enter />
+        <Chkout /> 
          <Footer /> 
         
     </div>
   );
 };
 
-export default HomePage;
+export default CheckoutPage;
