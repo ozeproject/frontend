@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../../app/globals.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Chkout from '../../components/checkout/checkout';
+import Guest from '../../components/checkout/guest';
+import User from '../../components/checkout/user';
 
 
 const CheckoutPage = () => {
@@ -11,7 +12,12 @@ const CheckoutPage = () => {
   return (
     <div className="">
         <Navbar />
-        <Chkout /> 
+        <div className="border-b-2 border-gray-500">
+            <div className=" p-12">
+                <div className="text-center text-4xl font-semibold">CHECKOUT</div>
+            </div>
+        </div>
+        <Guest /> 
          <Footer /> 
         
     </div>
