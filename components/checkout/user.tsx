@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
 import { jwtDecode } from "jwt-decode";
+import Fail from '../../components/validation/PaymentFail';
+import Success from '../../components/validation/PaymetnSuccess';
 
 const UserChkout = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
@@ -13,28 +15,35 @@ const UserChkout = () => {
             <div className=' p-10 flex'>
                 
                 <div className='w-7/12 mx-48'>
-                    <div className='flex justify-between text-2xl'>
-                        <div className=' '>SHIPPING ADDRESS</div>
+                    <div className=''>
+                        <div className='text-2xl '>SHIPPING ADDRESS</div>
+                        <div className=' '><textarea className='border border-[#B9B9B9] w-4/6  rounded h-28 placeholder:pl-3 mt-1 bg-[#F2EEE3]'  name="Address" placeholder='Address' /></div>
                     </div>
-                    <div className='text-lg mt-4'>
-                        <div className=' '>NAME *</div>
-                        <div className=' '><input className='border border-[#B9B9B9] w-3/6 rounded h-8 placeholder:pl-3 mt-1 bg-[#F2EEE3]' type="text" name="Lastname" placeholder='First name-Lastname' /></div>
+
+                    <div className='mt-8'>
+                        <div className='text-xl '>SHIPPING ADDRESS</div>
+                        <label></label>
+                        <select className='border-2 border-[#B9B9B9] bg-[#F2EEE3] rounded' >
+                            <option value=''>EMS : Thailand Post</option>
+                        </select>
                     </div>
-                    <div className=' mt-2 text-lg'>
-                        <div className=' '>EMAIL *</div>
-                        <div className=' '><input className='border border-[#B9B9B9] w-3/6 rounded h-8 placeholder:pl-3 mt-1 bg-[#F2EEE3]' type="text" name="Email" placeholder='Enter your email' /></div>
+
+                    <div className='mt-8'>
+                        <div className='text-xl'>PAYMENT METHOD</div>
+                        <div>
+                            <input type="radio" id="qrCode" name="paymentMethod" value="QR CODE" />
+                            <label className='ml-2' htmlFor="qrCode">QR CODE</label><br />
+                        </div>
+                        <div>
+                            <input type="radio" id="creditCard" name="paymentMethod" value="Credit/Debit Card" />
+                            <label className='ml-2' htmlFor="creditCard">Credit/Debit Card</label><br />
+                        </div>
                     </div>
-                    <div className='mt-2  text-lg'>
-                        <div className=' '>ADDRESS *</div>
-                        <div className=' '><textarea className='border border-[#B9B9B9] w-3/6  rounded h-28 placeholder:pl-3 mt-1 bg-[#F2EEE3]'  name="Address" placeholder='Address' /></div>
+                    
+                    <div className='my-8'>
+                        <button className='w-6/12 rounded-lg p-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center' type="button">PLACCE ORDER</button>
                     </div>
-                    <div className=' mt-2  text-lg'>
-                        <div className=' '>PHONE *</div>
-                        <div className=' '><input className='border border-[#B9B9B9] w-3/6 rounded h-8 placeholder:pl-3 mt-1 bg-[#F2EEE3]' type="text" name="Email" placeholder='Enter your email' /></div>
-                    </div>
-                    <div className='mt-5'>
-                        <button className='w-2/12 rounded-lg p-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center' type="button">NEXT</button>
-                    </div>
+
                 </div>
             </div>
            

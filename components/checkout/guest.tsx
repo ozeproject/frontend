@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
 import { jwtDecode } from "jwt-decode";
+import Fail from '../../components/validation/PaymentFail';
+import Success from '../../components/validation/PaymetnSuccess';
 
 const GuestChkout = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
