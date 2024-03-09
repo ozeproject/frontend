@@ -250,7 +250,7 @@ const WomenCollection = () => {
                           <div className='mt-16'>
                               <div className='flex '>
                                   <div>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">CHECKOUT</button>
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn"><Link href="/checkout/">CHECKOUT</Link></button>
                                   </div>
                                   
                                   <div className='ml-4'>

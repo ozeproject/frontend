@@ -22,7 +22,7 @@ const SignupFail: React.FC<SignupFailProps> = ({ onClose, message }) => {
                 </div>
                 <div className='text-center'>
                     <div className='text-red-600 mt-8 text-2xl'>Signup failed!</div>
-                    <div className='mt-4 font-semibold'>{message}</div> {/* Display the message here */}
+                    <div className='mt-4 font-semibold'>{message}</div> 
                     <div>
                         <button
                             className='mt-8 w-3/12 m-auto rounded-lg p-3 bg-red-500 text-white border border-gray-600 text-center'

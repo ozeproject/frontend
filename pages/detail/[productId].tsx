@@ -3,7 +3,7 @@ import { useRouter ,} from 'next/router';
 import Image from 'next/image'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-
+import Link from 'next/link';
 import { jwtDecode } from "jwt-decode";
 
 interface MyToken {
@@ -147,11 +147,12 @@ const ProductDetail = () => {
                     <div className='mt-4'>
                         <p className='font-semibold tracking-normal'>COLORS:</p>
                         <div className='flex mt-2'>
-                            {product.Color === 'White' ? (
-                                <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
+                        <button className={`white-button border-solid border-2 colorinput w-8 h-8 p-1 bg-[#F79009]`}></button>
+                            {/* {product.Color === 'White' ? (
+                                <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-{product.Color}"></button>
                             ) : product.Color === 'Black' ? (
                                 <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-black"></button>
-                            ) : null}
+                            ) : null} */}
                         </div>
                     </div>
 
@@ -183,7 +184,7 @@ const ProductDetail = () => {
                     <div className='mt-8'>
                         <div className='flex '>
                             <div>
-                                <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">CHECKOUT</button>
+                                <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn"><Link href="/checkout/">CHECKOUT</Link></button>
                             </div>
 
                             <div className='ml-4'>
