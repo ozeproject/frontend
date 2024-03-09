@@ -155,7 +155,8 @@ const WomenCollection = () => {
               </g>
             </svg></span></div>
 
-            <div className='text-center '><img className='mx-auto' src="" width={400} height={400} alt={product.ImagePath} loading="lazy"/></div>
+            <div className='text-center '><img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></div>
+
 
             <div className='text-center'><span>{product.ProductName} </span></div>
             
