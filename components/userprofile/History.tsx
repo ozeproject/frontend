@@ -81,7 +81,7 @@ const fetchHistory = async () => {
                     </g>
                     </svg></span>
                     </div>
-                    <div><Image className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
+                    <div><img className='mx-auto'  src="" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className=' w-8/12 p-3 ml-5'>
                     <div className='text-xl'>{order.ProductName} </div>

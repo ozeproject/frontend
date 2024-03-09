@@ -8,7 +8,7 @@ interface Product {
   ProductName: string;
   Description: string;
   Price: string;
-  StockQuantity: string;
+  StockQuantity: number;
   Color: string;
   IsTrend: string;
   IsNew: string;
@@ -167,7 +167,7 @@ function getUserId() {
                       </g>
                     </svg></span></div>
 
-                    <div className='text-center '><Image className='mx-auto' src="" width={400} height={400} alt="Test" loading="lazy"/></div>
+                    <div className='text-center '><img className='mx-auto' src="" width={400} height={400} alt="Test" loading="lazy"/></div>
 
                     <div className='text-center'><span>{product.ProductName}</span></div>
                     
@@ -200,16 +200,16 @@ function getUserId() {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><Image className='m-auto' src=''  width={500} height={500} alt={product.ImagePath} loading="lazy"/></p>
+                              <p><img className='m-auto' src=''  width={500} height={500} alt={product.ImagePath} loading="lazy"/></p>
                           </div>
                           
                           <div className='h-1/4'>
                               <div className='flex justify-between'>
                              
-                                  <p><Image className='mx-auto' src='' width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><Image className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><Image className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><Image className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src='' width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src=''  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
                               </div>
                           </div>
                       </div>
