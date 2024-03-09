@@ -137,7 +137,7 @@ const ProductDetail = () => {
                         <div className='border-2 h-fit'><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY331/73312b93dcc83560f54d904c71be419751a1ee6838303d15cd6b83b876b7f168.jpg' width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                     </div>
                     <div className='w-full'>
-                        <div className='border-b-2 border-x-2 h-fit'><Image className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-b-2 border-x-2 h-fit'><img className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                         <div className='border-2 h-fit'><img className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                     </div>
                 </div>
