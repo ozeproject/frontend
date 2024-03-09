@@ -74,7 +74,7 @@ const WishlistCard = () => {
             if (response.ok) {
                 setWishlistItems(prevItems => prevItems.filter(wishlistItem => wishlistItem.wishlist_id !== item.wishlist_id));
                 console.log('Product deleted successfully from the wishlist.');
-                window.location.reload();
+                // window.location.reload();
             } else {
                 setError('Failed to delete product. Please try again.');
             }
