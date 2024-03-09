@@ -49,10 +49,6 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
           setShowSuccessModal(true);
           setSuccessMessage('Login successful!');
 
-          setTimeout(() => {
-            window.location.href = '/shop';
-        }, 1000);
-          
       } else {
           const errorData = await response.json();
           console.log(errorData);
