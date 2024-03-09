@@ -13,6 +13,8 @@ interface MyToken {
     exp: number;
   }
 
+
+
 const ProductDetail = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const router = useRouter();
@@ -21,8 +23,8 @@ const ProductDetail = () => {
         ProductId: productId,
         ProductName: '',
         Description: '',
-        Price: '',
-        StockQuantity: '',
+        Price: 0,
+        StockQuantity: 0,
         Color: '',
         IsTrend: '',
         IsNew: '',
@@ -147,7 +149,7 @@ const ProductDetail = () => {
                     <div className='mt-4'>
                         <p className='font-semibold tracking-normal'>COLORS:</p>
                         <div className='flex mt-2'>
-                        <button className={`white-button border-solid border-2 colorinput w-8 h-8 p-1 bg-[#F79009]`}></button>
+                        <button className={`white-button border-solid border-2 colorinput w-8 h-8 p-1 bg-[${product.Color}]`}></button>
                             {/* {product.Color === 'White' ? (
                                 <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-{product.Color}"></button>
                             ) : product.Color === 'Black' ? (
@@ -168,15 +170,17 @@ const ProductDetail = () => {
                     </div>
 
                     <div>
-                        <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
-                        <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left you cannot add to the cart</p>
-                        <div className='flex mt-1'>
-                            <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
-                            <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
-                            <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
-                            <span className='mt-4 ml-2'>{'('}{product.StockQuantity}{')'}</span>
-                        </div>
-                    </div>
+                                <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
+                                {product.StockQuantity <= 1 && (
+                                    <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left, you cannot add to the cart</p>
+                                )}
+                                <div className='flex mt-1'>
+                                    <button className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard">{'-'}</button>
+                                    <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">1</button>
+                                    <button className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard">+</button>
+                                    <span className='mt-4 ml-2'>({product.StockQuantity})</span>
+                                </div>
+                            </div>
                     <div>
                         <p className='font-semibold tracking-normal mt-5'>INFORMATION:</p>
                         <p className='tracking-wide text-sm mt-2 pr-10'>{product.Description} </p>

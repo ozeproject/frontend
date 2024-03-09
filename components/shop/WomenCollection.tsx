@@ -8,7 +8,7 @@ interface Product {
   ProductName: string;
   Description: string;
   Price: string;
-  StockQuantity: string;
+  StockQuantity: number;
   Color: string;
   IsTrend: string;
   IsNew: string;
@@ -236,15 +236,17 @@ const WomenCollection = () => {
                                   <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
                               </div>
                               <div>
-                                  <p className='font-semibold tracking-normal mt-5'>QUANTITY::</p>
-                                  <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left you cannot add to the cart</p>
-                                  <div className='flex mt-1'>
-                                      <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
-                                      <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
-                                      <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
-                                      <span className='mt-4 ml-2'>{'('}{selectedProduct.StockQuantity}{')'}</span>
-                                  </div>
-                              </div>
+                                <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
+                                {selectedProduct.StockQuantity <= 1 && (
+                                    <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left, you cannot add to the cart</p>
+                                )}
+                                <div className='flex mt-1'>
+                                    <button className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard">{'-'}</button>
+                                    <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">1</button>
+                                    <button className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard">+</button>
+                                    <span className='mt-4 ml-2'>({selectedProduct.StockQuantity})</span>
+                                </div>
+                            </div>
                           </div>
 
                           <div className='mt-16'>
