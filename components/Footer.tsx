@@ -44,7 +44,7 @@ const Footer = () => {
                             <Link href="/home/contact"><div className={`hover:underline ${router.pathname === '/home/contact' ? 'underline' : ''}`}>
                                 CONTACT US
                             </div></Link>
-                            <Link href="/tracking/"><div className='hover:underline'>TRACKING</div></Link>
+                            <Link href="/tracking/"><div className={`hover:underline ${router.pathname === '/tracking' ? 'underline' : ''}`}>TRACKING</div></Link>
                         </div>
                     </div>
                 </div>
