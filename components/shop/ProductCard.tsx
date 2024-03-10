@@ -4,13 +4,14 @@ import Image from 'next/image'
 import '../../app/globals.css';
 import Delete from '../../components/validation/DeleteValidate';
 import { jwtDecode } from "jwt-decode";
+import Filter from './Filter';
  
 interface Product {
   ProductId: number;
   ProductName: string;
   Description: string;
   Price: string;
-  StockQuantity: string;
+  StockQuantity: number;
   Color: string;
   IsTrend: string;
   IsNew: string;
@@ -43,7 +44,22 @@ const ProductCard = () => {
         console.error('Error decoding JWT token:', error);
     }
 }
-  
+
+const fetchProducts = async (sortBy: string = '') => {
+  try {
+    const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products?sortBy=${sortBy}`);
+    if (response.ok) {
+      const data = await response.json();
+      setProducts(data);
+    } else {
+      setError('Failed to fetch products. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    setError('Error fetching products. Please try again.');
+  }
+};
+
   const openDeleteModal = (product: Product) => {
     setProductToDelete(product);
     setIsDeleteModalOpen(true);
@@ -53,25 +69,14 @@ const ProductCard = () => {
     setIsDeleteModalOpen(false);
   };
 
-  useEffect(() => {
-    
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products'); 
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data);
-        } else {
-          setError('Failed to fetch products. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setError('Error fetching products. Please try again.');
-      }
-    };
 
-    fetchProducts();
-  }, []); 
+  useEffect(() => {
+    fetchProducts(); // Pass an empty string or default value for sortBy
+  }, [])
+  
+    const handleSortChange = (sortBy: string) => {
+      fetchProducts(sortBy);
+    };
 
   const addToCart = async (product: Product) => {
     try {
@@ -194,13 +199,15 @@ function getUserId() {
   
   
   return (
+    <div>
+      <Filter onChangeFilter={fetchProducts}/>
   <div className={`grid grid-cols-4   border-gray-500`}>
      {products.map((product) => (
     <div key={product.ProductId} className=" border-gray-500 border-b-2 border-r-2">
         <div className="product p-6 ">
       <Link href={`/detail/${product.ProductId}`}>
             <div className='detail'>
-            <div className='flex justify-end'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <div className='flex justify-end'><span><svg className="hover:bg-[#D4CBB1] rounded-full" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
               <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
               <rect width="32" height="32" fill="#D9D9D9"/>
               </mask>
@@ -209,7 +216,7 @@ function getUserId() {
               </g>
             </svg></span></div>
 
-            <div className='text-center '><Image className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></div>
+            <div className='text-center '><img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></div>
 
             <div className='text-center'><span>{product.ProductName} </span></div>
             
@@ -251,16 +258,16 @@ function getUserId() {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><Image className='m-auto' src=''  width={500} height={500} alt={product.ImagePath} loading="lazy"/></p>
+                              <p><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg' width={500} height={500} alt={product.ImagePath} loading="lazy"/></p>
                           </div>
                           
                           <div className='h-1/4'>
                               <div className='flex justify-between'>
                              
-                                  <p><Image className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg' width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><Image className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><Image className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><Image className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg' width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
+                                  <p><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={100} height={200} alt={product.ImagePath} loading="lazy"/></p>
                               </div>
                           </div>
                       </div>
@@ -298,21 +305,23 @@ function getUserId() {
                                   <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
                               </div>
                               <div>
-                                  <p className='font-semibold tracking-normal mt-5'>QUANTITY::</p>
-                                  <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left you cannot add to the cart</p>
-                                  <div className='flex mt-1'>
-                                      <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
-                                      <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
-                                      <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
-                                      <span className='mt-4 ml-2'>{'('}{selectedProduct.StockQuantity}{')'}</span>
-                                  </div>
-                              </div>
+                                <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
+                                {selectedProduct.StockQuantity <= 1 && (
+                                    <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left, you cannot add to the cart</p>
+                                )}
+                                <div className='flex mt-1'>
+                                    <button className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard">{'-'}</button>
+                                    <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">1</button>
+                                    <button className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard">+</button>
+                                    <span className='mt-4 ml-2'>({selectedProduct.StockQuantity})</span>
+                                </div>
+                            </div>
                           </div>
 
                           <div className='mt-16'>
                               <div className='flex '>
                                   <div>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">CHECKOUT</button>
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn"><Link href="/checkout/">CHECKOUT</Link></button>
                                   </div>
                                   
                                   <div className='ml-4'>
@@ -321,7 +330,7 @@ function getUserId() {
                                   </div>
                                   
                                   <div className='ml-4 '>
-                                    <button className="last-button    "><svg xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 32 33" fill="none"
+                                    <button className="last-button    "><svg className="hover:bg-[#D4CBB1] rounded-full" xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 32 33" fill="none"
                                     onClick={() => addToWishlist(selectedProduct)}>
                                     <mask id="mask0_510_546"  maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
                                         <rect y="0.5" width="32" height="32" fill="#D9D9D9"/>
@@ -344,7 +353,7 @@ function getUserId() {
         </div>
         ))}
         </div>
-    
+        </div>
   );
 };
 

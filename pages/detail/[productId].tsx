@@ -3,8 +3,10 @@ import { useRouter ,} from 'next/router';
 import Image from 'next/image'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-
+import Link from 'next/link';
 import { jwtDecode } from "jwt-decode";
+import '../../app/globals.css';
+
 
 interface MyToken {
     userId: string;
@@ -12,6 +14,8 @@ interface MyToken {
     role: string;
     exp: number;
   }
+
+
 
 const ProductDetail = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
@@ -21,8 +25,8 @@ const ProductDetail = () => {
         ProductId: productId,
         ProductName: '',
         Description: '',
-        Price: '',
-        StockQuantity: '',
+        Price: 0,
+        StockQuantity: 0,
         Color: '',
         IsTrend: '',
         IsNew: '',
@@ -131,12 +135,12 @@ const ProductDetail = () => {
                 <div className='flex w-7/12'>
                     <div className='w-full h-full'>
 {/* Test images */}
-                        <div className='border-b-2 border-x-2 h-fit '><Image className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
-                        <div className='border-2 h-fit'><Image className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY331/73312b93dcc83560f54d904c71be419751a1ee6838303d15cd6b83b876b7f168.jpg' width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-b-2 border-x-2 h-fit '><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-2 h-fit'><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY331/73312b93dcc83560f54d904c71be419751a1ee6838303d15cd6b83b876b7f168.jpg' width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                     </div>
                     <div className='w-full'>
-                        <div className='border-b-2 border-x-2 h-fit'><Image className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
-                        <div className='border-2 h-fit'><Image className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-b-2 border-x-2 h-fit'><img className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
+                        <div className='border-2 h-fit'><img className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                     </div>
                 </div>
 
@@ -147,11 +151,12 @@ const ProductDetail = () => {
                     <div className='mt-4'>
                         <p className='font-semibold tracking-normal'>COLORS:</p>
                         <div className='flex mt-2'>
-                            {product.Color === 'White' ? (
-                                <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
+                        <button className={`white-button border-solid border-2 colorinput w-8 h-8 p-1 bg-[${product.Color}]`}></button>
+                            {/* {product.Color === 'White' ? (
+                                <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-{product.Color}"></button>
                             ) : product.Color === 'Black' ? (
                                 <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-black"></button>
-                            ) : null}
+                            ) : null} */}
                         </div>
                     </div>
 
@@ -167,15 +172,17 @@ const ProductDetail = () => {
                     </div>
 
                     <div>
-                        <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
-                        <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left you cannot add to the cart</p>
-                        <div className='flex mt-1'>
-                            <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
-                            <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
-                            <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
-                            <span className='mt-4 ml-2'>{'('}{product.StockQuantity}{')'}</span>
-                        </div>
-                    </div>
+                                <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
+                                {product.StockQuantity <= 1 && (
+                                    <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left, you cannot add to the cart</p>
+                                )}
+                                <div className='flex mt-1'>
+                                    <button className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard">{'-'}</button>
+                                    <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">1</button>
+                                    <button className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard">+</button>
+                                    <span className='mt-4 ml-2'>({product.StockQuantity})</span>
+                                </div>
+                            </div>
                     <div>
                         <p className='font-semibold tracking-normal mt-5'>INFORMATION:</p>
                         <p className='tracking-wide text-sm mt-2 pr-10'>{product.Description} </p>
@@ -183,7 +190,7 @@ const ProductDetail = () => {
                     <div className='mt-8'>
                         <div className='flex '>
                             <div>
-                                <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">CHECKOUT</button>
+                                <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn"><Link href="/checkout/">CHECKOUT</Link></button>
                             </div>
 
                             <div className='ml-4'>
@@ -191,7 +198,7 @@ const ProductDetail = () => {
                             </div>
 
                             <div className='ml-4 '>
-                                    <button className="hover:bg-[#D4CBB1] rounded-full" onClick={addToWishlist}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 32 33" fill="none">
+                                    <button className="hover:bg-[#D4CBB1] rounded-full" onClick={addToWishlist}><svg className="hover:bg-[#D4CBB1] rounded-full" xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 32 33" fill="none">
                                     <mask id="mask0_510_546"  maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
                                         <rect y="0.5" width="32" height="32" fill="#D9D9D9"/>
                                     </mask>

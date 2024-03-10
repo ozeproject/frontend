@@ -15,7 +15,7 @@ const Banner = () => {
   return (
     <div className=' px-20 py-10 border-b-2  border-gray-500'>
         <div className="border-2 border-gray-500 p-2 h-96">
-        <Image className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt="Banner" loading="lazy"/>
+        <img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt="Banner" loading="lazy"/>
         </div>
         <div className='mt-6'>
           <div className=' font-semibold text-xl'>New Arrival</div>

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Title from '../../components/Title';
 import AdminShop from '../../components/shop/AdminShop';
 import LoadMore from '../../components/Loadmore';
-import Filter from '../../components/shop/Filter';
 import ProductCard from '../../components/shop/ProductCard';
 import '../../setupEnv';
 import '../../app/globals.css';
@@ -32,22 +30,27 @@ const ShopPage = () => {
     }
   }, [token]);
 
+
   return (
     <div className="">
         <Navbar />
-        <Title />
+        <div className="border-b-2 border-gray-500">
+            <div className=" p-12">
+                <div className="text-center text-4xl font-semibold">ALL ITEMS</div>
+            </div>
+        </div>
         {userRole === 'Admin' ? (
         <>
           <AdminShop />
         </>
       ) : (
         <>
-          <Filter />
+          
         </>
       )}
         <ProductCard />
         <LoadMore />
-         <Footer /> 
+        <Footer /> 
         
     </div>
   );

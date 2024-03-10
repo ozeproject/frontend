@@ -123,7 +123,7 @@ const ShopBags = () => {
         {cartItems.map((item) => (
             <div key={item.cart_id} className='border-b-2  border-gray-500 p-10 flex'>
                 <div className='w-3/12 p-4'>
-                    <div className='flex justify-end'><span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <div className='flex justify-end'><span><svg className="hover:bg-[#D4CBB1] rounded-full" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                     <rect width="32" height="32" fill="#D9D9D9"/>
                     </mask>
@@ -133,7 +133,7 @@ const ShopBags = () => {
                     </svg></span>
                     </div>
 
-                    <div><Image className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
+                    <div><img className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className='w-9/12 p-4'>
                     <div className='flex justify-between text-2xl'>
@@ -186,7 +186,7 @@ const ShopBags = () => {
                               </div>
                               <div className='mt-5'>
                                  <button className='w-2/12 rounded-lg p-2 bg-slate-50 border border-gray-600 text-center'type="button">CANCEL</button>
-                                 <button className='w-2/12 ml-3 rounded-lg p-2 bg-slate-50 border border-gray-600 text-center' type="button">UPDATE</button>
+                                 <button className='w-2/12 ml-3 rounded-lg p-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center' type="button">UPDATE</button>
                               </div>
                         </div>
                         <div className='flex justify-end w-1/12  p-1'>
@@ -203,7 +203,8 @@ const ShopBags = () => {
             ))}
         </div>
         
-        <div className="border-l-2  border-gray-500 w-2/6 p-16">
+        <div className="border-l-2  border-gray-500 w-2/6 ">
+        <div className='border-b-2  border-gray-500 p-16'>
             <div className='flex justify-between text-lg'>
                 <div className=' '>YOUR ORDER SUMMARY</div>
                 <div className=' '>{'[ '}[ {cartItems.length} ]{' ]'}</div>
@@ -221,10 +222,11 @@ const ShopBags = () => {
                 <div className=' '>฿{total}</div>
             </div>
             <div className='mt-8 text-base'>
-                    <Link href="/shop/">
+                    <Link href="/checkout/">
                         <button className='m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center w-full' type="button">CHECK OUT</button>
                     </Link>
                 </div>
+        </div>
         </div>
     </div>
   );
