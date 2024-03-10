@@ -25,20 +25,25 @@ const UserProfile = () => {
 
           <div className='menutitle m-auto w-1/2 p-2 lay1 flex flex-row '>
             <span
-              className={`m-4 text-[#3B3B3B] hover:underline ${
-                activeTab === 'information' ? 'underline' : ''
-              }`}
+              className={`m-4 text-[#3B3B3B] hover:underline ${activeTab === 'information' ? 'underline' : ''
+                }`}
               onClick={() => handleTabChange('information')}
             >
               Information
             </span>
             <span
-              className={`m-4 text-[#3B3B3B] hover:underline ${
-                activeTab === 'orderHistory' ? 'underline' : ''
-              }`}
+              className={`m-4 text-[#3B3B3B] hover:underline ${activeTab === 'orderHistory' ? 'underline' : ''
+                }`}
               onClick={() => handleTabChange('orderHistory')}
             >
               Order History
+            </span>
+            <span
+              className={`m-4 text-[#3B3B3B] hover:underline ${activeTab === 'test' ? 'underline' : ''
+                }`}
+              onClick={() => handleTabChange('test')}
+            >
+              Test
             </span>
           </div>
         </div>
