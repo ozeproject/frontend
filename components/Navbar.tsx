@@ -73,10 +73,10 @@ const Navbar = () => {
                             </svg></Link>
                     </div>
 
-                    <div className='flex justify-between m-4'>
+                    <div className='flex justify-between m-4 pt-2'>
                         <Link href="/shop" passHref>
                             <span
-                                className={`mx-4 hover:underline ${router.pathname === '/shop' ? 'underline' : ''}`}
+                                className={`p-2 rounded-lg  hover:border-blacK hover:bg-[#D4CBB1]       ${router.pathname === '/shop' ? 'bg-[#D4CBB1]' : ''}`}
                                 onClick={() => handleTabChange('ALL ITEMS')}
                             >
                                 ALL ITEMS
@@ -85,7 +85,7 @@ const Navbar = () => {
 
                         <Link href="/shop/menshop" passHref>
                             <span
-                                className={`hover:underline ${router.pathname === '/shop/menshop' ? 'underline' : ''} m-4`}
+                                className={`p-2 rounded-lg  hover:border-blacK hover:bg-[#D4CBB1]       ${router.pathname === '/shop/menshop' ? 'bg-[#D4CBB1]' : ''}`}
                                 onClick={() => handleTabChange('MENS')}
                             >
                                 MENS
@@ -93,16 +93,16 @@ const Navbar = () => {
                         </Link>
 
                         <Link href="/shop/womenshop" passHref>
-                            <div
-                                className={`hover:underline ${router.pathname === '/shop/womenshop' ? 'underline' : ''} `}
+                            <span
+                                className={`p-2 rounded-lg  hover:border-blacK hover:bg-[#D4CBB1]       ${router.pathname === '/shop/womenshop' ? 'bg-[#D4CBB1]' : ''}`}
                                 onClick={() => handleTabChange('WOMEN')}
                             >
-                                WOMEN
-                            </div>
+                                WOMENS
+                            </span>
                         </Link>
 
                         <Link href="/shop/accessorie" passHref>
-                            <span className={`mx-4 hover:underline ${router.pathname === '/shop/accessorie' ? 'underline' : ''}`}>
+                            <span className={`p-2 rounded-lg  hover:border-blacK hover:bg-[#D4CBB1]       ${router.pathname === '/shop/accessorie' ? 'bg-[#D4CBB1]' : ''}`}>
                                 ACCESSORIES
                             </span>
                         </Link>
