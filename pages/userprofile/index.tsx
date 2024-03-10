@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Edit from '../../components/userprofile/Edit';
 import History from '../../components/userprofile/History';
@@ -14,7 +13,7 @@ const UserProfile = () => {
 
   return (
     <div className="">
-      <Navbar />
+
       <div>
         <div className="border-b-2 border-gray-500">
           <div className=" m-auto w-1/2 mt-12 lay1">
@@ -38,13 +37,7 @@ const UserProfile = () => {
             >
               Order History
             </span>
-            <span
-              className={`m-4 text-[#3B3B3B] hover:underline ${activeTab === 'test' ? 'underline' : ''
-                }`}
-              onClick={() => handleTabChange('test')}
-            >
-              Test
-            </span>
+
           </div>
         </div>
       </div>
