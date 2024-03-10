@@ -14,8 +14,8 @@ const Footer = () => {
                         <div className='font-bold mb-3'>SHOP</div>
                         <div className='font-medium'>
                             <Link href="/shop/" passHref>
-                                <div className={`hover:underline ${router.pathname === '/shop/' ? 'underline' : ''}`}>
-                                    NEW ITEMS
+                                <div className={`hover:underline ${router.pathname === '/shop' ? 'underline' : ''}`}>
+                                    All ITEMS
                                 </div>
                             </Link>
                             <Link href="/shop/menshop" passHref>
