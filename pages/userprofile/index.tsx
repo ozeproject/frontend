@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import Edit from '../../components/userprofile/Edit';
 import History from '../../components/userprofile/History';
 import '../../app/globals.css';
+import Navbar from '../../components/Navbar';
 
 const UserProfile = () => {
   const [activeTab, setActiveTab] = useState('information');
@@ -13,7 +14,7 @@ const UserProfile = () => {
 
   return (
     <div className="">
-
+      <Navbar />
       <div>
         <div className="border-b-2 border-gray-500">
           <div className=" m-auto w-1/2 mt-12 lay1">

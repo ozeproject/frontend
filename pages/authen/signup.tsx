@@ -21,6 +21,8 @@ const Signup = () => {
 
     const [emailError, setEmailError] = useState<string | null>(null);
     const [passwordError, setPasswordError] = useState<string | null>(null);
+    const [nameError, setNameError] = useState<string | null>(null);
+    const [userNameError, setUserNameError] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -44,13 +46,38 @@ const Signup = () => {
             const isPasswordMatch = e.target.value === user.Password;
             setPasswordError(isPasswordMatch ? null : 'Passwords do not match');
          }
+         // Validate username confirmation
+        if (e.target.name === 'Name') {
+
+            setNameError(e.target.value === '' ? 'Please input name.' : null);
+         }
+         // Validate password confirmation
+         if (e.target.name === 'Username') {
+
+            setUserNameError(e.target.value === '' ? 'Please input username.' : null);
+         }
+         
       };
 
   // Handler for form submission
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    if (user.Email) {
+        const isValidEmail = emailRegex.test(user.Email);
+        setEmailError(isValidEmail ? null : 'Invalid email format');
+      }
+      if(user.Name === '') {
+  
+        setNameError( 'Please input name.');
+      }
+      if(user.Username === '') {
+  
+        setUserNameError( 'Please input username.');
+      }
     // Your email and password validation logic here
+    if( emailRegex.test(user.Email) && user.Name !== '' && user.Username !== ''){
 
     try {
         const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/signup', {
@@ -74,7 +101,7 @@ const Signup = () => {
         console.error('Error creating user:', error);
         setErrorMessage('Error creating user. Please try again.');
         setShowModal(true); // Show the modal
-    }
+    }}
 };
   
     return (
@@ -103,10 +130,12 @@ const Signup = () => {
                         <div className=''>
                             <label className='text-[#3B3B3B]'>Username *</label><br />
                             <input className='border border-[#B9B9B9] w-full  rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='text' placeholder='Username' name="Username" value={user.Username} onChange={handleInputChange}></input>
+                            {userNameError && <p className='text-red-700 tracking-wide text-sm mt-2'>{userNameError}</p>}
                         </div>
                         <div className=''>
                             <label className='text-[#3B3B3B]'>Name *</label><br />
                             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='text' placeholder='Name' name="Name" value={user.Name} onChange={handleInputChange}></input>
+                            {nameError && <p className='text-red-700 tracking-wide text-sm mt-2'>{nameError}</p>}
                         </div>
                     </div>
 

@@ -10,6 +10,9 @@ const Edit = () => {
       Phone: '',
       Address: ''
     });
+    const [nameError,setNameError] = useState<string | null>(null)
+    const [userNameError,setUserNameError] = useState<string | null>(null)
+    const [emailError,setEmailError] = useState<string | null>(null)
   
     useEffect(() => {
       const fetchUserProfile = async () => {
@@ -50,25 +53,47 @@ const Edit = () => {
 
   const handleUpdateClick = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setNameError(null);
+    setUserNameError(null);
+    setEmailError(null);
 
-    try {
-      const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/user/profile`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify(userData),
-          });
 
-      if (response.ok) {
-        setIsEditMode(false);
-      } else {
-        console.error('Failed to update product');
-      }
-    } catch (error) {
-      console.error('Error updating product:', error);
+    if (userData.Email) {
+      
+      const isValidEmail = emailRegex.test(userData.Email);
+      setEmailError(isValidEmail ? null : 'Invalid email format');
     }
+    if(userData.Name === '') {
+
+      setNameError( 'Please input name.');
+    }
+    if(userData.Username === '') {
+
+      setUserNameError( 'Please input Username.');
+    }
+   
+    if(emailRegex.test(userData.Email) && userData.Name !== '' && userData.Username !== ''){
+      try {
+        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/user/profile`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+              body: JSON.stringify(userData),
+            });
+  
+        if (response.ok) {
+          setIsEditMode(false);
+        } else {
+          console.error('Failed to update product');
+        }
+      } catch (error) {
+        console.error('Error updating product:', error);
+      }
+    }
+    
   };
 
   return (
@@ -77,14 +102,17 @@ const Edit = () => {
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Name:</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" value={userData.Name} name="Name" placeholder="Admin User" readOnly={!isEditMode} onChange={handleInputChange}  />
+            {nameError && <p className='text-red-700 tracking-wide text-sm mt-2'>{nameError}</p>}
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Username:</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" value={userData.Username } name="Username" placeholder="admin_user" readOnly={!isEditMode} onChange={handleInputChange} />
+            {userNameError && <p className='text-red-700 tracking-wide text-sm mt-2'>{userNameError}</p>}
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Email:</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="email" value={userData.Email } name="Email" placeholder="admin@example.com" readOnly={!isEditMode} onChange={handleInputChange}  />
+            {emailError && <p className='text-red-700 tracking-wide text-sm mt-2'>{emailError}</p>}
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Phone:</label>
