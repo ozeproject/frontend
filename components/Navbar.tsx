@@ -58,7 +58,7 @@ const Navbar = () => {
                     <div className='m-4'> <Link href="/home/contact">Contact us</Link></div>
                 </div>
 
-                <div className="lay2 w-3/12">
+                <div className="lay2 w-96">
                     <div className='w-full'>
                         <Link href="/home/">
                             <svg xmlns="http://www.w3.org/2000/svg" width="128" height="64" viewBox="0 0 128 64" fill="none" className='m-auto'>
@@ -76,7 +76,7 @@ const Navbar = () => {
                     <div className='flex justify-between m-4 pt-2'>
                         <Link href="/shop" passHref>
                             <span
-                                className={`p-2 rounded-lg  hover:border-blacK hover:bg-[#D4CBB1]       ${router.pathname === '/shop' ? 'bg-[#D4CBB1]' : ''}`}
+                                className={` p-2 rounded-lg  hover:border-blacK hover:bg-[#D4CBB1]       ${router.pathname === '/shop' ? 'bg-[#D4CBB1]' : ''}`}
                                 onClick={() => handleTabChange('ALL ITEMS')}
                             >
                                 ALL ITEMS
