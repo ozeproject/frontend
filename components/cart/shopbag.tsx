@@ -101,13 +101,13 @@ const ShopBags = () => {
         const calculateSubtotal = () => {
             let total = 0;
             cartItems.forEach((item) => {
-                total += item.Price;
+                total += item.Price ;
             });
             setSubtotal(total);
         };
 
         const calculateTotal = () => {
-            setTotal(subtotal); 
+            setTotal(subtotal + 50 ); 
         };
 
         calculateSubtotal();
@@ -216,7 +216,7 @@ const ShopBags = () => {
             </div>
             <div className='flex justify-between text-base'>
                 <div className=' '>SHIPPING</div>
-                <div className=' '>฿0</div>
+                <div className=' '>฿50</div>
             </div>
             <div className='mt-4  flex justify-between text-2xl'>
                 <div className=' '>TOTAL</div>
