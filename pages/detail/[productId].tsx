@@ -21,6 +21,8 @@ const ProductDetail = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const router = useRouter();
     const { productId } = router.query;
+    const [selectedSize, setSelectedSize] = useState<string | null>(null);
+    const [quantity, setQuantity] = useState(1);
     const [product, setProduct] = useState({
         ProductId: productId,
         ProductName: '',
@@ -32,7 +34,28 @@ const ProductDetail = () => {
         IsNew: '',
         CategoryId: '',
         ImagePath: '',
+        gender: '',
+        Size: '',
       });
+
+    const handleSizeClick = (size: string) => {
+        setSelectedSize(prevSize => (prevSize === size ? null : size));
+        console.log("size selected: "+ size); 
+    };
+
+    const handleIncrement = () => {
+        if (quantity < product.StockQuantity) {
+            setQuantity(prevQuantity => prevQuantity + 1);
+        }
+        console.log(quantity);
+    };
+
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            setQuantity(prevQuantity => prevQuantity - 1);
+        }
+        console.log(quantity);
+    };
 
       const addToCart = async () => {
         try {
@@ -47,6 +70,8 @@ const ProductDetail = () => {
                     body: JSON.stringify({
                         userId: userId,
                         productId: product.ProductId, 
+                        size: selectedSize,
+                        quantity: quantity,
                     }),
                 });
                 if (response.ok) {
@@ -76,6 +101,8 @@ const ProductDetail = () => {
                     body: JSON.stringify({
                         userId: userId,
                         productId: product.ProductId, 
+                        size: selectedSize,
+                        quantity: quantity,
                     }),
                 });
                 if (response.ok) {
@@ -110,7 +137,6 @@ const ProductDetail = () => {
         }
     }
 
-  // Fetch product details based on productId
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -127,6 +153,8 @@ const ProductDetail = () => {
     }
   }, [productId]);
 
+  
+
     return (
         <div>
             <Navbar />
@@ -134,7 +162,6 @@ const ProductDetail = () => {
 
                 <div className='flex w-7/12'>
                     <div className='w-full h-full'>
-{/* Test images */}
                         <div className='border-b-2 border-x-2 h-fit '><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg'  width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                         <div className='border-2 h-fit'><img className='mx-auto' src='https://assets.official-goods-store.jp/product/ZMY331/73312b93dcc83560f54d904c71be419751a1ee6838303d15cd6b83b876b7f168.jpg' width={500} height={500} alt={product.ImagePath} loading="lazy"/></div>
                     </div>
@@ -161,28 +188,60 @@ const ProductDetail = () => {
                     </div>
 
                     
-                    <div className='mt-6'>
-                        <p className='font-semibold tracking-normal'>SIZES:</p>
-                        <p className='text-red-700 tracking-wide text-sm mt-2'>Please select your size first</p>
-                        <div className='flex mt-1'>
-                            <button className="white-button  border-solid border-2 border-gray-500  w-8 h-8 p-1  inputCard font-bold text-center rounded-md text-sm">L</button>
-                            <button className="black-button  border-solid border-2 border-gray-500  w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm">XL</button>
-                        </div>
-                        <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
-                    </div>
-
-                    <div>
-                                <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
-                                {product.StockQuantity <= 1 && (
-                                    <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left, you cannot add to the cart</p>
-                                )}
-                                <div className='flex mt-1'>
-                                    <button className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard">{'-'}</button>
-                                    <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">1</button>
-                                    <button className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard">+</button>
-                                    <span className='mt-4 ml-2'>({product.StockQuantity})</span>
-                                </div>
+            <div className='mt-6'>
+                <p className='font-semibold tracking-normal'>SIZES:</p>
+                {selectedSize ? null : (
+                    <p className='text-red-700 tracking-wide text-sm mt-2'>
+                    Please select your size first
+                    </p>
+                )}
+                <div className='flex mt-1'>
+                <button
+                        className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 inputCard font-bold text-center rounded-md text-sm ${
+                            selectedSize === 'L' ? 'selected' : ''
+                        }`}
+                        onClick={() => handleSizeClick('L')}
+                    >
+                        L
+                    </button>
+                    <button
+                        className={`black-button border-solid border-2 border-gray-500 w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm ${
+                            selectedSize === 'XL' ? 'selected' : ''
+                        }`}
+                        onClick={() => handleSizeClick('XL')}
+                    >
+                        XL
+                    </button>
+                </div>
+                <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
+            </div>
+                        <div>
+                            <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
+                            {product.StockQuantity <= 1 && (
+                                <p className='text-red-700 tracking-wide text-sm mt-2'>
+                                    Only 1 item left, you cannot add to the cart
+                                </p>
+                            )}
+                            <div className='flex mt-1'>
+                                <button
+                                    className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard"
+                                    onClick={handleDecrement}
+                                >
+                                    {'-'}
+                                </button>
+                                <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">
+                                    {quantity}
+                                </button>
+                                <button
+                                    className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard"
+                                    onClick={handleIncrement}
+                                >
+                                    {'+'}
+                                </button>
+                                <span className='mt-4 ml-2'>({product.StockQuantity})</span>
                             </div>
+                        </div>
+
                     <div>
                         <p className='font-semibold tracking-normal mt-5'>INFORMATION:</p>
                         <p className='tracking-wide text-sm mt-2 pr-10'>{product.Description} </p>

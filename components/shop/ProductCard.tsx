@@ -34,6 +34,8 @@ const ProductCard = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null); 
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState(1);
   let userRole: string | null = null;
 
   if (token) {
@@ -74,9 +76,26 @@ const fetchProducts = async (sortBy: string = '') => {
     fetchProducts(); // Pass an empty string or default value for sortBy
   }, [])
   
-    const handleSortChange = (sortBy: string) => {
+  const handleSortChange = (sortBy: string) => {
       fetchProducts(sortBy);
     };
+
+  const handleSizeClick = (size: string) => {
+      setSelectedSize(prevSize => (prevSize === size ? null : size));
+      console.log("size selected: "+ size); 
+  };
+
+  const handleIncrement = () => {
+    if (quantity < selectedProduct!.StockQuantity) {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    }
+};
+
+const handleDecrement = () => {
+    if (quantity > 1) {
+        setQuantity(prevQuantity => prevQuantity - 1);
+    }
+};
 
   const addToCart = async (product: Product) => {
     try {
@@ -91,6 +110,8 @@ const fetchProducts = async (sortBy: string = '') => {
                 body: JSON.stringify({
                     userId: userId,
                     productId: product.ProductId, 
+                    size: selectedSize,
+                    quantity: quantity,
                 }),
             });
             if (response.ok) {
@@ -120,6 +141,8 @@ const addToWishlist = async (product: Product) => {
                 body: JSON.stringify({
                     userId: userId,
                     productId: product.ProductId, 
+                    size: selectedSize,
+                    quantity: quantity,
                 }),
             });
             if (response.ok) {
@@ -295,25 +318,59 @@ function getUserId() {
                                     ) : null}
                                   </div>
                               </div>
+
                               <div className='mt-6'>
                                   <p className='font-semibold tracking-normal'>SIZES:</p>
-                                  <p className='text-red-700 tracking-wide text-sm mt-2'>Please select your size first</p>
+                                  {selectedSize ? null : (
+                                      <p className='text-red-700 tracking-wide text-sm mt-2'>
+                                      Please select your size first
+                                      </p>
+                                  )}
                                   <div className='flex mt-1'>
-                                      <button className="white-button  border-solid border-2 border-gray-500 rounded-md  w-8 h-8 p-1  inputCard font-bold text-center text-sm">L</button>
-                                      <button className="black-button  border-solid border-2 border-gray-500  rounded-md w-8 h-8 p-1 ml-3 inputCard font-bold text-center text-sm">XL</button>
+                                  <button
+                                          className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 inputCard font-bold text-center rounded-md text-sm ${
+                                              selectedSize === 'L' ? 'selected' : ''
+                                          }`}
+                                          onClick={() => handleSizeClick('L')}
+                                      >
+                                          L
+                                      </button>
+                                      <button
+                                          className={`black-button border-solid border-2 border-gray-500 w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm ${
+                                              selectedSize === 'XL' ? 'selected' : ''
+                                          }`}
+                                          onClick={() => handleSizeClick('XL')}
+                                      >
+                                          XL
+                                      </button>
                                   </div>
                                   <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
                               </div>
-                              <div>
+
+                            <div>
                                 <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
-                                {selectedProduct.StockQuantity <= 1 && (
-                                    <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left, you cannot add to the cart</p>
+                                {selectedProduct!.StockQuantity <= 1 && (
+                                    <p className='text-red-700 tracking-wide text-sm mt-2'>
+                                        Only 1 item left, you cannot add to the cart
+                                    </p>
                                 )}
                                 <div className='flex mt-1'>
-                                    <button className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard">{'-'}</button>
-                                    <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">1</button>
-                                    <button className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard">+</button>
-                                    <span className='mt-4 ml-2'>({selectedProduct.StockQuantity})</span>
+                                    <button
+                                        className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard"
+                                        onClick={handleDecrement}
+                                    >
+                                        {'-'}
+                                    </button>
+                                    <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">
+                                        {quantity}
+                                    </button>
+                                    <button
+                                        className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard"
+                                        onClick={handleIncrement}
+                                    >
+                                        {'+'}
+                                    </button>
+                                    <span className='mt-4 ml-2'>({selectedProduct!.StockQuantity})</span>
                                 </div>
                             </div>
                           </div>
