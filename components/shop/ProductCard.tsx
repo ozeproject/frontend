@@ -69,6 +69,7 @@ const fetchProducts = async (sortBy: string = '') => {
 
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
+    setSelectedSizes({});
   };
 
 
@@ -375,6 +376,7 @@ function getUserId() {
                                     <span className='mt-4 ml-2'>({selectedProduct!.StockQuantity})</span>
                                 </div>
                             </div>
+
                           </div>
 
                           <div className='mt-16'>

@@ -73,6 +73,7 @@ const handleDecrement = () => {
   
     const closeModal = () => {
       setIsModalOpen(false);
+      setSelectedSizes({});
     };
   
     useEffect(() => {

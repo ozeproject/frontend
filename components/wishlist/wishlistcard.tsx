@@ -34,7 +34,8 @@ const WishlistCard = () => {
     const [error, setError] = useState<string | null>(null); 
     const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
     const [selectedProduct, setSelectedProduct] = useState<WishlistItem | null>(null);
-    const [wishlistToDelete, setWishlistToDelete] = useState<WishlistItem | null>(null); 
+    const [selectedSize, setSelectedSizes] = useState<{ [productId: number]: string | null }>({});
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         fetchWishlist();
@@ -84,6 +85,28 @@ const WishlistCard = () => {
         }
     };
 
+    const handleSizeClick = (size: string, productId: number) => {
+        setSelectedSizes(prevSizes => ({
+            ...prevSizes,
+            [productId]: prevSizes[productId] === size ? null : size
+        }));
+      };
+      useEffect(() => {
+        console.log(selectedSize);
+      }, [selectedSize]);
+  
+    const handleIncrement = () => {
+      if (quantity < selectedProduct!.StockQuantity) {
+          setQuantity(prevQuantity => prevQuantity + 1);
+      }
+  };
+  
+  const handleDecrement = () => {
+      if (quantity > 1) {
+          setQuantity(prevQuantity => prevQuantity - 1);
+      }
+  };
+
     const openModal = (product: WishlistItem) => {
         setSelectedProduct(product);
         setIsModalOpen(true);
@@ -91,6 +114,7 @@ const WishlistCard = () => {
       
         const closeModal = () => {
           setIsModalOpen(false);
+          setSelectedSizes({});
         };
       
         useEffect(() => {
@@ -222,10 +246,10 @@ const WishlistCard = () => {
                         
                         <div className='text-center font-bold text-3xl mt-4'><span>{item.Price}</span></div>
                         
-                        <div className="hideforhold mt-4">
+                        <div className="mt-4">
                             <div className="color-options text-center">
-                                    <button className="white-button  border-solid border-2 colorinput  w-5 h-5 p-1  bg-white mx-1"></button>
-                                    <button className="black-button  border-solid border-2 colorinput w-5 h-5 p-1  bg-black mx-1"></button>
+                            <button className="white-button  border-solid border-2 colorinput  w-5 h-5 p-1"
+                                    style={{ backgroundColor: item.Color }}></button>
                             </div>
                         </div>
                     
@@ -288,35 +312,72 @@ const WishlistCard = () => {
                           <div>
                               <p className='text-2xl font-semibold tracking-normal'>{selectedProduct.ProductName}  </p>
                               <p className='text-2xl font-semibold mt-2 tracking-normal'>฿{selectedProduct.Price} </p>
+
                               <div className='mt-4'>
-                                  <p className='font-semibold tracking-normal'>COLORS:</p>
-                                  <div className='flex mt-2'>
-                                  {selectedProduct.Color === 'White' ? (
-                                        <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
-                                    ) : selectedProduct.Color === 'Black' ? (
-                                      <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-black"></button>
-                                    ) : null}
-                                  </div>
-                              </div>
-                              <div className='mt-6'>
+                                    <p className='font-semibold tracking-normal'>COLORS:</p>
+                                    <div className='flex mt-2'>
+                                        <button
+                                            className="white-button border-solid border-2 colorinput w-8 h-8 p-1"
+                                            style={{ backgroundColor: selectedProduct.Color }}
+                                        ></button>
+                                    </div>
+                                </div>
+
+                                <div className='mt-6'>
                                   <p className='font-semibold tracking-normal'>SIZES:</p>
-                                  <p className='text-red-700 tracking-wide text-sm mt-2'>Please select your size first</p>
+                                  {Object.keys(selectedSize).length === 0 && (
+                                      <p className='text-red-700 tracking-wide text-sm mt-2'>
+                                          Please select your size first
+                                      </p>
+                                  )}
                                   <div className='flex mt-1'>
-                                      <button className="white-button  border-solid border-2 border-gray-500 rounded-md  w-8 h-8 p-1  inputCard font-bold text-center text-sm">L</button>
-                                      <button className="black-button  border-solid border-2 border-gray-500  rounded-md w-8 h-8 p-1 ml-3 inputCard font-bold text-center text-sm">XL</button>
+                                  <button
+                                        className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 inputCard font-bold text-center rounded-md text-sm ${
+                                          selectedSize[selectedProduct.ProductId] === 'L' ? 'selected' : ''
+                                        }`}
+                                        onClick={() => handleSizeClick('L', selectedProduct.ProductId)}
+                                    >
+                                        L
+                                    </button>
+                                    <button
+                                        className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm ${
+                                          selectedSize[selectedProduct.ProductId] === 'XL' ? 'selected' : ''
+                                        }`}
+                                        onClick={() => handleSizeClick('XL', selectedProduct.ProductId)}
+                                    >
+                                        XL
+                                    </button>
                                   </div>
                                   <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
                               </div>
+
                               <div>
-                                  <p className='font-semibold tracking-normal mt-5'>QUANTITY::</p>
-                                  <p className='text-red-700 tracking-wide text-sm mt-2'>Only 1 item left you cannot add to the cart</p>
-                                  <div className='flex mt-1'>
-                                      <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
-                                      <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
-                                      <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
-                                      <span className='mt-4 ml-2'>{'('}{selectedProduct.StockQuantity}{')'}</span>
-                                  </div>
-                              </div>
+                                <p className='font-semibold tracking-normal mt-5'>QUANTITY:</p>
+                                {selectedProduct!.StockQuantity <= 1 && (
+                                    <p className='text-red-700 tracking-wide text-sm mt-2'>
+                                        Only 1 item left, you cannot add to the cart
+                                    </p>
+                                )}
+                                <div className='flex mt-1'>
+                                    <button
+                                        className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard"
+                                        onClick={handleDecrement}
+                                    >
+                                        {'-'}
+                                    </button>
+                                    <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">
+                                        {quantity}
+                                    </button>
+                                    <button
+                                        className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard"
+                                        onClick={handleIncrement}
+                                    >
+                                        {'+'}
+                                    </button>
+                                    <span className='mt-4 ml-2'>({selectedProduct!.StockQuantity})</span>
+                                </div>
+                            </div>
+
                           </div>
 
                           <div className='mt-16'>
