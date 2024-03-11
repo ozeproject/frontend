@@ -245,13 +245,10 @@ function getUserId() {
             
             <div className='text-center font-bold text-3xl mt-4'><span>฿{product.Price}</span></div>
             
-            <div className="hideforhold mt-4">
+            <div className="mt-4">
                 <div className="color-options text-center">
-                    {product.Color === 'White' ? (
-                                <button className="white-button  border-solid border-2 colorinput  w-5 h-5 p-1  bg-white"></button>
-                            ) : product.Color === 'Black' ? (
-                              <button className="black-button  border-solid border-2 colorinput w-5 h-5 p-1  bg-black"></button>
-                            ) : null}
+                <button className="white-button  border-solid border-2 colorinput  w-5 h-5 p-1"
+                        style={{ backgroundColor: product.Color }}></button>
                 </div>
             </div>
             
@@ -308,16 +305,16 @@ function getUserId() {
                           <div>
                               <p className='text-2xl font-semibold tracking-normal'>{selectedProduct.ProductName}  </p>
                               <p className='text-2xl font-semibold mt-2 tracking-normal'>฿{selectedProduct.Price} </p>
+                              
                               <div className='mt-4'>
-                                  <p className='font-semibold tracking-normal'>COLORS:</p>
-                                  <div className='flex mt-2'>
-                                  {selectedProduct.Color === 'White' ? (
-                                        <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-white"></button>
-                                    ) : selectedProduct.Color === 'Black' ? (
-                                      <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-black"></button>
-                                    ) : null}
-                                  </div>
-                              </div>
+                                    <p className='font-semibold tracking-normal'>COLORS:</p>
+                                    <div className='flex mt-2'>
+                                        <button
+                                            className="white-button border-solid border-2 colorinput w-8 h-8 p-1"
+                                            style={{ backgroundColor: selectedProduct.Color }}
+                                        ></button>
+                                    </div>
+                                </div>
 
                               <div className='mt-6'>
                                   <p className='font-semibold tracking-normal'>SIZES:</p>

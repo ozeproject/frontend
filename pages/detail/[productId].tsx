@@ -178,14 +178,17 @@ const ProductDetail = () => {
                     <div className='mt-4'>
                         <p className='font-semibold tracking-normal'>COLORS:</p>
                         <div className='flex mt-2'>
-                        <button className={`white-button border-solid border-2 colorinput w-8 h-8 p-1 bg-[${product.Color}]`}></button>
+                            <button
+                                className="white-button border-solid border-2 colorinput w-8 h-8 p-1"
+                                style={{ backgroundColor: product.Color }}
+                            ></button>
+                        </div>
+                    </div>
                             {/* {product.Color === 'White' ? (
                                 <button className="white-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-{product.Color}"></button>
                             ) : product.Color === 'Black' ? (
                                 <button className="black-button  border-solid border-2 colorinput  w-8 h-8 p-1  bg-black"></button>
                             ) : null} */}
-                        </div>
-                    </div>
 
                     
             <div className='mt-6'>
