@@ -15,7 +15,9 @@ const Create = () => {
     IsTrend: '',
     IsNew: '',
     CategoryId: '',
-    ImagePath: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWsPfSz6bOW4iOxwZ8krfFxShTYYFVrXM7Q&usqp=CAU',
+    ImagePath: '',
+    gender:'',
+    Size:'',
   });
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -51,7 +53,9 @@ const Create = () => {
           IsTrend: '',
           IsNew: '',
           CategoryId: '',
-          ImagePath: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmWsPfSz6bOW4iOxwZ8krfFxShTYYFVrXM7Q&usqp=CAU',
+          ImagePath: '',
+          gender:'',
+          Size:'',
         });
       } else {
         setShowFailModal(true);
@@ -79,10 +83,24 @@ const Create = () => {
       <div className='w-1/4 mx-auto my-12'>
         <form onSubmit={handleSubmit}>
         <div className='mt-3'>
-        <div className="border-2 border-[#B9B9B9] p-2 h-44 rounded-md bg-[#F2EEE3]">
-            <div className='text-[#3B3B3B]'>Upload file</div>
-        </div>
+          <label className='text-[#3B3B3B]'>Upload file</label>
+          <input
+            type="file"
+            id="fileInput"
+            className="hidden"
+            value={formData.ImagePath}
+            // onChange={handleFileUpload} // Add your file upload handling function
+          />
+          <div className="mt-3"> {/* Add this line for a blank line */}
+            <button
+              className="border border-[#B9B9B9] rounded-md bg-[#D4CBB1] hover:bg-[#D9D9D9] px-4 py-2"
+              // onClick={() => document.getElementById('fileInput').click()}
+            >
+              Choose file
+            </button>
           </div>
+        </div>
+
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>ProductName</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" value={formData.ProductName} onChange={handleInputChange} />
@@ -102,25 +120,21 @@ const Create = () => {
 
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Color</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="Color" value={formData.Color} onChange={handleInputChange}>
-              <option value="Black">Black</option>
-              <option value="White">White</option>
-            </select>
+            <input
+              type="color"
+              className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]"
+              name="Color"
+              value={formData.Color}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className='mt-3'>
-            <label className='text-[#3B3B3B]'>Trend</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsTrend" value={formData.IsTrend} onChange={handleInputChange}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
-
-          <div className='mt-3'>
-            <label className='text-[#3B3B3B]'>New</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsNew" value={formData.IsNew} onChange={handleInputChange}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+            <label className='text-[#3B3B3B]'>Gender</label>
+            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsNew" value={formData.gender} onChange={handleInputChange}>
+              <option value="true">Male</option>
+              <option value="false">Female</option>
+              <option value="false">Other</option>
             </select>
           </div>
 
@@ -128,7 +142,6 @@ const Create = () => {
             <label className='text-[#3B3B3B]'>Category</label>
             <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="CategoryId" value={formData.CategoryId} onChange={handleInputChange}>
               <option value="Shirt">Shirt</option>
-              <option value="Bag">Bag</option>
               <option value="Accessories">Accessories</option>
             </select>
           </div>
