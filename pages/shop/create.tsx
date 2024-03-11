@@ -23,15 +23,43 @@ const Create = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailModal, setShowFailModal] = useState(false);
 
+  const [ProductNameError, setProductNameError] = useState<string | null>(null);
+  const [StockError, setStockQuantityError] = useState<string | null>(null);
+  const [PriceError, setPriceError] = useState<string | null>(null);
+
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+
+    if (e.target.name === 'ProductName') {
+      setProductNameError(e.target.value == '' ? 'Please input ProductName.' : null);
+    }
+    if (e.target.name === 'Price') {
+      setPriceError(e.target.value == '' ? 'Please input Price.' : null);
+     }
+    if (e.target.name === 'StockQuantity') {
+      setStockQuantityError(e.target.value == '' ? 'Please input StockQuantity.' : null);
+     }
+    
   };
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+
+    if(formData.ProductName == '') {
+
+      setProductNameError( 'Please input name.');
+    }
+    if(formData.StockQuantity == '') {
+
+      setStockQuantityError( 'Please input StockQuantity.');
+    }
+    if(formData.Price == '') {
+
+      setPriceError( 'Please input Price.');
+    }
 
     try {
       const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products', {
@@ -65,6 +93,8 @@ const Create = () => {
       console.error('Error creating product:', error);
       setShowFailModal(true);
     }
+
+
   };
 
   const handleCloseModal = () => {
@@ -104,6 +134,7 @@ const Create = () => {
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>ProductName</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" value={formData.ProductName} onChange={handleInputChange} />
+            {ProductNameError && <p className='text-red-700 tracking-wide text-sm mt-2'>{ProductNameError}</p>}
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Description</label>
@@ -112,10 +143,12 @@ const Create = () => {
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Price</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="Price" value={formData.Price} onChange={handleInputChange} />
+            {PriceError && <p className='text-red-700 tracking-wide text-sm mt-2'>{PriceError}</p>}
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Stock</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="StockQuantity" value={formData.StockQuantity} onChange={handleInputChange} />
+            {StockError && <p className='text-red-700 tracking-wide text-sm mt-2'>{StockError}</p>}
           </div>
 
           <div className='mt-3'>

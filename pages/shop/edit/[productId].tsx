@@ -43,16 +43,43 @@ const EditProduct: React.FC = () => {
     }
   }, [productId]);
 
+  const [ProductNameError, setProductNameError] = useState<string | null>(null);
+  const [StockError, setStockQuantityError] = useState<string | null>(null);
+  const [PriceError, setPriceError] = useState<string | null>(null);
+
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     setProduct({
       ...product,
       [e.target.name]: e.target.value,
     });
+
+    if (e.target.name == 'ProductName') {
+      setProductNameError(e.target.value === '' ? 'Please input ProductName.' : null);
+    }
+    if (e.target.name == 'Price') {
+      setStockQuantityError(e.target.value === '' ? 'Please input Price.' : null);
+     }
+    if (e.target.name == 'StockQuantity') {
+      setPriceError(e.target.value === '' ? 'Please input StockQuantity.' : null);
+     }
   };
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    
+    if(product.ProductName == '') {
 
+      setProductNameError( 'Please input name.');
+    }
+    if(product.StockQuantity == '') {
+
+      setStockQuantityError( 'Please input StockQuantity.');
+    }
+    if(product.Price == '') {
+
+      setPriceError( 'Please input Price.');
+    }
+    
     try {
       const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`, {
             method: 'PUT',
@@ -111,6 +138,7 @@ const EditProduct: React.FC = () => {
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Product name</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" value={product.ProductName} onChange={handleInputChange} required/>
+            {ProductNameError && <p className='text-red-700 tracking-wide text-sm mt-2'>{ProductNameError}</p>}
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Description</label>
@@ -119,10 +147,12 @@ const EditProduct: React.FC = () => {
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Price</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="Price" value={product.Price} onChange={handleInputChange} />
+            {PriceError && <p className='text-red-700 tracking-wide text-sm mt-2'>{PriceError}</p>}
           </div>
           <div className='mt-3'>
             <label>Stock</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="StockQuantity" value={product.StockQuantity} onChange={handleInputChange} />
+            {StockError && <p className='text-red-700 tracking-wide text-sm mt-2'>{StockError}</p>}
           </div>
           
           <div className='mt-3'>
