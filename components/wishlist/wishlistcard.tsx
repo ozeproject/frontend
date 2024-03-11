@@ -19,6 +19,8 @@ interface WishlistItem {
     CategoryId: number;
     ImagePath: string;
     gender: string;
+    Size: string;
+    Quantity: number;
 }
 
 interface MyToken {
@@ -110,6 +112,9 @@ const WishlistCard = () => {
     const openModal = (product: WishlistItem) => {
         setSelectedProduct(product);
         setIsModalOpen(true);
+        if (product.CategoryId == 2) {
+            setSelectedSizes({ [product.ProductId]: 'FREE' });
+          }
       };
       
         const closeModal = () => {
@@ -153,6 +158,8 @@ const WishlistCard = () => {
                             body: JSON.stringify({
                                 userId: userId,
                                 productId: product.ProductId, 
+                                size: selectedSize,
+                                quantity: quantity,
                             }),
                         });
                         if (response.ok) {
@@ -185,7 +192,9 @@ const WishlistCard = () => {
                         },
                         body: JSON.stringify({
                             userId: userId,
-                            productId: product.ProductId, 
+                            productId: product.ProductId,
+                            size: selectedSize,
+                            quantity: quantity,
                         }),
                     });
                     if (response.ok) {
@@ -331,22 +340,36 @@ const WishlistCard = () => {
                                       </p>
                                   )}
                                   <div className='flex mt-1'>
-                                  <button
-                                        className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 inputCard font-bold text-center rounded-md text-sm ${
-                                          selectedSize[selectedProduct.ProductId] === 'L' ? 'selected' : ''
-                                        }`}
-                                        onClick={() => handleSizeClick('L', selectedProduct.ProductId)}
-                                    >
-                                        L
-                                    </button>
-                                    <button
-                                        className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm ${
-                                          selectedSize[selectedProduct.ProductId] === 'XL' ? 'selected' : ''
-                                        }`}
-                                        onClick={() => handleSizeClick('XL', selectedProduct.ProductId)}
-                                    >
-                                        XL
-                                    </button>
+                                      {selectedProduct.CategoryId == 2 ? (
+                                          <button
+                                              className={`white-button border-solid border-2 border-gray-500 w-12 h-8 p-1 inputCard font-bold text-center rounded-md text-sm selected ${
+                                                  selectedSize[selectedProduct.ProductId] === 'FREE' ? 'selected' : ''
+                                              }`}
+                                              onClick={() => handleSizeClick('FREE', selectedProduct.ProductId)}
+                                              disabled={true}
+                                          >
+                                              FREE
+                                          </button>
+                                      ) : (
+                                          <>
+                                              <button
+                                                  className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 inputCard font-bold text-center rounded-md text-sm ${
+                                                      selectedSize[selectedProduct.ProductId] === 'L' ? 'selected' : ''
+                                                  }`}
+                                                  onClick={() => handleSizeClick('L', selectedProduct.ProductId)}
+                                              >
+                                                  L
+                                              </button>
+                                              <button
+                                                  className={`black-button border-solid border-2 border-gray-500 w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm ${
+                                                      selectedSize[selectedProduct.ProductId] === 'XL' ? 'selected' : ''
+                                                  }`}
+                                                  onClick={() => handleSizeClick('XL', selectedProduct.ProductId)}
+                                              >
+                                                  XL
+                                              </button>
+                                          </>
+                                      )}
                                   </div>
                                   <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
                               </div>

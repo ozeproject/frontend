@@ -16,8 +16,8 @@ const EditProduct: React.FC = () => {
       Price: '',
       StockQuantity: '',
       Color: '',
-      IsTrend: '',
-      IsNew: '',
+      IsTrend: 'No',
+      IsNew: 'No',
       CategoryId: '',
       ImagePath: '',
       gender:'',
@@ -107,6 +107,7 @@ const EditProduct: React.FC = () => {
             </button>
           </div>
         </div>
+
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Product name</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" value={product.ProductName} onChange={handleInputChange} required/>
@@ -137,7 +138,7 @@ const EditProduct: React.FC = () => {
 
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Gender</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsTrend" value={product.gender} onChange={handleInputChange}>
+            <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="IsTrend" value={product.gender} onChange={handleInputChange}>
               <option value="true">Male</option>
               <option value="false">Female</option>
               <option value="false">Other</option>
@@ -146,10 +147,18 @@ const EditProduct: React.FC = () => {
           
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Category</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="CategoryId" value={product.CategoryId} onChange={handleInputChange}>
+            <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="CategoryId" value={product.CategoryId} onChange={handleInputChange}>
               <option value="Shirt">Shirt</option>
               <option value="Bag">Bag</option>
               <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+
+          <div className='mt-3'>
+            <label className='text-[#3B3B3B]'>Size</label>
+            <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="Size" value={product.Size} onChange={handleInputChange}>
+              <option value="1">FREE SIZE</option>
+              <option value="2">L , XL</option>
             </select>
           </div>
 

@@ -12,8 +12,8 @@ const Create = () => {
     Price: '',
     StockQuantity: '',
     Color: '',
-    IsTrend: '',
-    IsNew: '',
+    IsTrend: 'No',
+    IsNew: 'No',
     CategoryId: '',
     ImagePath: '',
     gender:'',
@@ -82,6 +82,7 @@ const Create = () => {
       </div>
       <div className='w-1/4 mx-auto my-12'>
         <form onSubmit={handleSubmit}>
+
         <div className='mt-3'>
           <label className='text-[#3B3B3B]'>Upload file</label>
           <input
@@ -94,12 +95,11 @@ const Create = () => {
           <div className="mt-3"> {/* Add this line for a blank line */}
             <button
               className="border border-[#B9B9B9] rounded-md bg-[#D4CBB1] hover:bg-[#D9D9D9] px-4 py-2"
-              // onClick={() => document.getElementById('fileInput').click()}
             >
               Choose file
             </button>
           </div>
-        </div>
+          </div>
 
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>ProductName</label>
@@ -131,18 +131,31 @@ const Create = () => {
 
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Gender</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="IsNew" value={formData.gender} onChange={handleInputChange}>
-              <option value="true">Male</option>
-              <option value="false">Female</option>
-              <option value="false">Other</option>
+            <select  
+              className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" 
+              name="gender" 
+              value={formData.gender} 
+              onChange={handleInputChange} 
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Category</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]" name="CategoryId" value={formData.CategoryId} onChange={handleInputChange}>
-              <option value="Shirt">Shirt</option>
-              <option value="Accessories">Accessories</option>
+            <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="CategoryId" value={formData.CategoryId} onChange={handleInputChange}>
+              <option value="1">Shirt</option>
+              <option value="2">Accessories</option>
+            </select>
+          </div>
+
+          <div className='mt-3'>
+            <label className='text-[#3B3B3B]'>Size</label>
+            <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="Size" value={formData.Size} onChange={handleInputChange}>
+              <option value="1">FREE SIZE</option>
+              <option value="2">L , XL</option>
             </select>
           </div>
 

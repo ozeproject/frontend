@@ -19,6 +19,7 @@ interface CartItem {
     Size: string;
     quantity: number;
     ImagePath: string;
+    Quantity: number;
 }
 
 const ShopBags = () => {
