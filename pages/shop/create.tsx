@@ -33,16 +33,21 @@ const Create = () => {
       [e.target.name]: e.target.value,
     });
 
-    if (e.target.name === 'ProductName') {
-      setProductNameError(e.target.value == '' ? 'Please input ProductName.' : null);
+    if (e.target.name == 'ProductName') {
+      setProductNameError(e.target.value === '' ? 'Please input product name.' : null);
     }
-    if (e.target.name === 'Price') {
-      setPriceError(e.target.value == '' ? 'Please input Price.' : null);
+    if (e.target.name == 'Price') {
+      setPriceError(
+        e.target.value === '' ? 'Please input price.' : 
+        e.target.value < 0 ? 'Price cannot be negative.' : null
+      );
      }
-    if (e.target.name === 'StockQuantity') {
-      setStockQuantityError(e.target.value == '' ? 'Please input StockQuantity.' : null);
+    if (e.target.name == 'StockQuantity') {
+      setPriceError(
+        e.target.value === '' ? 'Please input price.' : 
+        e.target.value < 0 ? 'Price cannot be negative.' : null
+      );
      }
-    
   };
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {

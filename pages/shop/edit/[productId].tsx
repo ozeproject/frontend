@@ -44,8 +44,8 @@ const EditProduct: React.FC = () => {
   }, [productId]);
 
   const [ProductNameError, setProductNameError] = useState<string | null>(null);
-  const [StockError, setStockQuantityError] = useState<string | null>(null);
   const [PriceError, setPriceError] = useState<string | null>(null);
+  const [StockError, setStockQuantityError] = useState<string | null>(null);
 
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     setProduct({
@@ -54,13 +54,19 @@ const EditProduct: React.FC = () => {
     });
 
     if (e.target.name == 'ProductName') {
-      setProductNameError(e.target.value === '' ? 'Please input ProductName.' : null);
+      setProductNameError(e.target.value === '' ? 'Please input product name.' : null);
     }
     if (e.target.name == 'Price') {
-      setStockQuantityError(e.target.value === '' ? 'Please input Price.' : null);
+      setPriceError(
+        e.target.value === '' ? 'Please input price.' : 
+        e.target.value < 0 ? 'Price cannot be negative.' : null
+      );
      }
     if (e.target.name == 'StockQuantity') {
-      setPriceError(e.target.value === '' ? 'Please input StockQuantity.' : null);
+      setPriceError(
+        e.target.value === '' ? 'Please input price.' : 
+        e.target.value < 0 ? 'Price cannot be negative.' : null
+      );
      }
   };
 
@@ -69,17 +75,17 @@ const EditProduct: React.FC = () => {
     
     if(product.ProductName == '') {
 
-      setProductNameError( 'Please input name.');
-    }
-    if(product.StockQuantity == '') {
-
-      setStockQuantityError( 'Please input StockQuantity.');
+      setProductNameError( 'Please input product name.');
     }
     if(product.Price == '') {
 
-      setPriceError( 'Please input Price.');
+      setPriceError( 'Please input price.');
     }
-    
+    if(product.StockQuantity == '') {
+
+      setStockQuantityError( 'Please input stock quantity.');
+    }
+  
     try {
       const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`, {
             method: 'PUT',
