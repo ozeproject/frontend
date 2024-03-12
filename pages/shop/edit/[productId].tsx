@@ -63,9 +63,9 @@ const EditProduct: React.FC = () => {
       );
      }
     if (e.target.name == 'StockQuantity') {
-      setPriceError(
-        e.target.value === '' ? 'Please input price.' : 
-        e.target.value < 0 ? 'Price cannot be negative.' : null
+      setStockQuantityError(
+        e.target.value === '' ? 'Please input stock quantity.' : 
+        e.target.value < 0 ? 'stock quantity cannot be negative.' : null
       );
      }
   };
