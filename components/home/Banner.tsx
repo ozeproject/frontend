@@ -10,7 +10,9 @@ const Banner = () => {
       .then((response) => response.json())
       .then((data) => setProductCount(data.count))
       .catch((error) => console.error('Error fetching product count:', error));
+      console.log('process.env.FIREBASE_API_KEY',process.env.firebaseApiKey)
   }, []);
+ 
 
   return (
     <div className=' px-20 py-10 border-b-2  border-gray-500'>

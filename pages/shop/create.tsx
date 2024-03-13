@@ -4,6 +4,8 @@ import Footer from '../../components/Footer';
 import '../../app/globals.css';
 import Fail from '../../components/validation/CreateFail';
 import Success from '../../components/validation/CreateSuccess';
+import { storage } from '@/app/firebase'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -14,15 +16,15 @@ const Create = () => {
     Color: '',
     IsTrend: 'No',
     IsNew: 'No',
-    CategoryId: '',
+    CategoryId: '1',
     ImagePath: '',
-    gender:'',
-    Size:'',
+    gender:'Male',
+    Size:'1',
   });
+  const [file,setFile] = useState()
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailModal, setShowFailModal] = useState(false);
-
   const [ProductNameError, setProductNameError] = useState<string | null>(null);
   const [StockError, setStockQuantityError] = useState<string | null>(null);
   const [PriceError, setPriceError] = useState<string | null>(null);
@@ -52,20 +54,21 @@ const Create = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-
+    console.log(formData);
+    
     if(formData.ProductName == '') {
-
       setProductNameError( 'Please input name.');
     }
     if(formData.StockQuantity == '') {
-
       setStockQuantityError( 'Please input StockQuantity.');
     }
     if(formData.Price == '') {
-
       setPriceError( 'Please input Price.');
     }
-
+    formData.ImagePath = await uploadImage(formData.ProductName,file)
+    if(formData.ImagePath == '') {
+      setProductNameError( 'Please upload image.');
+    }
     try {
       const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products', {
         method: 'POST',
@@ -98,14 +101,32 @@ const Create = () => {
       console.error('Error creating product:', error);
       setShowFailModal(true);
     }
-
-
   };
 
   const handleCloseModal = () => {
     setShowSuccessModal(false);
     setShowFailModal(false);
   };
+
+  const uploadImage = async (path: string, file: any) => {
+    // const storageRef = ref(storage,path);
+    // const snapshot = await uploadBytes(storageRef,file)
+    // const linkFile = await getDownloadURL(snapshot.ref)
+    // const imageRef = storageRef.child(`images/${file.name}`);
+    try {
+      const storageRef = ref(storage,path);
+      const snapshot = await uploadBytes(storageRef,file)
+      const linkFile = await getDownloadURL(snapshot.ref)
+      return linkFile;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      throw error;
+    }
+  };
+  const handleFileUpload = (e:any) =>{
+    setFile(e.target.files[0]) 
+    console.log('file',file)
+  }
 
   return (
     <div>
@@ -124,15 +145,17 @@ const Create = () => {
             type="file"
             id="fileInput"
             className="hidden"
-            value={formData.ImagePath}
-            // onChange={handleFileUpload} // Add your file upload handling function
+
+            onChange={handleFileUpload} // Add your file upload handling function
           />
           <div className="mt-3"> {/* Add this line for a blank line */}
-            <button
+          <label htmlFor="fileInput"><div style={{width:'fit-content'}} 
               className="border border-[#B9B9B9] rounded-md bg-[#D4CBB1] hover:bg-[#D9D9D9] px-4 py-2"
             >
               Choose file
-            </button>
+            </div>
+          </label>
+            
           </div>
           </div>
 

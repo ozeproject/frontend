@@ -201,7 +201,7 @@ function getUserId() {
                       </g>
                     </svg></span></div>
 
-                    <div className='text-center '><img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></div>
+                    <div className='text-center '><img className='mx-auto' src={product.ImagePath} width={400} height={400} alt={product.ProductName} loading="lazy"/></div>
 
                     <div className='text-center'><span>{product.ProductName}</span></div>
                     
@@ -231,17 +231,7 @@ function getUserId() {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></p>
-                          </div>
-                          
-                          <div className='h-1/4'>
-                              <div className='flex justify-between'>
-                             
-                                  <p><img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></p>
-                                  <p><img className='mx-auto' src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={400} height={400} alt={product.ImagePath} loading="lazy"/></p>
-                              </div>
+                              <p><img className='mx-auto' src={product.ImagePath} width={400} height={400} alt={product.ProductName} loading="lazy"/></p>
                           </div>
                       </div>
 
