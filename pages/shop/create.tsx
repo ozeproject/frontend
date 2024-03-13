@@ -215,8 +215,8 @@ const Create = () => {
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Size</label>
             <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="Size" value={formData.Size} onChange={handleInputChange}>
-              <option value="1">FREE SIZE</option>
-              <option value="2">L , XL</option>
+              <option value="1">L , XL</option>
+              <option value="2">FREE SIZE</option>
             </select>
           </div>
 
