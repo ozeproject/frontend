@@ -299,7 +299,7 @@ function getUserId() {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><img className='mx-auto' src={product.ImagePath} width={500} height={500} alt={product.ProductName} loading="lazy"/></p>
+                              <p><img className='mx-auto' src={selectedProduct.ImagePath} width={500} height={500} alt={product.ProductName} loading="lazy"/></p>
                           </div>
                       </div>
 

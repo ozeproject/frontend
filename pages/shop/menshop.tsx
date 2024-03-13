@@ -20,7 +20,7 @@ const MenShopPage = () => {
         {/* <Filter /> */}
         <MenCollection />
         <LoadMore />
-         <Footer /> 
+        <Footer /> 
         
     </div>
   );
