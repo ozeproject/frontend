@@ -134,7 +134,7 @@ const ShopBags = () => {
                     </svg></span>
                     </div>
 
-                    <div><img className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
+                    <div><img className='mx-auto'  src={item.ImagePath} width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className='w-9/12 p-4'>
                     <div className='flex justify-between text-2xl'>
