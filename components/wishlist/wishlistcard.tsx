@@ -38,6 +38,7 @@ const WishlistCard = () => {
     const [selectedProduct, setSelectedProduct] = useState<WishlistItem | null>(null);
     const [selectedSize, setSelectedSizes] = useState<{ [productId: number]: string | null }>({});
     const [quantity, setQuantity] = useState(1);
+    const [productQuantities, setProductQuantities] = useState<{ [productId: number]: number }>({});
 
     useEffect(() => {
         fetchWishlist();
@@ -97,17 +98,21 @@ const WishlistCard = () => {
         console.log(selectedSize);
       }, [selectedSize]);
   
+
     const handleIncrement = () => {
-      if (quantity < selectedProduct!.StockQuantity) {
-          setQuantity(prevQuantity => prevQuantity + 1);
-      }
-  };
+       if (quantity < selectedProduct!.StockQuantity) {
+           setQuantity(prevQuantity => prevQuantity + 1);
+       }
+   };
   
-  const handleDecrement = () => {
-      if (quantity > 1) {
-          setQuantity(prevQuantity => prevQuantity - 1);
-      }
+   const handleDecrement = () => {
+       if (quantity > 1) {
+           setQuantity(prevQuantity => prevQuantity - 1);
+       }
   };
+
+
+
 
     const openModal = (product: WishlistItem) => {
         setSelectedProduct(product);
@@ -135,6 +140,7 @@ const WishlistCard = () => {
       
           return cleanup;
         }, [isModalOpen]);
+
     
         const addToCart2 = async (product: WishlistItem) => {
             try {
@@ -382,7 +388,7 @@ const WishlistCard = () => {
                                     </p>
                                 )}
                                 <div className='flex mt-1'>
-                                    <button
+                                <button
                                         className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard"
                                         onClick={handleDecrement}
                                     >
