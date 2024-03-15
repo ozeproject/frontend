@@ -55,13 +55,13 @@ const EditProduct: React.FC = () => {
     if (e.target.name == 'Price') {
       setPriceError(
         e.target.value === '' ? 'Please input price.' : 
-        e.target.value < 0 ? 'Price cannot be negative.' : null
+        e.target.value < 0 ? 'Price cannot be negative.' : e.target.value == 0 ? 'Price cannot zero' : null
       );
      }
     if (e.target.name == 'StockQuantity') {
       setStockQuantityError(
         e.target.value === '' ? 'Please input stock quantity.' : 
-        e.target.value < 0 ? 'stock quantity cannot be negative.' : null
+        e.target.value < 0 ? 'stock quantity cannot be negative.' : e.target.value == 0 ? 'quantity cannot zero' : null
       );
      }
   };
@@ -74,8 +74,8 @@ const EditProduct: React.FC = () => {
     if(product.StockQuantity == '') {
       setStockQuantityError( 'Please input stock quantity.');
     }
-  
-    try {
+    if(parseInt(product.Price) > 0 && parseInt(product.StockQuantity) > 0){
+      try {
       const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`, {
             method: 'PUT',
             headers: {
@@ -93,6 +93,7 @@ const EditProduct: React.FC = () => {
     } catch (error) {
       console.error('Error updating product:', error);
       setShowFailModal(true);
+    }
     }
   };
 

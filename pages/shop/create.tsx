@@ -21,13 +21,14 @@ const Create = () => {
     gender:'Male',
     Size:'2',
   });
+  // const [file,setFile] = useState();
   const [file,setFile] = useState<File | null>(null);
-
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailModal, setShowFailModal] = useState(false);
   const [ProductNameError, setProductNameError] = useState<string | null>(null);
   const [StockError, setStockQuantityError] = useState<string | null>(null);
   const [PriceError, setPriceError] = useState<string | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
 
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     setFormData({
@@ -49,7 +50,7 @@ const Create = () => {
         e.target.value === '' ? 'Please input stock quantity.' : 
         e.target.value < 0 ? 'stock quantity cannot be negative.' : null
       );
-     }
+    }
   };
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
@@ -66,10 +67,11 @@ const Create = () => {
       setPriceError( 'Please input Price.');
     }
     formData.ImagePath = await uploadImage(formData.ProductName,file)
-    if(formData.ImagePath == '') {
-      setProductNameError( 'Please upload image.');
+    if(file == undefined) {
+      setFileError( 'Please upload image.');
     }
-    try {
+    if(formData.ProductName !== '' && formData.StockQuantity !== '' && formData.Price !== '' && file != undefined){
+      try {
       const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products', {
         method: 'POST',
         headers: {
@@ -101,6 +103,7 @@ const Create = () => {
       console.error('Error creating product:', error);
       setShowFailModal(true);
     }
+    }
   };
 
   const handleCloseModal = () => {
@@ -111,7 +114,7 @@ const Create = () => {
   const uploadImage = async (path: string, file: any) => {
     // const imageRef = storageRef.child(`images/${file.name}`);
     try {
-      const storageRef = ref(storage,path + '.jpg');
+      const storageRef = ref(storage,path);
       const snapshot = await uploadBytes(storageRef,file)
       const linkFile = await getDownloadURL(snapshot.ref)
       return linkFile;
@@ -122,6 +125,7 @@ const Create = () => {
   };
   const handleFileUpload = (e:any) =>{
     setFile(e.target.files[0]) 
+    setFileError(null);
     console.log('file',file)
   }
 
@@ -156,6 +160,7 @@ const Create = () => {
                 {file.name}
               </div>
             )}
+            {fileError && <p className='text-red-700 tracking-wide text-sm mt-2'>{fileError}</p>}
           </div>
           </div>
 
