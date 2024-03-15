@@ -219,7 +219,7 @@ const closeModal = () => {
                     <div className="modalproduct pdcard p-8 rounded-md shadow-lg z-10 flex">
                       <div className='w-full p-4'>
                           <div className='h-3/4'>
-                              <p><img className='m-auto' src={selectedProduct.ImagePath}  width={500} height={500} alt={product.ProductName} loading="lazy"/></p>
+                              <p><img className='m-auto' src={selectedProduct.ImagePath}  style={{ width: '500px', height: '500px' }} alt={product.ProductName} loading="lazy"/></p>
                           </div>
                       </div>
 
@@ -258,7 +258,7 @@ const closeModal = () => {
                                         {selectedProduct.CategoryId === '2' ? (
                                             <button
                                                 className={`white-button border-solid border-2 border-gray-500 w-12 h-8 p-1 inputCard font-bold text-center rounded-md text-sm selected ${
-                                                    selectedSize === 'FREE' ? 'selected' : ''
+                                                    selectedSize == 'FREE' ? 'selected' : ''
                                                 }`}
                                                 onClick={() => handleSizeClick('FREE')}
                                                 disabled={true}
