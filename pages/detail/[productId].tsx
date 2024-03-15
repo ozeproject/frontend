@@ -57,7 +57,7 @@ const ProductDetail = () => {
         console.log(quantity);
     };
 
-      const addToCart = async () => {
+    const addToCart = async () => {
         try {
             const userId = getUserId(); 
             if (userId) {
@@ -100,9 +100,9 @@ const ProductDetail = () => {
                     },
                     body: JSON.stringify({
                         userId: userId,
-                        productId: product.ProductId, 
+                        productId: product.ProductId,
                         size: selectedSize,
-                        quantity: quantity,
+                        quantity: quantity, 
                     }),
                 });
                 if (response.ok) {
@@ -164,12 +164,14 @@ const ProductDetail = () => {
     return (
         <div>
             <Navbar />
-            <div className='flex mb-5'>
+            <div className='flex '>
 
-                <div className='flex w-7/12'>
+                <div className=' w-7/12'>
+                    
                     <div className='w-full h-full'>
-                        <div className='border-b-2 border-x-2 h-fit '><img className='mx-auto' src={product.ImagePath}  width={500} height={500} alt={product.ProductName} loading="lazy"/></div>
+                        <div className='border-r-2 h-fit '><img className='mx-auto' src={product.ImagePath} style={{ width: '500px', height: '600px' }} alt={product.ProductName} loading="lazy"/></div>
                     </div>
+
                 </div>
 
                 <div className='w-5/12 pl-5'>

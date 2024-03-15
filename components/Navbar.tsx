@@ -124,7 +124,7 @@ const Navbar = () => {
                             </svg>
                         </div>
 
-                        <div className='m-4'><Link href="/userprofile">{userName}</Link></div>
+                        <div className='m-4 pt-2'><Link href="/userprofile">{userName}</Link></div>
 
                         <div className='m-4'>
                             <Link href="/wishlist/">
@@ -159,7 +159,7 @@ const Navbar = () => {
                                     style={{
                                         backgroundColor: '#f2eee3',
                                         width: '420px',
-                                        height: '48px',
+                                        height: '46px',
                                         border: '1px solid #ccc',
                                     }}
                                 />
