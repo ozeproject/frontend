@@ -332,7 +332,7 @@ const closeModal = () => {
                                       </p>
                                   )}
                                   <div className='flex mt-1'>
-                                        {selectedProduct.CategoryId === '2' ? (
+                                        {selectedProduct.CategoryId == '2' ? (
                                             <button
                                                 className={`white-button border-solid border-2 border-gray-500 w-12 h-8 p-1 inputCard font-bold text-center rounded-md text-sm selected ${
                                                     selectedSize === 'FREE' ? 'selected' : ''
