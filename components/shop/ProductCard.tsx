@@ -203,7 +203,7 @@ function getUserId() {
   const openModal = (product: Product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
-    if (product.CategoryId === '2') {
+    if (product.CategoryId == '2') {
         setSelectedSize('FREE');
     }
 };
