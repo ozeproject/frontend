@@ -16,7 +16,7 @@ const HomePage = () => {
         <div className="w-2/6 px-12 my-20 mx-auto">
           <div className="font-semibold text-xl mb-4">Project background</div>
           <div className="mb-4 pl-4">
-            With an interest in doing business and are interested in fashion, clothes, and dressing, but when looking for or buying what we want, we find that many websites have beautiful UIs, but the steps to use them have many steps, so we want to try our hand at a web shop, buying and selling formats. new That reduces the purchasing process to be convenient, easy, and safe.
+            {}With an interest in doing business and are interested in fashion, clothes, and dressing, but when looking for or buying what we want, we find that many websites have beautiful UIs, but the steps to use them have many steps, so we want to try our hand at a web shop, buying and selling formats. new That reduces the purchasing process to be convenient, easy, and safe.
           </div>
           <div className="font-semibold text-xl mb-4">Members</div>
             <div className="mb-4">
@@ -40,8 +40,8 @@ const HomePage = () => {
           <div className="font-semibold text-xl mb-4">University information</div>
           <div className="mb-4 pl-4">
             <div className="font-semibold">School of Information Technology</div>
-            King Mongkut's University of Technology Thonburi,
-            126 Pracha-U-Thit Rd., Bangmod, Thungkru, Bangkok 10140, Thailand
+            {`King Mongkut's University of Technology Thonburi,
+            126 Pracha-U-Thit Rd., Bangmod, Thungkru, Bangkok 10140, Thailand`}
           </div>
         </div>
       </div>
