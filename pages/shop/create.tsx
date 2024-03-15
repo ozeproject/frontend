@@ -21,7 +21,7 @@ const Create = () => {
     gender:'Male',
     Size:'2',
   });
-  const [file,setFile] = useState()
+  const [file,setFile] = useState<File | null>(null);
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailModal, setShowFailModal] = useState(false);
@@ -109,12 +109,9 @@ const Create = () => {
   };
 
   const uploadImage = async (path: string, file: any) => {
-    // const storageRef = ref(storage,path);
-    // const snapshot = await uploadBytes(storageRef,file)
-    // const linkFile = await getDownloadURL(snapshot.ref)
     // const imageRef = storageRef.child(`images/${file.name}`);
     try {
-      const storageRef = ref(storage,path);
+      const storageRef = ref(storage,path + '.jpg');
       const snapshot = await uploadBytes(storageRef,file)
       const linkFile = await getDownloadURL(snapshot.ref)
       return linkFile;
@@ -145,17 +142,20 @@ const Create = () => {
             type="file"
             id="fileInput"
             className="hidden"
-
-            onChange={handleFileUpload} // Add your file upload handling function
+            onChange={handleFileUpload}
           />
-          <div className="mt-3"> {/* Add this line for a blank line */}
+          <div className="mt-3"> 
           <label htmlFor="fileInput"><div style={{width:'fit-content'}} 
               className="border border-[#B9B9B9] rounded-md bg-[#D4CBB1] hover:bg-[#D9D9D9] px-4 py-2"
             >
               Choose file
             </div>
           </label>
-            
+            {file && (
+              <div className="mt-2">
+                {file.name}
+              </div>
+            )}
           </div>
           </div>
 
