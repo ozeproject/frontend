@@ -42,13 +42,13 @@ const Create = () => {
     if (e.target.name == 'Price') {
       setPriceError(
         e.target.value === '' ? 'Please input price.' : 
-        e.target.value < 0 ? 'Price cannot be negative.' : null
+        e.target.value < 0 ? 'Price cannot be negative.' : e.target.value == 0 ? 'Price cannot zero' : null
       );
      }
     if (e.target.name == 'StockQuantity') {
       setStockQuantityError(
         e.target.value === '' ? 'Please input stock quantity.' : 
-        e.target.value < 0 ? 'stock quantity cannot be negative.' : null
+        e.target.value < 0 ? 'stock quantity cannot be negative.' : e.target.value == 0 ? 'quantity cannot zero' : null
       );
     }
   };
@@ -66,11 +66,12 @@ const Create = () => {
     if(formData.Price == '') {
       setPriceError( 'Please input Price.');
     }
-    formData.ImagePath = await uploadImage(formData.ProductName,file)
+    // formData.ImagePath = await uploadImage(formData.ProductName,file)
     if(file == undefined) {
       setFileError( 'Please upload image.');
     }
-    if(formData.ProductName !== '' && formData.StockQuantity !== '' && formData.Price !== '' && file != undefined){
+    if(formData.ProductName !== '' && parseInt(formData.StockQuantity) > 0 && parseInt(formData.Price) > 0 && file != undefined){
+      formData.ImagePath = await uploadImage(formData.ProductName,file)
       try {
       const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products', {
         method: 'POST',
