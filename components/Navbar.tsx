@@ -73,7 +73,7 @@ const Navbar = () => {
                             </svg></Link>
                     </div>
 
-                    <div className='flex justify-between m-4 pt-2'>
+                    <div className='flex justify-between m-2 pt-2'>
                         <Link href="/shop" passHref>
                             <span
                                 className={` p-2 rounded-lg  hover:border-blacK hover:bg-[#D4CBB1]       ${router.pathname === '/shop' ? 'bg-[#D4CBB1]' : ''}`}
