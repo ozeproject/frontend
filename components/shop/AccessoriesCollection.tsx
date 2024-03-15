@@ -29,7 +29,7 @@ const AccessoriesCollection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null); 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [selectedSize, setSelectedSizes] = useState<{ [productId: number]: string | null }>({});
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -54,15 +54,12 @@ const AccessoriesCollection = () => {
   }, []);
 
 
-const handleSizeClick = (size: string, productId: number) => {
-  setSelectedSizes(prevSizes => ({
-      ...prevSizes,
-      [productId]: prevSizes[productId] === size ? null : size
-  }));
+  const handleSizeClick = (size: string) => {
+    setSelectedSize(prevSize => (prevSize === size ? null : size));
 };
 
 useEffect(() => {
-  console.log(selectedSize);
+    console.log(selectedSize);
 }, [selectedSize]);
 
 const handleIncrement = () => {
@@ -80,14 +77,14 @@ const handleDecrement = () => {
 const openModal = (product: Product) => {
   setSelectedProduct(product);
   setIsModalOpen(true);
-  if (product.CategoryId == '2') {
-    setSelectedSizes({ [product.ProductId]: 'FREE' });
+  if (product.CategoryId === '2') {
+      setSelectedSize('FREE');
   }
 };
 
 const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedSizes({});
+  setIsModalOpen(false);
+  setSelectedSize(null);
 };
 
   useEffect(() => {
@@ -201,7 +198,7 @@ function getUserId() {
                       </g>
                     </svg></span></div>
 
-                    <div className='text-center '><img className='mx-auto' src={product.ImagePath} width={400} height={400} alt={product.ProductName} loading="lazy"/></div>
+                    <div className='text-center '><img className='mx-auto h-fit' src={product.ImagePath} style={{ width: '400px', height: '400px' }}  alt={product.ProductName} loading="lazy"/></div>
 
                     <div className='text-center'><span>{product.ProductName}</span></div>
                     
@@ -261,43 +258,43 @@ function getUserId() {
 
                                 <div className='mt-6'>
                                   <p className='font-semibold tracking-normal'>SIZES:</p>
-                                  {Object.keys(selectedSize).length === 0 && (
+                                  {!selectedSize && (
                                       <p className='text-red-700 tracking-wide text-sm mt-2'>
                                           Please select your size first
                                       </p>
                                   )}
                                   <div className='flex mt-1'>
-                                      {selectedProduct.CategoryId == '2' ? (
-                                          <button
-                                              className={`white-button border-solid border-2 border-gray-500 w-12 h-8 p-1 inputCard font-bold text-center rounded-md text-sm selected ${
-                                                  selectedSize[selectedProduct.ProductId] === 'FREE' ? 'selected' : ''
-                                              }`}
-                                              onClick={() => handleSizeClick('FREE', selectedProduct.ProductId)}
-                                              disabled={true}
-                                          >
-                                              FREE
-                                          </button>
-                                      ) : (
-                                          <>
-                                              <button
-                                                  className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 inputCard font-bold text-center rounded-md text-sm ${
-                                                      selectedSize[selectedProduct.ProductId] === 'L' ? 'selected' : ''
-                                                  }`}
-                                                  onClick={() => handleSizeClick('L', selectedProduct.ProductId)}
-                                              >
-                                                  L
-                                              </button>
-                                              <button
-                                                  className={`black-button border-solid border-2 border-gray-500 w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm ${
-                                                      selectedSize[selectedProduct.ProductId] === 'XL' ? 'selected' : ''
-                                                  }`}
-                                                  onClick={() => handleSizeClick('XL', selectedProduct.ProductId)}
-                                              >
-                                                  XL
-                                              </button>
-                                          </>
-                                      )}
-                                  </div>
+                                        {selectedProduct.CategoryId === '2' ? (
+                                            <button
+                                                className={`white-button border-solid border-2 border-gray-500 w-12 h-8 p-1 inputCard font-bold text-center rounded-md text-sm selected ${
+                                                    selectedSize === 'FREE' ? 'selected' : ''
+                                                }`}
+                                                onClick={() => handleSizeClick('FREE')}
+                                                disabled={true}
+                                            >
+                                                FREE
+                                            </button>
+                                        ) : (
+                                            <>
+                                                <button
+                                                    className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 inputCard font-bold text-center rounded-md text-sm ${
+                                                        selectedSize === 'L' ? 'selected' : ''
+                                                    }`}
+                                                    onClick={() => handleSizeClick('L')}
+                                                >
+                                                    L
+                                                </button>
+                                                <button
+                                                    className={`black-button border-solid border-2 border-gray-500 w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm ${
+                                                        selectedSize === 'XL' ? 'selected' : ''
+                                                    }`}
+                                                    onClick={() => handleSizeClick('XL')}
+                                                >
+                                                    XL
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
                                   <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
                               </div>
 

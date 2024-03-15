@@ -255,9 +255,9 @@ const WishlistCard = () => {
                             </svg></span>
                         </div>
 
-                        <div className='text-center '><img className='mx-auto' src={item.ImagePath} width={500} height={500} alt="img" loading="lazy"/></div>
+                        <div className='text-center '><img className='mx-auto' src={item.ImagePath} style={{ width: '400px', height: '400px' }} alt="img" loading="lazy"/></div>
 
-                        <div className='text-center mt-8'><span>{item.ProductName}</span></div>
+                        <div className='text-center '><span>{item.ProductName}</span></div>
                         
                         <div className='text-center font-bold text-3xl mt-4'><span>{item.Price}</span></div>
                         
