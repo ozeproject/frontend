@@ -43,7 +43,7 @@ const EditProduct: React.FC = () => {
     }
   }, [productId]);
 
-  const [ProductNameError, setProductNameError] = useState<string | null>(null);
+  // const [ProductNameError, setProductNameError] = useState<string | null>(null);
   const [PriceError, setPriceError] = useState<string | null>(null);
   const [StockError, setStockQuantityError] = useState<string | null>(null);
 
@@ -52,10 +52,6 @@ const EditProduct: React.FC = () => {
       ...product,
       [e.target.name]: e.target.value,
     });
-
-    if (e.target.name == 'ProductName') {
-      setProductNameError(e.target.value === '' ? 'Please input product name.' : null);
-    }
     if (e.target.name == 'Price') {
       setPriceError(
         e.target.value === '' ? 'Please input price.' : 
@@ -72,17 +68,10 @@ const EditProduct: React.FC = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    
-    if(product.ProductName == '') {
-
-      setProductNameError( 'Please input product name.');
-    }
     if(product.Price == '') {
-
       setPriceError( 'Please input price.');
     }
     if(product.StockQuantity == '') {
-
       setStockQuantityError( 'Please input stock quantity.');
     }
   
@@ -121,34 +110,20 @@ const EditProduct: React.FC = () => {
             </div>
       </div>
       <div className='w-1/4 mx-auto my-12'>
+      <div className='text-center pb-8'><img className='mx-auto' src={product.ImagePath} style={{ width: '400px', height: '400px' }}  alt={product.ProductName} loading="lazy"/></div>
         <form onSubmit={handleSubmit}>
-        <div className='mt-3'>
-          <label className='text-[#3B3B3B]'>Upload file</label>
-          <input
-            type="file"
-            id="fileInput"
-            className="hidden"
-            // value={product.ImagePath}
-            // onChange={handleFileUpload} // Add your file upload handling function
-          />
-          <div className="mt-3"> {/* Add this line for a blank line */}
-            <button
-              className="border border-[#B9B9B9] rounded-md bg-[#D4CBB1] hover:bg-[#D9D9D9] px-4 py-2"
-              // onClick={() => document.getElementById('fileInput').click()}
-            >
-              Choose file
-            </button>
-          </div>
-        </div>
-
           <div className='mt-3'>
-            <label className='text-[#3B3B3B]'>Product name</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="ProductName" value={product.ProductName} onChange={handleInputChange} required/>
-            {ProductNameError && <p className='text-red-700 tracking-wide text-sm mt-2'>{ProductNameError}</p>}
+            <label className='text-[#3B3B3B]'>Product name: {product.ProductName}</label>
           </div>
           <div className='mt-3'>
-            <label className='text-[#3B3B3B]'>Description</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="text" name="Description" value={product.Description} onChange={handleInputChange} />
+            <label className='text-[#3B3B3B]'>Description: {product.Description}</label>
+          </div>
+          <div className='mt-3'>
+            <label className='text-[#3B3B3B]'>Color:</label>
+            <div className='border-solid border-2' style={{ backgroundColor: product.Color, width: '70px', height: '20px', marginLeft: '5px', display: 'inline-block' }}></div>
+          </div>
+          <div className='mt-3'>
+            <label className='text-[#3B3B3B]'>Size: {product.Size == '1' ? 'Free' : product.Size == '2' ? 'L, XL' : product.Size}</label> 
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Price</label>
@@ -159,43 +134,6 @@ const EditProduct: React.FC = () => {
             <label>Stock</label>
             <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" name="StockQuantity" value={product.StockQuantity} onChange={handleInputChange} />
             {StockError && <p className='text-red-700 tracking-wide text-sm mt-2'>{StockError}</p>}
-          </div>
-          
-          <div className='mt-3'>
-            <label className='text-[#3B3B3B]'>Color</label>
-            <input
-              type="color"
-              className="border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]"
-              name="Color"
-              value={product.Color}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className='mt-3'>
-            <label className='text-[#3B3B3B]'>Gender</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="IsTrend" value={product.gender} onChange={handleInputChange}>
-              <option value="true">Male</option>
-              <option value="false">Female</option>
-              <option value="false">Other</option>
-            </select>
-          </div>
-          
-          <div className='mt-3'>
-            <label className='text-[#3B3B3B]'>Category</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="CategoryId" value={product.CategoryId} onChange={handleInputChange}>
-              <option value="Shirt">Shirt</option>
-              <option value="Bag">Bag</option>
-              <option value="Accessories">Accessories</option>
-            </select>
-          </div>
-
-          <div className='mt-3'>
-            <label className='text-[#3B3B3B]'>Size</label>
-            <select  className="border border-[#B9B9B9] w-full rounded h-12 placeholder:pl-3 bg-[#F2EEE3]" name="Size" value={product.Size} onChange={handleInputChange}>
-              <option value="1">FREE SIZE</option>
-              <option value="2">L , XL</option>
-            </select>
           </div>
 
           <div className='mt-5'>
