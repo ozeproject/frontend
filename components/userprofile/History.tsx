@@ -10,7 +10,7 @@ interface MyToken {
   }
 
 type OrderHistoryItem = {
-  imageUrl: string;
+  ImagePath: string;
   ProductName: string;
   color: string;
   size: string;
@@ -81,7 +81,7 @@ const fetchHistory = async () => {
                     </g>
                     </svg></span>
                     </div>
-                    <div><img className='mx-auto'  src="https://assets.official-goods-store.jp/product/ZMY299/babf58aafeb66622d75748d01bd85255341da3abd658eb5637b9f7c6ef4858d4.jpg" width={220} height={220} alt="Test IMG" loading="lazy"/></div>
+                    <div><img className='mx-auto'  src={order.ImagePath} width={220} height={220} alt="Test IMG" loading="lazy"/></div>
                 </div>
                 <div className=' w-8/12 p-3 ml-5'>
                     <div className='text-xl'>{order.ProductName} </div>
