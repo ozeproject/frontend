@@ -12,9 +12,9 @@ interface MyToken {
 type OrderHistoryItem = {
   ImagePath: string;
   ProductName: string;
-  color: string;
-  size: string;
-  quantity: number;
+  Color: string;
+  Size: string;
+  Quantity: number;
   Price: string;
 };
 
@@ -86,9 +86,9 @@ const fetchHistory = async () => {
                 <div className=' w-8/12 p-3 ml-5'>
                     <div className='text-xl'>{order.ProductName} </div>
                     <div className='text-sm mt-6'>
-                        <div className='mt-1'>COLORS: {order.color}</div>
-                        <div className='mt-1'>SIZES: {order.size}</div>
-                        <div className='mt-1'>QUANTITY: {order.quantity}</div>
+                        <div className='mt-1'>COLORS: {order.Color}</div>
+                        <div className='mt-1'>SIZES: {order.Size}</div>
+                        <div className='mt-1'>QUANTITY: {order.Quantity}</div>
                     </div>
                 </div>
                 <div className=' w-1/12 ml-3 text-xl'>
