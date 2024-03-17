@@ -64,7 +64,7 @@ const Signup = () => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (user.Email) {
+      if (user.Email) {
         const isValidEmail = emailRegex.test(user.Email);
         setEmailError(isValidEmail ? null : 'Invalid email format');
       }

@@ -6,7 +6,8 @@ import Delete from '../../components/validation/DeleteValidate';
 import { jwtDecode } from "jwt-decode";
 import Filter from './Filter';
 import SizeValidate from '../../components/validation/SizeShop';
- 
+import { useRouter } from "next/navigation";
+
 interface Product {
   ProductId: number;
   ProductName: string;
@@ -28,6 +29,7 @@ interface MyToken {
 }
 
 const ProductCard = () => {
+  const router: any = useRouter();
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null); 
@@ -243,7 +245,18 @@ const closeModal = () => {
       return cleanup;
     }, [isModalOpen]);
   
-  
+    useEffect(() => {
+      addQuantity();
+    }, [quantity]);
+    useEffect(() => {
+      addQuantity();
+    }, []);
+    function addQuantity() {
+      setSelectedProduct((prevState) => ({
+        ...(prevState as Product),
+        Quantity: quantity,
+      }));
+    }
   return (
     <div>
       <Filter onChangeFilter={fetchProducts}/>
@@ -415,7 +428,25 @@ const closeModal = () => {
                           <div className='mt-16'>
                               <div className='flex '>
                                   <div>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn"><Link href="/checkout/">CHECKOUT</Link></button>
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">
+
+                                    <div
+                                onClick={() => {
+                                  router.push({
+                                    pathname: "/checkout",
+                                    query: {
+                                      detail: JSON.stringify({
+                                        isQuickBuy: true,
+                                        product: [selectedProduct],
+                                      }),
+                                    },
+                                  });
+                                }}
+                              >
+                                CHECKOUT
+                              </div>
+                                      
+                                    </button>
                                   </div>
                                   
                                   <div className='ml-4'>

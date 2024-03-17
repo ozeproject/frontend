@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 import { jwtDecode } from "jwt-decode";
 import SizeValidate from '../../components/validation/SizeShop';
+import { useRouter } from "next/navigation";
 
 interface Product {
   ProductId: number;
@@ -25,6 +26,7 @@ interface MyToken {
 }
 
 const WomenCollection = () => {
+    const router: any = useRouter();
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   const [products, setProducts] = useState<Product[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -187,7 +189,18 @@ const closeModal = () => {
       }
   }
 
-  
+  useEffect(() => {
+    addQuantity();
+  }, [quantity]);
+  useEffect(() => {
+    addQuantity();
+  }, []);
+  function addQuantity() {
+    setSelectedProduct((prevState) => ({
+      ...(prevState as Product),
+      Quantity: quantity,
+    }));
+  }
 
   return (
     <div className=''>
@@ -340,7 +353,21 @@ const closeModal = () => {
                           <div className='mt-16'>
                               <div className='flex '>
                                   <div>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn"><Link href="/checkout/">CHECKOUT</Link></button>
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">        <div
+                                onClick={() => {
+                                  router.push({
+                                    pathname: "/checkout",
+                                    query: {
+                                      detail: JSON.stringify({
+                                        isQuickBuy: true,
+                                        product: [selectedProduct],
+                                      }),
+                                    },
+                                  });
+                                }}
+                              >
+                                CHECKOUT
+                              </div></button>
                                   </div>
                                   
                                   <div className='ml-4'>

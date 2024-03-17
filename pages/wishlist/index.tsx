@@ -5,7 +5,6 @@ import EmtyCard from '../../components/wishlist/emtycard';
 import WishlistCard from '../../components/wishlist/wishlistcard';
 import '../../app/globals.css';
 import { jwtDecode } from "jwt-decode";
-import SizeValidate from '../../components/validation/SizeShop';
 
 interface WishlistItem {
     wishlist_id: number;

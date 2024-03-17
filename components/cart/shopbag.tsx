@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image'
 import { jwtDecode } from "jwt-decode";
+import { useRouter } from "next/navigation";
 
 interface MyToken {
     userId: string;
@@ -22,6 +21,8 @@ interface CartItem {
 }
 
 const ShopBags = () => {
+    const router: any = useRouter();
+
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const [isEditing, setIsEditing] = useState(false);
@@ -215,9 +216,23 @@ const ShopBags = () => {
                 <div className=' '>฿{total}</div>
             </div>
             <div className='mt-8 text-base'>
-                    <Link href="/checkout/">
-                        <button className='m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center w-full' type="button">CHECK OUT</button>
-                    </Link>
+            <button
+                className="m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center w-full"
+                type="button"
+                onClick={() => {
+                  router.push({
+                    pathname: "/checkout",
+                    query: {
+                      detail: JSON.stringify({
+                        isQuickBuy: false,
+                        product: cartItems,
+                      }),
+                    },
+                  });
+                }}
+              >
+                CHECK OUT
+              </button>
                 </div>
         </div>
         </div>

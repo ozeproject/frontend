@@ -1,77 +1,188 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image'
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { jwtDecode } from "jwt-decode";
-import Fail from '../../components/validation/PaymentFail';
-import Success from '../../components/validation/PaymetnSuccess';
+import Fail from "../../components/validation/PaymentFail";
+import Success from "../../components/validation/PaymetnSuccess";
+import { useRouter } from "next/router";
 
+interface MyToken {
+  userId: string;
+  username: string;
+  role: string;
+  exp: number;
+  Address: string;
+  phone: string;
+}
 const UserChkout = () => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
+  const router = useRouter();
 
-    return (
-        <div className='flex '>
-        <div className=" w-4/6">
-        
-            <div className=' p-10 flex'>
-                
-                <div className='w-7/12 mx-48'>
-                    <div className=''>
-                        <div className='text-2xl '>SHIPPING ADDRESS</div>
-                        <div className=' '><textarea className='border border-[#B9B9B9] w-4/6  rounded h-28 placeholder:pl-3 mt-1 bg-[#F2EEE3]'  name="Address" placeholder='Address' /></div>
-                    </div>
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+  const [Authenticated, setIsAuthenticated] = useState(false);
+  const [userDetail, setUserDetail] = useState<MyToken | null>(null);
+  const data = router.query.detail && JSON.parse(router.query.detail as string);
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      setIsAuthenticated(true);
+    }
 
-                    <div className='mt-8'>
-                        <div className='text-xl '>SHIPPING ADDRESS</div>
-                        <label></label>
-                        <select className='border-2 border-[#B9B9B9] bg-[#F2EEE3] rounded' >
-                            <option value=''>EMS : Thailand Post</option>
-                        </select>
-                    </div>
+    if (token) {
+      try {
+        const decodedToken = jwtDecode<MyToken>(token);
+        setUserDetail(decodedToken);
+        console.log(decodedToken);
+      } catch (error) {
+        console.error("Error decoding JWT token:", error);
+      }
+    }
+  }, [token]);
 
-                    <div className='mt-8'>
-                        <div className='text-xl'>PAYMENT METHOD</div>
-                        <div>
-                            <input type="radio" id="qrCode" name="paymentMethod" value="QR CODE" />
-                            <label className='ml-2' htmlFor="qrCode">QR CODE</label><br />
-                        </div>
-                        <div>
-                            <input type="radio" id="creditCard" name="paymentMethod" value="Credit/Debit Card" />
-                            <label className='ml-2' htmlFor="creditCard">Credit/Debit Card</label><br />
-                        </div>
-                    </div>
-                    
-                    <div className='my-8'>
-                        <button className='w-6/12 rounded-lg p-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center' type="button">PLACCE ORDER</button>
-                    </div>
+  function initProduct() {
+    let countProduct = 0;
+    let totalAmount = 0;
+    let product: { product_id: number; price: number; Quantity: number }[] = [];
+    if (data) {
+      for (let index = 0; index < data.product.length; index++) {
+        product.push({
+          product_id: data.product[index].ProductId,
+          price: data.product[index].Price,
+          Quantity: data.product[index].Quantity
+            ? data.product[index].Quantity
+            : 1,
+        });
+        let Quantity = 0;
+        data.product[index].Quantity
+          ? (Quantity = data.product[index].Quantity)
+          : (Quantity = 1);
+        countProduct = countProduct + Quantity;
+        totalAmount = totalAmount + data.product[index].Price * Quantity;
+      }
+    }
 
-                </div>
+    return { product, countProduct, totalAmount };
+  }
+  function checkout() {
+    fetch("https://capstone23.sit.kmutt.ac.th/sj3/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userDetail: {
+          user_id: userDetail?.userId,
+          address: userDetail?.Address,
+        },
+        total_amount: initProduct().totalAmount + 50,
+        total_quantity: initProduct().countProduct,
+        product: initProduct().product,
+        isQuickBuy: data.isQuickBuy,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log(data.url_link_payment);
+        window.location.href = data.url_link_payment;
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
+
+  return (
+    <div className="flex ">
+      <div className=" w-4/6">
+        <div className=" p-10 flex">
+          <div className="w-7/12 mx-48">
+            <div className="">
+              <div className="text-2xl ">SHIPPING ADDRESS</div>
+              <div className=" ">
+                <textarea
+                  className="border border-[#B9B9B9] w-4/6  rounded h-28 placeholder:pl-3 mt-1 bg-[#F2EEE3]"
+                  name="Address"
+                  placeholder="Address"
+                  value={userDetail?.Address}
+                />
+              </div>
             </div>
-           
+
+            <div className="mt-8">
+              <div className="text-xl ">SHIPPING ADDRESS</div>
+              <label></label>
+              <select className="border-2 border-[#B9B9B9] bg-[#F2EEE3] rounded">
+                <option value="">EMS : Thailand Post</option>
+              </select>
+            </div>
+
+            <div className="mt-8">
+              <div className="text-xl">PAYMENT METHOD</div>
+              <div>
+                <input
+                  type="radio"
+                  id="qrCode"
+                  name="paymentMethod"
+                  value="QR CODE"
+                />
+                <label className="ml-2" htmlFor="qrCode">
+                  QR CODE
+                </label>
+                <br />
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="creditCard"
+                  name="paymentMethod"
+                  value="Credit/Debit Card"
+                />
+                <label className="ml-2" htmlFor="creditCard">
+                  Credit/Debit Card
+                </label>
+                <br />
+              </div>
+            </div>
+
+            <div className="my-8">
+              <button
+                className="w-6/12 rounded-lg p-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center"
+                type="button"
+                onClick={() => checkout()}
+              >
+                PLACCE ORDER
+              </button>
+            </div>
+          </div>
         </div>
-        
-        <div className="border-l-2  border-gray-500 w-5/12 ">
-            <div className='border-b-2  border-gray-500 p-16'>
-            <div className='flex justify-between text-lg '>
-                <div className=' '>YOUR ORDER SUMMARY</div>
-                <div className=' '>{'[ '}00{' ]'}</div>
-            </div>
-            <div className='flex justify-between text-base mt-4'>
-                <div className=' '>SUBTOTAL</div>
-                <div className=' '>฿</div>
-            </div>
-            <div className='flex justify-between text-base'>
-                <div className=' '>SHIPPING</div>
-                <div className=' '>฿0</div>
-            </div>
-            <div className='mt-4   flex justify-between text-2xl'>
-                <div className=' '>TOTAL</div>
-                <div className=' '>฿0</div>
-            </div>
+      </div>
 
-           </div>
+      <div className="border-l-2  border-gray-500 w-5/12 ">
+        <div className="border-b-2  border-gray-500 p-16">
+          <div className="flex justify-between text-lg ">
+            <div className=" ">YOUR ORDER SUMMARY</div>
+            <div className=" ">
+              {"[ "}
+              {initProduct().countProduct}
+              {" ]"}
+            </div>
+          </div>
+          <div className="flex justify-between text-base mt-4">
+            <div className=" ">SUBTOTAL</div>
+            <div className=" ">฿{initProduct().totalAmount}</div>
+          </div>
+          <div className="flex justify-between text-base">
+            <div className=" ">SHIPPING</div>
+            <div className=" ">฿50</div>
+          </div>
+          <div className="mt-4   flex justify-between text-2xl">
+            <div className=" ">TOTAL</div>
+            <div className=" ">฿{initProduct().totalAmount + 50}</div>
+          </div>
         </div>
+      </div>
     </div>
-    );
+  );
 };
 
 export default UserChkout;
