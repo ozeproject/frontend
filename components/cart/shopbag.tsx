@@ -78,6 +78,32 @@ const handleDecrement =  async (item: CartItem) => {
     }
   };
 
+  const handleUpdateCartItem = async (item: CartItem) => {
+    try {
+        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/cart/${item.cart_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                size: selectedSize,
+                quantity: quantity,
+            }),
+        });
+
+        if (response.ok) {
+            console.log('Cart item updated successfully');
+            fetchCart(); // Fetch the cart again to update the UI with the latest data
+        } else {
+            setError('Failed to update cart item. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error updating cart item:', error);
+        setError('Error updating cart item. Please try again.');
+    }
+};
+
   const handleDelete = async (item: CartItem) => {
     try {
         const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/cart/${item.cart_id}`, {
@@ -181,7 +207,7 @@ const handleDecrement =  async (item: CartItem) => {
                                 <div className='w-1/12'>
                                     <div className='p-1 border-b-2 border-gray-500 w-fit' onClick={() => toggleEditing(index, item)}>EDIT</div>
                                 </div>
-                                    <div className={`p-4 w-10/12 border-2 border-gray-800 rounded-lg ${editingIndex === index ? '' : 'hidden'}`}>
+                                <div className={`p-4 w-10/12 border-2 border-gray-800 rounded-lg ${editingIndex === index ? '' : 'hidden'}`}>
                                     <div className="mt-4">
                                         <p className="font-semibold tracking-normal">COLORS:</p>
                                         <div className="flex mt-2">
@@ -268,7 +294,13 @@ const handleDecrement =  async (item: CartItem) => {
                                         >
                                             CANCEL
                                         </button>
-                                        <button className="w-2/12 ml-3 rounded-lg p-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center" type="button">UPDATE</button>
+                                        <button
+                                                className="w-2/12 ml-3 rounded-lg p-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center"
+                                                type="button"
+                                                onClick={() => handleUpdateCartItem(item)}
+                                            >
+                                                UPDATE
+                                        </button>
                                     </div>
 
                                 </div>
