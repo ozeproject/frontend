@@ -120,6 +120,7 @@ const WishlistCard = () => {
     if (product.CategoryId == '2') {
         setSelectedSize('FREE');
     }
+    setSelectedSize(product.Size);
 };
 
 const closeModal = () => {

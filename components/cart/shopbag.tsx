@@ -17,7 +17,6 @@ interface CartItem {
     Price: number;
     Color: string;
     Size: string;
-    quantity: number;
     ImagePath: string;
     Quantity: number;
 }
@@ -143,15 +142,18 @@ const ShopBags = () => {
                     </div>
                     <div className='flex  text-lg mt-4'>
                         <div className=' '>COLORS:</div>
-                        <div className='ml-2 '>{item.Color}</div>
+                        <div className='ml-2 '><button
+                                            className="white-button border-solid border-2 colorinput w-5 h-5 "
+                                            style={{ backgroundColor: item.Color }}
+                                        ></button></div>
                     </div>
                     <div className='flex  text-lg'>
                         <div className=' '>SIZES:</div>
-                        <div className=' ml-2'>฿{item.Size}</div>
+                        <div className=' ml-2'>{item.Size}</div>
                     </div>
                     <div className='flex  text-lg'>
                         <div className=' '>QUANTITY:</div>
-                        <div className=' ml-2'>{item.quantity}</div>
+                        <div className=' ml-2'>{item.Quantity}</div>
                     </div>
                     <div className='mt-4 text-lg flex justify-between'>
                         <div className='w-1/12'>
@@ -182,7 +184,7 @@ const ShopBags = () => {
                                       <button className="first-button  border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg  w-10 h-10 p-1  inputCard">{'-'}</button>
                                       <button className="mid-button  border-y-2 border-gray-500  w-10 h-10 p-1  inputCard">1</button>
                                       <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg  w-10 h-10 p-1  inputCard">+</button>
-                                      <span className='mt-4 ml-2'>{'('}{item.quantity}{')'}</span>
+                                      <span className='mt-4 ml-2'>{'('}{item.Quantity}{')'}</span>
                                   </div>
                               </div>
                               <div className='mt-5'>
