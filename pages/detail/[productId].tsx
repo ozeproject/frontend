@@ -294,23 +294,27 @@ const ProductDetail = () => {
                     </div>
                     <div className='mt-8'>
                         <div className='flex '>
-                            <div>
-                                <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn"> <div
-                    onClick={() => {
-                      router.push({
-                        pathname: "/checkout",
-                        query: {
-                          detail: JSON.stringify({
-                            isQuickBuy: true,
-                            product: [product],
-                          }),
-                        },
-                      });
-                    }}
-                  >
-                    CHECKOUT
-                  </div></button>
-                            </div>
+                        <div>
+                                <button className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2 w-48 h-14 ckbtn">
+                                    <div onClick={() => {
+                                    if (!selectedSize) {
+                                        setSizeValidModal(true);
+                                        return;
+                                    }
+                                    router.push({
+                                        pathname: "/checkout",
+                                        query: {
+                                        detail: JSON.stringify({
+                                            isQuickBuy: true,
+                                            product: [product],
+                                        }),
+                                        },
+                                    });
+                                    }}>
+                                    CHECKOUT
+                                    </div>
+                                </button>
+                                </div>
 
                             <div className='ml-4'>
                                 <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt hover:bg-slate-950" onClick={addToCart}>ADD TO BAG</button>
