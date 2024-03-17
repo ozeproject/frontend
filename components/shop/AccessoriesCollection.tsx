@@ -360,7 +360,8 @@ function addQuantity() {
                           <div className='mt-16'>
                               <div className='flex '>
                                   <div>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">        <div
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">       
+                                     <div
                                 onClick={() => {
                                   router.push({
                                     pathname: "/checkout",
