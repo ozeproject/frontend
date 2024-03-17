@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
 import { jwtDecode } from "jwt-decode";
+import SizeValidate from '../../components/validation/SizeShop';
 
 interface Product {
   ProductId: number;
@@ -31,6 +32,7 @@ const AccessoriesCollection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [showSizeValidModal, setSizeValidModal] = useState(false);
 
   useEffect(() => {
     fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/pd/accessories')
@@ -74,6 +76,10 @@ const handleDecrement = () => {
   }
 };
 
+const handleCloseModal = () => {
+  setSizeValidModal(false);
+};
+
 const openModal = (product: Product) => {
   setSelectedProduct(product);
   setIsModalOpen(true);
@@ -103,6 +109,11 @@ const closeModal = () => {
 
   const addToCart = async (product: Product) => {
     try {
+
+      if (!selectedSize) {
+        setSizeValidModal(true);
+        return; 
+      }
         const userId = getUserId(); 
         if (userId) {
             const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
@@ -134,6 +145,11 @@ const closeModal = () => {
 
 const addToWishlist = async (product: Product) => {
     try {
+        if (!selectedSize) {
+          setSizeValidModal(true);
+          return; 
+        }
+
         const userId = getUserId(); 
         if (userId) {
             const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
@@ -333,7 +349,7 @@ function getUserId() {
                                   </div>
                                   
                                   <div className='ml-4'>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt"
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt hover:bg-slate-950"
                                     onClick={() => addToCart(selectedProduct)} >ADD TO BAG</button>
                                   </div>
                                   
@@ -361,6 +377,7 @@ function getUserId() {
             </div>
             ))}
           </div>
+          {showSizeValidModal && <SizeValidate onClose={handleCloseModal} />}
     </div>
   );
 };

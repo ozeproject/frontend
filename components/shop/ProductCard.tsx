@@ -5,6 +5,7 @@ import '../../app/globals.css';
 import Delete from '../../components/validation/DeleteValidate';
 import { jwtDecode } from "jwt-decode";
 import Filter from './Filter';
+import SizeValidate from '../../components/validation/SizeShop';
  
 interface Product {
   ProductId: number;
@@ -36,6 +37,7 @@ const ProductCard = () => {
   const [productToDelete, setProductToDelete] = useState<Product | null>(null); 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [showSizeValidModal, setSizeValidModal] = useState(false);
   let userRole: string | null = null;
 
   if (token) {
@@ -71,6 +73,10 @@ const fetchProducts = async (sortBy: string = '') => {
     setIsDeleteModalOpen(false);
   };
 
+  const handleCloseModal = () => {
+    setSizeValidModal(false);
+  };
+
 
   useEffect(() => {
     fetchProducts(); // Pass an empty string or default value for sortBy
@@ -102,6 +108,11 @@ const handleDecrement = () => {
 
   const addToCart = async (product: Product) => {
     try {
+        if (!selectedSize) {
+          setSizeValidModal(true);
+          return; 
+        }
+
         const userId = getUserId(); 
         if (userId) {
             const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
@@ -133,6 +144,11 @@ const handleDecrement = () => {
 
 const addToWishlist = async (product: Product) => {
     try {
+        if (!selectedSize) {
+          setSizeValidModal(true);
+          return; 
+        }
+
         const userId = getUserId(); 
         if (userId) {
             const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
@@ -402,7 +418,7 @@ const closeModal = () => {
                                   </div>
                                   
                                   <div className='ml-4'>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt"
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt hover:bg-slate-950"
                                      onClick={() => addToCart(selectedProduct)} >ADD TO BAG</button>
                                   </div>
                                   
@@ -430,6 +446,7 @@ const closeModal = () => {
         </div>
         ))}
         </div>
+        {showSizeValidModal && <SizeValidate onClose={handleCloseModal} />}
         </div>
   );
 };

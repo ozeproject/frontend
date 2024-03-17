@@ -6,6 +6,7 @@ import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { jwtDecode } from "jwt-decode";
 import '../../app/globals.css';
+import SizeValidate from '../../components/validation/SizeShop';
 
 
 interface MyToken {
@@ -22,6 +23,7 @@ const ProductDetail = () => {
     const router = useRouter();
     const { productId } = router.query;
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
+    const [showSizeValidModal, setSizeValidModal] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [product, setProduct] = useState({
         ProductId: productId,
@@ -57,8 +59,17 @@ const ProductDetail = () => {
         console.log(quantity);
     };
 
+    const handleCloseModal = () => {
+        setSizeValidModal(false);
+      };
+
     const addToCart = async () => {
         try {
+            if (!selectedSize) {
+                setSizeValidModal(true);
+                return; 
+            }
+
             const userId = getUserId(); 
             if (userId) {
                 const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
@@ -90,6 +101,11 @@ const ProductDetail = () => {
     
     const addToWishlist = async () => {
         try {
+            if (!selectedSize) {
+                setSizeValidModal(true);
+                return; 
+            }
+
             const userId = getUserId(); 
             if (userId) {
                 const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
@@ -272,7 +288,7 @@ const ProductDetail = () => {
                             </div>
 
                             <div className='ml-4'>
-                                <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt" onClick={addToCart}>ADD TO BAG</button>
+                                <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt hover:bg-slate-950" onClick={addToCart}>ADD TO BAG</button>
                             </div>
 
                             <div className='ml-4 '>
@@ -291,6 +307,7 @@ const ProductDetail = () => {
                 </div>
             </div>
             <Footer />
+            {showSizeValidModal && <SizeValidate onClose={handleCloseModal} />}
         </div>
     );
 };

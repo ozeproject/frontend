@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 import '../../app/globals.css';
 import { jwtDecode } from "jwt-decode";
+import SizeValidate from '../../components/validation/SizeShop';
 
 interface WishlistItem {
     wishlist_id: number;
@@ -38,6 +39,7 @@ const WishlistCard = () => {
     const [selectedProduct, setSelectedProduct] = useState<WishlistItem | null>(null);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [quantity, setQuantity] = useState(1);
+    const [showSizeValidModal, setSizeValidModal] = useState(false);
 
     useEffect(() => {
         fetchWishlist();
@@ -108,6 +110,10 @@ const WishlistCard = () => {
        }
   };
 
+  const handleCloseModal = () => {
+    setSizeValidModal(false);
+  };
+
   const openModal = (product: WishlistItem) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -138,6 +144,11 @@ const closeModal = () => {
     
         const addToCart2 = async (product: WishlistItem) => {
             try {
+                if (!selectedSize) {
+                    setSizeValidModal(true);
+                    return; 
+                }
+
                 const userId = getUserId(); 
                 if (userId) {
                     const deleteResponse = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${product.wishlist_id}`, {
@@ -180,37 +191,6 @@ const closeModal = () => {
             }
         };
         
-        const addToWishlist = async (product: WishlistItem) => {
-            try {
-                const userId = getUserId(); 
-                if (userId) {
-                    const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`,
-                        },
-                        body: JSON.stringify({
-                            userId: userId,
-                            productId: product.ProductId,
-                            size: selectedSize,
-                            quantity: quantity,
-                        }),
-                    });
-                    if (response.ok) {
-                        const data = await response.json();
-                        console.log(data.message); 
-                    } else {
-                        console.error('Failed to add product to wishlist:', response.statusText);
-                    }
-                } else {
-                    console.error('User ID not found.');
-                }
-            } catch (error) {
-                console.error('Error adding product to wishlist:', error);
-            }
-        };
-        
         function getUserId() {
             const token = localStorage.getItem('accessToken');
         
@@ -245,16 +225,6 @@ const closeModal = () => {
                             <path d="M12 22.2052L10.9897 21.2923C8.81367 19.3043 7.01367 17.6026 5.58973 16.1872C4.1658 14.7718 3.04187 13.5235 2.21793 12.4423C1.394 11.3611 0.818367 10.3829 0.491033 9.50773C0.163678 8.63251 0 7.75217 0 6.8667C0 5.17097 0.576066 3.74703 1.7282 2.5949C2.88033 1.44277 4.30427 0.866699 6 0.866699C7.17264 0.866699 8.27264 1.1667 9.3 1.7667C10.3274 2.3667 11.2274 3.23934 12 4.38463C12.7726 3.23934 13.6726 2.3667 14.7 1.7667C15.7274 1.1667 16.8274 0.866699 18 0.866699C19.6957 0.866699 21.1197 1.44277 22.2718 2.5949C23.4239 3.74703 24 5.17097 24 6.8667C24 7.75217 23.8363 8.63251 23.509 9.50773C23.1816 10.3829 22.606 11.3611 21.7821 12.4423C20.9581 13.5235 19.8385 14.7718 18.4231 16.1872C17.0077 17.6026 15.2034 19.3043 13.0103 21.2923L12 22.2052Z" fill="#3B3B3B"/>
                             </svg>
                         </span>
-
-                            
-                            {/* <span><svg className=" rounded-full" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                            <mask id="mask0_510_1236" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
-                            <rect width="32" height="32" fill="#D9D9D9"/>
-                            </mask>
-                            <g mask="url(#mask0_510_1236)" >
-                            <path d="M16 26.2052L14.9897 25.2923C12.8137 23.3043 11.0137 21.6026 9.58973 20.1872C8.1658 18.7718 7.04187 17.5235 6.21793 16.4423C5.394 15.3611 4.81837 14.3829 4.49103 13.5077C4.16368 12.6325 4 11.7522 4 10.8667C4 9.17097 4.57607 7.74703 5.7282 6.5949C6.88033 5.44277 8.30427 4.8667 10 4.8667C11.1726 4.8667 12.2726 5.1667 13.3 5.7667C14.3274 6.3667 15.2274 7.23934 16 8.38463C16.7726 7.23934 17.6726 6.3667 18.7 5.7667C19.7274 5.1667 20.8274 4.8667 22 4.8667C23.6957 4.8667 25.1197 5.44277 26.2718 6.5949C27.4239 7.74703 28 9.17097 28 10.8667C28 11.7522 27.8363 12.6325 27.509 13.5077C27.1816 14.3829 26.606 15.3611 25.7821 16.4423C24.9581 17.5235 23.8385 18.7718 22.4231 20.1872C21.0077 21.6026 19.2034 23.3043 17.0103 25.2923L16 26.2052ZM16 24.4C18.1333 22.4718 19.8889 20.8201 21.2667 19.4449C22.6444 18.0697 23.7333 16.8765 24.5333 15.8654C25.3333 14.8543 25.8889 13.9586 26.2 13.1782C26.5111 12.3979 26.6667 11.6274 26.6667 10.8667C26.6667 9.53337 26.2222 8.42226 25.3333 7.53337C24.4444 6.64448 23.3333 6.20003 22 6.20003C20.9385 6.20003 19.959 6.50302 19.0615 7.109C18.1641 7.71498 17.3607 8.62738 16.6513 9.8462H15.3487C14.6222 8.61029 13.8145 7.69362 12.9256 7.0962C12.0367 6.49876 11.0615 6.20003 10 6.20003C8.68376 6.20003 7.57692 6.64448 6.6795 7.53337C5.78206 8.42226 5.33333 9.53337 5.33333 10.8667C5.33333 11.6274 5.48889 12.3979 5.8 13.1782C6.11111 13.9586 6.66667 14.8543 7.46667 15.8654C8.26667 16.8765 9.35556 18.0654 10.7333 19.4321C12.1111 20.7988 13.8667 22.4547 16 24.4Z" fill="#3B3B3B"/>
-                            </g>
-                            </svg></span> */}
                         </div>
 
                         <div className='text-center '><img className='mx-auto' src={item.ImagePath} style={{ width: '400px', height: '400px' }} alt="img" loading="lazy"/></div>
@@ -403,20 +373,17 @@ const closeModal = () => {
 
                           <div className='mt-16'>
                               <div className='flex '>
-                                  <div>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg p-2  w-48 h-14  ckbtn">CHECKOUT</button>
-                                  </div>
                                   
-                                  <div className='ml-4'>
-                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt"
+                                  <div className=''>
+                                    <button className="last-button  border-y-2 border-r-2 border-2 border-gray-500 rounded-lg  p-2 w-48 h-14 addcrt hover:bg-slate-950"
                                     onClick={() => addToCart2(selectedProduct)} >ADD TO BAG</button>
                                   </div>
                                   
                                   <div className='ml-5 '>
-                                    <button className="last-button "><svg width="49" height="60" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <span className="last-button "><svg width="49" height="60" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 22.2052L10.9897 21.2923C8.81367 19.3043 7.01367 17.6026 5.58973 16.1872C4.1658 14.7718 3.04187 13.5235 2.21793 12.4423C1.394 11.3611 0.818367 10.3829 0.491033 9.50773C0.163678 8.63251 0 7.75217 0 6.8667C0 5.17097 0.576066 3.74703 1.7282 2.5949C2.88033 1.44277 4.30427 0.866699 6 0.866699C7.17264 0.866699 8.27264 1.1667 9.3 1.7667C10.3274 2.3667 11.2274 3.23934 12 4.38463C12.7726 3.23934 13.6726 2.3667 14.7 1.7667C15.7274 1.1667 16.8274 0.866699 18 0.866699C19.6957 0.866699 21.1197 1.44277 22.2718 2.5949C23.4239 3.74703 24 5.17097 24 6.8667C24 7.75217 23.8363 8.63251 23.509 9.50773C23.1816 10.3829 22.606 11.3611 21.7821 12.4423C20.9581 13.5235 19.8385 14.7718 18.4231 16.1872C17.0077 17.6026 15.2034 19.3043 13.0103 21.2923L12 22.2052Z" fill="#3B3B3B"/>
                                     </svg>
-                                    </button>
+                                    </span>
                                   </div>
                               </div>
                           </div>
@@ -431,7 +398,7 @@ const closeModal = () => {
             ))}
         </div>
         </div>
-         
+        {showSizeValidModal && <SizeValidate onClose={handleCloseModal} />}
     </div>
   );
 };
