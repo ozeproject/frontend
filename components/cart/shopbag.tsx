@@ -18,6 +18,8 @@ interface CartItem {
     Size: string;
     ImagePath: string;
     Quantity: number;
+    CategoryId: string;
+    StockQuantity: number;
 }
 
 const ShopBags = () => {
@@ -30,10 +32,29 @@ const ShopBags = () => {
     const [cartToDelete, setCartToDelete] = useState<CartItem | null>(null); 
     const [error, setError] = useState<string | null>(null); 
     const [editingIndex, setEditingIndex] = useState<number | null>(null); 
+    const [selectedSize, setSelectedSize] = useState<string | null>(null);
+    const [quantity, setQuantity] = useState(1);
   
   useEffect(() => {
     fetchCart();
   }, []); 
+
+  const handleSizeClick = (size: string) => {
+    setSelectedSize(prevSize => (prevSize === size ? null : size));
+    console.log("size selected: "+ size); 
+};
+
+const handleIncrement =  async (item: CartItem) => {
+    if (quantity < item.StockQuantity) {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    }
+};
+
+const handleDecrement =  async (item: CartItem) => {
+    if (quantity > 1) {
+        setQuantity(prevQuantity => prevQuantity - 1);
+    }
+};
   
   const fetchCart = async () => {
     try {
@@ -114,9 +135,22 @@ const ShopBags = () => {
         calculateTotal();
     }, [cartItems, subtotal]);
 
-    const toggleEditing = (index: number | null) => {
-        setEditingIndex(prevIndex => prevIndex === index ? null : index);
+    const toggleEditing = (index: number | null, item: CartItem | null) => {
+        setEditingIndex(prevIndex => {
+            const newIndex = prevIndex === index ? null : index;
+    
+            if (newIndex !== null && item) {
+                setSelectedSize(item.Size);
+                setQuantity(item.Quantity); 
+            } else {
+                setSelectedSize(null);
+                setQuantity(1); 
+            }
+    
+            return newIndex;
+        });
     };
+    
 
   return (
     <div className='flex'>
@@ -145,40 +179,92 @@ const ShopBags = () => {
                             </div>
                             <div className='mt-4 text-lg flex justify-between'>
                                 <div className='w-1/12'>
-                                    <div className='p-1 border-b-2 border-gray-500 w-fit' onClick={() => toggleEditing(index)}>EDIT</div>
+                                    <div className='p-1 border-b-2 border-gray-500 w-fit' onClick={() => toggleEditing(index, item)}>EDIT</div>
                                 </div>
                                     <div className={`p-4 w-10/12 border-2 border-gray-800 rounded-lg ${editingIndex === index ? '' : 'hidden'}`}>
                                     <div className="mt-4">
                                         <p className="font-semibold tracking-normal">COLORS:</p>
                                         <div className="flex mt-2">
-                                            <button className="white-button border-solid border-2 colorinput w-8 h-8 p-1 bg-white"></button>
-                                            <button className="black-button border-solid border-2 colorinput w-8 h-8 p-1 ml-2 bg-black"></button>
+                                        <button
+                                            className="white-button border-solid border-2 colorinput w-8 h-8 p-1"
+                                            style={{ backgroundColor: item.Color }}
+                                        ></button>
                                         </div>
                                     </div>
                                     <div className="mt-6">
-                                        <p className="font-semibold tracking-normal">SIZES:</p>
-                                        <p className="text-red-700 tracking-wide text-sm mt-2">Please select your size first</p>
-                                        <div className="flex mt-1">
-                                            <button className="white-button border-solid border-2 border-gray-500 rounded-md w-8 h-8 p-1 inputCard font-bold text-center text-sm">L</button>
-                                            <button className="black-button border-solid border-2 border-gray-500 rounded-md w-8 h-8 p-1 ml-3 inputCard font-bold text-center text-sm">XL</button>
-                                        </div>
-                                        <p className="underline tracking-wide text-sm mt-1">Size guide</p>
+                                    <p className='font-semibold tracking-normal'>SIZES:</p>
+                                    {selectedSize ? null : (
+                                        <p className='text-red-700 tracking-wide text-sm mt-2'>
+                                        Please select your size first
+                                        </p>
+                                    )}
+
+                                    <div className='flex mt-1'>
+                                                        {item.CategoryId == '2' ? (
+                                                            <button
+                                                                className={`white-button border-solid border-2 border-gray-500 w-12 h-8 p-1 inputCard font-bold text-center rounded-md text-sm selected ${
+                                                                    selectedSize  === 'FREE' ? 'selected' : ''
+                                                                }`}
+                                                                onClick={() => handleSizeClick('FREE')}
+                                                                disabled={true}
+                                                            >
+                                                                FREE
+                                                            </button>
+                                                        ) : (
+                                                            <>
+                                                                <button
+                                                                    className={`white-button border-solid border-2 border-gray-500 w-8 h-8 p-1 inputCard font-bold text-center rounded-md text-sm ${
+                                                                        selectedSize  == 'L' ? 'selected' : ''
+                                                                    }`}
+                                                                    onClick={() => handleSizeClick('L')}
+                                                                >
+                                                                    L
+                                                                </button>
+                                                                <button
+                                                                    className={`black-button border-solid border-2 border-gray-500 w-8 h-8 p-1 ml-3 inputCard font-bold text-center rounded-md text-sm ${
+                                                                        selectedSize == 'XL' ? 'selected' : ''
+                                                                    }`}
+                                                                    onClick={() => handleSizeClick('XL')}
+                                                                >
+                                                                    XL
+                                                                </button>
+                                                            </>
+                                                        )}
+                                                    </div>
+
+                                    <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
                                     </div>
                                     <div className="mt-5">
                                         <p className="font-semibold tracking-normal mt-5">QUANTITY:</p>
-                                        <p className="text-red-700 tracking-wide text-sm mt-2">Only 1 item left, you cannot add to the cart</p>
+                                        {item.StockQuantity <= 1 && (
+                                            <p className="text-red-700 tracking-wide text-sm mt-2">
+                                                Only 1 item left, you cannot add to the cart
+                                            </p>
+                                        )}
                                         <div className="flex mt-1">
-                                            <button className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard">{'-'}</button>
-                                            <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">1</button>
-                                            <button className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard">+</button>
-                                            <span className="mt-4 ml-2">({item.Quantity})</span>
+                                            <button
+                                                className="first-button border-y-2 border-l-2 border-2 border-gray-500 rounded-l-lg w-10 h-10 p-1 inputCard"
+                                                onClick={() => handleDecrement(item)}
+                                            >
+                                                {'-'}
+                                            </button>
+                                            <button className="mid-button border-y-2 border-gray-500 w-10 h-10 p-1 inputCard">
+                                                {quantity}
+                                            </button>
+                                            <button
+                                                className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard"
+                                                onClick={() => handleIncrement(item)} // Wrap with arrow function
+                                            >
+                                                {'+'}
+                                            </button>
+                                            <span className="mt-4 ml-2">({item.StockQuantity})</span>
                                         </div>
                                     </div>
                                     <div className="mt-5">
                                         <button
                                             className="w-2/12 rounded-lg p-2 bg-slate-50 border border-gray-600 text-center"
                                             type="button"
-                                            onClick={() => toggleEditing(null)}
+                                            onClick={() => toggleEditing(null, null)} // Pass null for both index and item
                                         >
                                             CANCEL
                                         </button>
