@@ -121,21 +121,10 @@ const UserChkout = () => {
               <div>
                 <input
                   type="radio"
-                  id="qrCode"
-                  name="paymentMethod"
-                  value="QR CODE"
-                />
-                <label className="ml-2" htmlFor="qrCode">
-                  QR CODE
-                </label>
-                <br />
-              </div>
-              <div>
-                <input
-                  type="radio"
                   id="creditCard"
                   name="paymentMethod"
                   value="Credit/Debit Card"
+                  checked
                 />
                 <label className="ml-2" htmlFor="creditCard">
                   Credit/Debit Card
