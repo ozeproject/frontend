@@ -86,7 +86,8 @@ const fetchHistory = async () => {
                 <div className=' w-8/12 p-3 ml-5'>
                     <div className='text-xl'>{order.ProductName} </div>
                     <div className='text-sm mt-6'>
-                        <div className='mt-1'>COLORS: {order.Color}</div>
+                        <div className='mt-1'>COLORS: <button className="white-button  border-solid border-2 colorinput  w-6 h-6 p-1"
+                        style={{ backgroundColor: order.Color }}></button></div>
                         <div className='mt-1'>SIZES: {order.Size}</div>
                         <div className='mt-1'>QUANTITY: {order.Quantity}</div>
                     </div>
