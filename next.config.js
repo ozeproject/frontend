@@ -8,7 +8,7 @@ module.exports = {
       return [
         {
           source: `/:path*`,
-          destination: `${basePath}/sj3/:path*`
+          destination: `/sj3/:path*`
         }
       ];
     },
