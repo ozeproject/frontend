@@ -9,15 +9,15 @@ module.exports = {
   experimental: {
     outputStandalone: true,
   },
-    async redirects() {
-      return [
-        {
-          source: '/',
-          destination: '/sj3/home', // Your desired default path
-          permanent: true,
-        },
-      ];
-    },
+    // async redirects() {
+    //   return [
+    //     {
+    //       source: '/',
+    //       destination: '/sj3/home', // Your desired default path
+    //       permanent: true,
+    //     },
+    //   ];
+    // },
 // Test images.
     images: { remotePatterns: [{ hostname: '**' }] },
 
