@@ -6,9 +6,6 @@ module.exports = {
   assetPrefix: isProduction ? '/sj3' : '' ,
   trailingSlash: true,
   reactStrictMode: true,
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-  },
   experimental: {
     outputStandalone: true,
   },
