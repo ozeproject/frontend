@@ -3,6 +3,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const nextConfig = {}
 
 module.exports = {
+  basePath: '/sj3',
   assetPrefix: isProduction ? '/sj3' : '' ,
     rewrites() {
       return [
