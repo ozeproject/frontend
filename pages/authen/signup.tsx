@@ -161,7 +161,7 @@ const Signup = () => {
                     </div>
 
                     <div className='mt-8'>
-                        <p className='text-center text-[#818181]'>Already a member? <span className='font-bold text-[#3B3B3B]'><Link href="/authen/login">Log in</Link></span></p>
+                        <p className='text-center text-[#818181]'>Already a member? <span className='font-bold text-[#3B3B3B]'><Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/authen/login`}>Log in</Link></span></p>
                     </div>
                 </div>
                 </form>

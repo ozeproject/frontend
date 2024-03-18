@@ -269,7 +269,7 @@ const closeModal = () => {
               <div>
                 <div 
                 className={`rounded-lg p-1 px-2 text-sm bordertext-center border-[#3B3B3B] bg-[#3B3B3B] hover:bg-black text-[#FAF9F6] ${userRole !== 'Admin' ? 'hidden' : ''}`}
-                ><Link href={`/shop/edit/${product.ProductId}`}>Edit</Link></div>
+                ><Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/edit/${product.ProductId}`}>Edit</Link></div>
               </div>
 
               <div>
@@ -284,7 +284,7 @@ const closeModal = () => {
               </div>
             
             </div>
-            <Link href={`/detail/${product.ProductId}`}>
+            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/detail/${product.ProductId}`}>
 
             <div className='text-center '><img className='mx-auto' src={product.ImagePath} style={{ width: '400px', height: '400px' }}  alt={product.ProductName} loading="lazy"/></div>
 

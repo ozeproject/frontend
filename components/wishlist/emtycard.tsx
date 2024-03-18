@@ -9,7 +9,7 @@ const EmtyBag = () => {
             <div className="text-center">
                 <div className='text-xl font-semibold text-center'>Your cart is empty</div>
                 <div className='mt-8 text-base'>
-                <Link href="/shop"><button
+                <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/`}><button
                         className='m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'
                         type="button"
                     >

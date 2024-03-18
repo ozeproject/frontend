@@ -22,7 +22,7 @@ const HomePage = () => {
           <Men /> 
           
           <div className="filter flex justify-between p-10">
-            <button className='m-auto font-semibold text-lg rounded-lg px-3 py-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center'><Link href="/shop/menshop">VIEW MORE</Link></button>
+            <button className='m-auto font-semibold text-lg rounded-lg px-3 py-2 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center'><Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/menshop`}>VIEW MORE</Link></button>
           </div>
 
         </div>
@@ -34,7 +34,7 @@ const HomePage = () => {
           <Women /> 
 
           <div className="filter flex justify-between p-10">
-            <button className='m-auto font-semibold text-lg rounded-lg px-3 py-1 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center'><Link href="/shop/womenshop">VIEW MORE</Link></button>
+            <button className='m-auto font-semibold text-lg rounded-lg px-3 py-1 bg-[#3B3B3B] text-[#FAF9F6] border border-gray-600 text-center'><Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/womenshop`}>VIEW MORE</Link></button>
           </div>
           
         </div>

@@ -13,22 +13,22 @@ const Footer = () => {
                     <div className='text-start m-6'>
                         <div className='font-bold mb-3'>SHOP</div>
                         <div className='font-medium'>
-                            <Link href="/shop/" passHref>
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/`} passHref>
                                 <div className={`hover:underline ${router.pathname === '/shop' ? 'underline' : ''}`}>
                                     All ITEMS
                                 </div>
                             </Link>
-                            <Link href="/shop/menshop" passHref>
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/menshop/`} passHref>
                                 <div className={`hover:underline ${router.pathname === '/shop/menshop' ? 'underline' : ''}`}>
                                     MEN
                                 </div>
                             </Link>
-                            <Link href="/shop/womenshop" passHref>
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/womenshop/`} passHref>
                                 <div className={`hover:underline ${router.pathname === '/shop/womenshop' ? 'underline' : ''}`}>
                                     WOMEN
                                 </div>
                             </Link>
-                            <Link href="/shop/accessorie" passHref>
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/accessorie/`} passHref>
                                 <div className={`hover:underline ${router.pathname === '/shop/accessorie' ? 'underline' : ''}`}>
                                     ACCESSORIES
                                 </div>
@@ -41,10 +41,10 @@ const Footer = () => {
                     <div className='text-start m-6'>
                         <div className='font-bold mb-3'>HELP</div>
                         <div className='font-medium'>
-                            <Link href="/home/contact"><div className={`hover:underline ${router.pathname === '/home/contact' ? 'underline' : ''}`}>
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/contact/`}><div className={`hover:underline ${router.pathname === '/home/contact' ? 'underline' : ''}`}>
                                 CONTACT US
                             </div></Link>
-                            <Link href="/tracking/"><div className={`hover:underline ${router.pathname === '/tracking' ? 'underline' : ''}`}>TRACKING</div></Link>
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/tracking/`}><div className={`hover:underline ${router.pathname === '/tracking' ? 'underline' : ''}`}>TRACKING</div></Link>
                         </div>
                     </div>
                 </div>

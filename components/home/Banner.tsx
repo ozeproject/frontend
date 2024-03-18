@@ -9,13 +9,12 @@ const Banner = () => {
     'https://www.smartt.com/sites/default/files/2020-06/uniqlo-logo-banner.jpg'
     // Add additional image URLs here...
   ];
-
   useEffect(() => {
     fetchProductCount();
     const interval = setInterval(() => {
       nextSlide();
     }, 2000); // Change slide every 5 seconds
-
+      console.log(`${process.env.NEXT_PUBLIC_BASEPATH}/shop/`)
     return () => clearInterval(interval);
   }, []);
 

@@ -3,7 +3,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const nextConfig = {}
 
 module.exports = {
-  assetPrefix: isProduction ? '/sj3' : '' ,
+  assetPrefix: isProduction ? '/sj3/' : '' ,
   trailingSlash: true,
   reactStrictMode: true,
   experimental: {
