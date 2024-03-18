@@ -5,11 +5,13 @@ import { useRouter } from 'next/router';
 import '../../../app/globals.css';
 import Fail from '../../../components/validation/EditFail';
 import Success from '../../../components/validation/EditSuccess';
+import { useSearchParams } from 'next/navigation';
 
 const EditProduct: React.FC = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const router = useRouter();
-    const { productId } = router.query;
+    const searchParams = useSearchParams()
+    const productId = searchParams ? searchParams.get('productId') : '';
     const [product, setProduct] = useState({
       ProductName: '',
       Description: '',
