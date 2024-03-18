@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { jwtDecode } from "jwt-decode";
 import '../../app/globals.css';
 import SizeValidate from '../../components/validation/SizeShop';
+import { useSearchParams } from 'next/navigation';
 
 
 interface MyToken {
@@ -21,7 +22,8 @@ interface MyToken {
 const ProductDetail = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const router = useRouter();
-    const { productId } = router.query;
+    const searchParams = useSearchParams()
+    const productId = searchParams ? searchParams.get('productId') : '';
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [showSizeValidModal, setSizeValidModal] = useState(false);
     const [quantity, setQuantity] = useState(1);

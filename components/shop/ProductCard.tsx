@@ -284,7 +284,7 @@ const closeModal = () => {
               </div>
             
             </div>
-            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/detail/${product.ProductId}`}>
+            <Link href={{pathname:`${process.env.NEXT_PUBLIC_BASEPATH}/detail`, query: {productId:`${product.ProductId}` }}}>
 
             <div className='text-center '><img className='mx-auto' src={product.ImagePath} style={{ width: '400px', height: '400px' }}  alt={product.ProductName} loading="lazy"/></div>
 

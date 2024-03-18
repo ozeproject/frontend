@@ -4,7 +4,7 @@ const nextConfig = {}
 
 module.exports = {
   assetPrefix: isProduction ? '/sj3/' : '' ,
-  trailingSlash: true,
+  trailingSlash: false,
   reactStrictMode: true,
   experimental: {
     outputStandalone: true,
