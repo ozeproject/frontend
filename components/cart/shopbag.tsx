@@ -148,7 +148,7 @@ const handleDecrement =  async (item: CartItem) => {
         const calculateSubtotal = () => {
             let total = 0;
             cartItems.forEach((item) => {
-                total += item.Price ;
+                total += item.Price * item.Quantity ;
             });
             setSubtotal(total);
         };
@@ -337,7 +337,7 @@ const handleDecrement =  async (item: CartItem) => {
             </div>
             <div className='mt-8 text-base'>
             <button
-                className="m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center w-full"
+                className="m-auto rounded-lg p-3 border border-gray-600 text-center w-full bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]"
                 type="button"
                 onClick={() => {
                   router.push({
