@@ -122,7 +122,7 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
                     </div>
 
                     <div className='mt-8'>
-                        <p className='text-center text-[#818181]'>Don’t have an account? <span className='font-bold text-[#3B3B3B]'>  <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/authen/signup`}"">Sign up</Link></span></p>
+                        <p className='text-center text-[#818181]'>Don’t have an account? <span className='font-bold text-[#3B3B3B]'>  <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/authen/signup`}>Sign up</Link></span></p>
                     </div>
                 </div>
             </form>
