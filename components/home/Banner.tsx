@@ -50,7 +50,7 @@ const Banner = () => {
     <div className='mt-6'>
       <div className='font-semibold text-xl'>New Arrival</div>
       <div className='underline text-sm mt-3'>
-        <Link href='/shop/'>EXPLORE ITEMS</Link>
+        <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/`}>EXPLORE ITEMS</Link>
       </div>
     </div>
   </div>
