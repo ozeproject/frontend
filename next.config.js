@@ -4,7 +4,14 @@ const nextConfig = {}
 
 module.exports = {
   assetPrefix: isProduction ? '/sj3' : '' ,
-  
+    rewrites() {
+      return [
+        {
+          source: `/:path*`,
+          destination: `${basePath}/sj3/:path*`
+        }
+      ];
+    },
     async redirects() {
       return [
         {

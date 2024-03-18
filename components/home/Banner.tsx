@@ -6,8 +6,7 @@ const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const images = [
     'https://assets-global.website-files.com/5fb85f26f126ce08d792d2d9/628a5e3eebec8808b407eefc_72331280_1375222229300944_3110216239734063104_n.jpg',
-    'https://www.smartt.com/sites/default/files/2020-06/uniqlo-logo-banner.jpg',
-    'https://media.licdn.com/dms/image/C4E12AQFSyydwd-lllg/article-cover_image-shrink_600_2000/0/1520108749231?e=2147483647&v=beta&t=HzObMx8-m4eFrRgGQBqSesW4Zk2qK5jea_FPLBTfkFM'
+    'https://www.smartt.com/sites/default/files/2020-06/uniqlo-logo-banner.jpg'
     // Add additional image URLs here...
   ];
 
