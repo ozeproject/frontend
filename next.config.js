@@ -9,7 +9,7 @@ module.exports = {
       return [
         {
           source: '/',
-          destination: '/home', // Your desired default path
+          destination: '/sj3/home', // Your desired default path
           permanent: true,
         },
       ];

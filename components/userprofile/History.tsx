@@ -21,7 +21,7 @@ type OrderHistoryItem = {
 const History = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   const [orderHistory, setOrderHistory] = useState<OrderHistoryItem[]>([]);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  // const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   useEffect(() => {
     fetchHistory();
@@ -66,10 +66,6 @@ const fetchHistory = async () => {
         return null;
     }
 }
-
-const handleSizeClick = (size: string) => {
-  setSelectedSize(prevSize => (prevSize === size ? null : size));
-};
 
   return (
     <div className=''>
