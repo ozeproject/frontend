@@ -288,7 +288,7 @@ const handleDecrement =  async (item: CartItem) => {
                                     </div>
                                     <div className="mt-5">
                                         <button
-                                            className="w-2/12 rounded-lg p-2 bg-slate-50 border border-gray-600 text-center"
+                                            className="w-2/12 rounded-lg p-2 bg-[#F2EEE3] border border-gray-600 text-center"
                                             type="button"
                                             onClick={() => toggleEditing(null, null)} // Pass null for both index and item
                                         >
