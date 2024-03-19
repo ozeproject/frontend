@@ -306,11 +306,15 @@ const ProductDetail = () => {
                                     router.push({
                                         pathname: "/checkout",
                                         query: {
-                                        detail: JSON.stringify({
-                                            isQuickBuy: true,
-                                            product: [product],
-                                        }),
-                                        },
+                                            detail: JSON.stringify({
+                                              isQuickBuy: true,
+                                              product: [{
+                                                  ...product,
+                                                  size: selectedSize 
+                                              }]
+                                              ,
+                                            }),
+                                          },
                                     });
                                     }}>
                                     CHECKOUT
