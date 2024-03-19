@@ -362,7 +362,10 @@ const closeModal = () => {
                                       query: {
                                         detail: JSON.stringify({
                                           isQuickBuy: true,
-                                          product: [selectedProduct],
+                                          product: [{
+                                            ...selectedProduct,
+                                            size: selectedSize 
+                                        }],
                                         }),
                                       },
                                     });
