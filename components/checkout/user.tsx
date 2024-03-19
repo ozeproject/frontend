@@ -44,10 +44,9 @@ const UserCheckout = () => {
     let totalAmount = 0;
     let product: { product_id: number; price: number; Quantity: number , size : string }[] = [];
     if (data) {
-      console.log(data.product)
       for (let index = 0; index < data.product.length; index++) {
         console.log(data.product[index]);
-        console.log(data.product[index].Size);
+        console.log(data.product[index].size);
         product.push({
           product_id: data.product[index].ProductId,
           price: data.product[index].Price,
