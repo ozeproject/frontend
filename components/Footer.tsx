@@ -41,10 +41,10 @@ const Footer = () => {
                     <div className='text-start m-6'>
                         <div className='font-bold mb-3'>HELP</div>
                         <div className='font-medium'>
-                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/contact/`}><div className={`hover:underline ${router.pathname === '/home/contact' ? 'underline' : ''}`}>
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/home/contact/`}><div className={`hover:underline ${router.pathname === '/home/contact' ? 'underline' : ''}`}>
                                 CONTACT US
                             </div></Link>
-                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/tracking/`}><div className={`hover:underline ${router.pathname === '/tracking' ? 'underline' : ''}`}>TRACKING</div></Link>
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/tracking/`}><div className={`hover:underline ${router.pathname === '/tracking' ? 'underline' : ''}`}>TRACKING</div></Link>
                         </div>
                     </div>
                 </div>

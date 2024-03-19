@@ -10,7 +10,7 @@ const EmtyBag = () => {
                 <div className='text-xl font-semibold text-center'>Your cart is empty</div>
                 <div className='mt-8 text-base'>
                 <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/`}><button
-                        className='m-auto rounded-lg p-3 bg-slate-50 border border-gray-600 text-center'
+                        className='m-auto rounded-lg p-3 border border-gray-600 text-center bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]'
                         type="button"
                     >
                         GO SHOPPING
