@@ -14,7 +14,7 @@ interface MyToken {
   Address: string;
   phone: string;
 }
-const UserChkout = () => {
+const UserCheckout = () => {
   const router = useRouter();
 
   const token =
@@ -174,4 +174,4 @@ const UserChkout = () => {
   );
 };
 
-export default UserChkout;
+export default UserCheckout;

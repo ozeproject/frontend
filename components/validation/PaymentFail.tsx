@@ -35,7 +35,7 @@ const PaymentFail = () => {
             <button
               className="mt-8 w-4/12 m-auto rounded-lg p-3 bg-red-500 text-white border border-gray-600 text-center"
               type="button"
-              onClick={() => router.push("/sj3/shop")}
+              onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/shop/`)}
             >
               TRY AGAIN
             </button>
