@@ -42,12 +42,16 @@ const UserCheckout = () => {
   function initProduct() {
     let countProduct = 0;
     let totalAmount = 0;
-    let product: { product_id: number; price: number; Quantity: number }[] = [];
+    let product: { product_id: number; price: number; Quantity: number , size : string }[] = [];
     if (data) {
+      console.log(data.product)
       for (let index = 0; index < data.product.length; index++) {
+        console.log(data.product[index]);
+        console.log(data.product[index].Size);
         product.push({
           product_id: data.product[index].ProductId,
           price: data.product[index].Price,
+          size : data.product[index].size || data.product[index].Size,
           Quantity: data.product[index].Quantity
             ? data.product[index].Quantity
             : 1,
@@ -57,6 +61,8 @@ const UserCheckout = () => {
           ? (Quantity = data.product[index].Quantity)
           : (Quantity = 1);
         countProduct = countProduct + Quantity;
+        console.log(data.product[index].Price)
+        console.log(Quantity)
         totalAmount = totalAmount + data.product[index].Price * Quantity;
       }
     }
