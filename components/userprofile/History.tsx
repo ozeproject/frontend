@@ -16,6 +16,7 @@ type OrderHistoryItem = {
   Size: string;
   Quantity: number;
   Price: string;
+  status: string;
 };
 
 const History = () => {
@@ -69,7 +70,9 @@ const fetchHistory = async () => {
 
   return (
     <div className=''>
-      {orderHistory.map((order, index) => (
+      {orderHistory
+      .filter(order => order.status === 'success') //add filter check status 'success' only can show
+      .map((order, index) => (
         <div key={index} className={`m-auto border-x-2 ${index !== orderHistory.length - 1 ? 'border-b-2' : ''} w-7/12 border-gray-500`}> 
           <div className='p-2 flex '>
                 <div className='w-3/12 p-3'>
