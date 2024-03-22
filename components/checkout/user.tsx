@@ -101,17 +101,21 @@ const UserCheckout = () => {
       <div className=" w-4/6">
         <div className=" p-10 flex">
           <div className="w-7/12 mx-48">
-            <div className="">
-              <div className="text-2xl ">SHIPPING ADDRESS</div>
-              <div className=" ">
-                <textarea
-                  className="border border-[#B9B9B9] w-4/6  rounded h-28 placeholder:pl-3 mt-1 bg-[#F2EEE3]"
-                  name="Address"
-                  placeholder="Address"
-                  value={userDetail?.Address}
-                />
-              </div>
+          <div className="">
+            <div className="text-2xl ">SHIPPING ADDRESS</div>
+            <div className=" ">
+              <textarea
+                className="border border-[#B9B9B9] w-4/6  rounded h-28 placeholder:pl-3 mt-1 bg-[#F2EEE3]"
+                name="Address"
+                placeholder="Address"
+                value={userDetail?.Address || ''} // Ensure value is not undefined
+                onChange={(e) => setUserDetail((prevUserDetail) => ({
+                  ...prevUserDetail!,
+                  Address: e.target.value
+                }))}
+              />
             </div>
+          </div>
 
             <div className="mt-8">
               <div className="text-xl ">SHIPPING ADDRESS</div>
