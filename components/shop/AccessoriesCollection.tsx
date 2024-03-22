@@ -116,6 +116,10 @@ const closeModal = () => {
         setSizeValidModal(true);
         return; 
       }
+      if (!token) {
+        router.push('/authen/login');
+        return;
+      }
         const userId = getUserId(); 
         if (userId) {
             const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
@@ -150,6 +154,10 @@ const addToWishlist = async (product: Product) => {
         if (!selectedSize) {
           setSizeValidModal(true);
           return; 
+        }
+        if (!token) {
+          router.push('/authen/login');
+          return;
         }
 
         const userId = getUserId(); 
@@ -364,6 +372,10 @@ function addQuantity() {
                                   <div onClick={() => {
                                     if (!selectedSize) {
                                       setSizeValidModal(true);
+                                      return;
+                                    }
+                                    if (!token) {
+                                      router.push('/authen/login');
                                       return;
                                     }
                                     router.push({

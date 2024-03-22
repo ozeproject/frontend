@@ -105,6 +105,10 @@ const closeModal = () => {
                 setSizeValidModal(true);
                 return; 
             }
+            if (!token) {
+                router.push('/authen/login');
+                return;
+            }
 
             const userId = getUserId(); 
             if (userId) {
@@ -140,6 +144,10 @@ const closeModal = () => {
             if (!selectedSize) {
                 setSizeValidModal(true);
                 return; 
+            }
+            if (!token) {
+                router.push('/authen/login');
+                return;
             }
 
             const userId = getUserId(); 
@@ -357,6 +365,10 @@ const closeModal = () => {
                                     <div onClick={() => {
                                     if (!selectedSize) {
                                         setSizeValidModal(true);
+                                        return;
+                                    }
+                                    if (!token) {
+                                        router.push('/authen/login');
                                         return;
                                     }
                                     router.push({

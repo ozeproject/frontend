@@ -114,6 +114,10 @@ const handleDecrement = () => {
           setSizeValidModal(true);
           return; 
         }
+        if (!token) {
+          router.push('/authen/login');
+          return;
+      }
 
         const userId = getUserId(); 
         if (userId) {
@@ -149,6 +153,10 @@ const addToWishlist = async (product: Product) => {
         if (!selectedSize) {
           setSizeValidModal(true);
           return; 
+        }
+        if (!token) {
+          router.push('/authen/login');
+          return;
         }
 
         const userId = getUserId(); 
@@ -432,6 +440,10 @@ const closeModal = () => {
                                   <div onClick={() => {
                                     if (!selectedSize) {
                                       setSizeValidModal(true);
+                                      return;
+                                    }
+                                    if (!token) {
+                                      router.push('/authen/login');
                                       return;
                                     }
                                     router.push({

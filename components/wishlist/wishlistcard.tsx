@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-import Link from 'next/link';
-import Image from 'next/image'
 import '../../app/globals.css';
 import { jwtDecode } from "jwt-decode";
 import SizeValidate from '../../components/validation/SizeShop';
+import router from 'next/router';
 
 interface WishlistItem {
     wishlist_id: number;
@@ -149,6 +146,10 @@ const closeModal = () => {
                 if (!selectedSize) {
                     setSizeValidModal(true);
                     return; 
+                }
+                if (!token) {
+                    router.push('/authen/login');
+                    return;
                 }
 
                 const userId = getUserId(); 

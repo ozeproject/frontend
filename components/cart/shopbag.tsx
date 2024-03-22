@@ -94,7 +94,8 @@ const handleDecrement =  async (item: CartItem) => {
 
         if (response.ok) {
             console.log('Cart item updated successfully');
-            fetchCart(); // Fetch the cart again to update the UI with the latest data
+            fetchCart(); 
+            toggleEditing(null, null);
         } else {
             setError('Failed to update cart item. Please try again.');
         }
@@ -279,7 +280,7 @@ const handleDecrement =  async (item: CartItem) => {
                                             </button>
                                             <button
                                                 className="last-button border-y-2 border-r-2 border-2 border-gray-500 rounded-r-lg w-10 h-10 p-1 inputCard"
-                                                onClick={() => handleIncrement(item)} // Wrap with arrow function
+                                                onClick={() => handleIncrement(item)} 
                                             >
                                                 {'+'}
                                             </button>
@@ -290,7 +291,7 @@ const handleDecrement =  async (item: CartItem) => {
                                         <button
                                             className="w-2/12 rounded-lg p-2 bg-[#F2EEE3] border border-gray-600 text-center"
                                             type="button"
-                                            onClick={() => toggleEditing(null, null)} // Pass null for both index and item
+                                            onClick={() => toggleEditing(null, null)} 
                                         >
                                             CANCEL
                                         </button>
@@ -345,11 +346,7 @@ const handleDecrement =  async (item: CartItem) => {
                     query: {
                       detail: JSON.stringify({
                         isQuickBuy: false,
-                        product: [{
-                            ...cartItems,
-                            size: selectedSize 
-                        }]
-                        ,
+                        product: cartItems,
                       }),
                     },
                   });
