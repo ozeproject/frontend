@@ -68,7 +68,7 @@ const ForgotPW = () => {
                         </div>
                     </div>
 
-                    {emailSubmitted ? null : (
+                    {emailSubmitted ? null : ( 
                     <div>
                         <h1 className='text-center font-semibold text-xl mt-2 text-[#3B3B3B]'>ENTER YOUR EMAIL</h1>
                         
@@ -86,7 +86,7 @@ const ForgotPW = () => {
                             onClick={handleEmailSubmit} >NEXT STEP</button>
                         </div>
                     </div>
-                    )}
+                    )} 
 
                     {showPasswordFields && (
                     <div>

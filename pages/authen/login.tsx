@@ -114,7 +114,7 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
                     
                     <div className='flex justify-end mt-3'>
                         <div className=''>
-                            <p className='underline text-[#818181]'><Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/authen/forgotpw/1`}>Forgot password</Link></p>
+                            <p className='underline text-[#818181]'><Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/authen/forgotpw`}>Forgot password</Link></p>
                         </div>
                     </div>
                     <div className='mt-10'>
