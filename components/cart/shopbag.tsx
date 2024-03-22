@@ -346,7 +346,12 @@ const handleDecrement =  async (item: CartItem) => {
                     query: {
                       detail: JSON.stringify({
                         isQuickBuy: false,
+<<<<<<< HEAD
                         product: cartItems,
+=======
+                        product: cartItems
+                        ,
+>>>>>>> 56e4440275b3b3b8fd61d646e9ea660e44a16afc
                       }),
                     },
                   });
