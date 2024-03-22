@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import '../../app/globals.css';
+import '../../../app/globals.css';
 import router from 'next/router';
 
 
