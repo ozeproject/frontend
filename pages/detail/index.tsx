@@ -71,6 +71,10 @@ const ProductDetail = () => {
                 setSizeValidModal(true);
                 return; 
             }
+            if (!token) {
+                router.push('/authen/login');
+                return;
+            }
 
             const userId = getUserId(); 
             if (userId) {
@@ -106,6 +110,10 @@ const ProductDetail = () => {
             if (!selectedSize) {
                 setSizeValidModal(true);
                 return; 
+            }
+            if (!token) {
+                router.push('/authen/login');
+                return;
             }
 
             const userId = getUserId(); 
@@ -301,6 +309,10 @@ const ProductDetail = () => {
                                     <div onClick={() => {
                                     if (!selectedSize) {
                                         setSizeValidModal(true);
+                                        return;
+                                    }
+                                    if (!token) {
+                                        router.push('/authen/login');
                                         return;
                                     }
                                     router.push({
