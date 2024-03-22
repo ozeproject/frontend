@@ -11,30 +11,20 @@ const ForgotPW = () => {
     const [message, setMessage] = useState('');
     const [emailSubmitted, setEmailSubmitted] = useState(false);
     const [showPasswordFields, setShowPasswordFields] = useState(false);
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
-    // const handleEmailSubmit = async () => {
-    //     try {
-    //         const response = await fetch('/api/resetpassword/checkemail', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({ 
-    //                 email: email, 
-    //             })
-    //         });
-    //         console.log(email)
-    //         const data = await response.json();
-    //         setMessage(data.message);
-    //         setEmailSubmitted(true); 
-    //         setShowPasswordFields(true); 
-    //     } catch (error: any) { 
-    //         setMessage('Error checking email: ' + error.message);
-    //     }
-    // };
+    const validateEmail = (email: any) => {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(String(email).toLowerCase());
+    };
 
     const handleEmailSubmit = async () => {
+        if (!validateEmail(email)) {
+            setEmailError('Please enter a valid email address.');
+        }
         try {
+            
             const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/checkemail', {
                 method: 'POST',
                 headers: {
@@ -59,6 +49,10 @@ const ForgotPW = () => {
     };
 
     const handlePasswordSubmit = async () => {
+        if (newPassword !== confirmPassword) {
+            setPasswordError('Passwords do not match.');
+            return;
+        }
         try {
             const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/resetpassword', {
                 method: 'POST',
@@ -107,6 +101,7 @@ const ForgotPW = () => {
                             placeholder='Enter your email'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}/>
+                            {emailError && <p className='text-red-700 tracking-wide text-sm mt-2'>{emailError}</p>}
                         </div>
                         
                         <div className='mt-10'>
@@ -136,6 +131,7 @@ const ForgotPW = () => {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             />
+                            {passwordError && <p className='text-red-700 tracking-wide text-sm mt-2'>{passwordError}</p>}
                         </div>
                         
                         <div className='mt-10'>
