@@ -12,19 +12,47 @@ const ForgotPW = () => {
     const [emailSubmitted, setEmailSubmitted] = useState(false);
     const [showPasswordFields, setShowPasswordFields] = useState(false);
 
+    // const handleEmailSubmit = async () => {
+    //     try {
+    //         const response = await fetch('/api/resetpassword/checkemail', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({ 
+    //                 email: email, 
+    //             })
+    //         });
+    //         console.log(email)
+    //         const data = await response.json();
+    //         setMessage(data.message);
+    //         setEmailSubmitted(true); 
+    //         setShowPasswordFields(true); 
+    //     } catch (error: any) { 
+    //         setMessage('Error checking email: ' + error.message);
+    //     }
+    // };
+
     const handleEmailSubmit = async () => {
         try {
-            const response = await fetch('/api/resetpassword/checkemail', {
+            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/checkemail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ email })
             });
-            const data = await response.json();
-            setMessage(data.message);
-            setEmailSubmitted(true); 
-            setShowPasswordFields(true); 
+
+            if (response.ok) {
+                console.log(email)
+                const data = await response.json();
+                setMessage(data.message);
+                setEmailSubmitted(true);
+                setShowPasswordFields(true);
+            } else {
+                const data = await response.json();
+                setMessage(data.error || 'Error checking email');
+            }
         } catch (error: any) { 
             setMessage('Error checking email: ' + error.message);
         }
@@ -32,7 +60,7 @@ const ForgotPW = () => {
 
     const handlePasswordSubmit = async () => {
         try {
-            const response = await fetch('/api/resetpassword', {
+            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/resetpassword', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
