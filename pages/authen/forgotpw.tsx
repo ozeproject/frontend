@@ -42,6 +42,7 @@ const ForgotPW = () => {
             } else {
                 const data = await response.json();
                 setMessage(data.error || 'Error checking email');
+                setEmailError('ไม่พบ email ในระบบ');
             }
         } catch (error: any) { 
             setMessage('Error checking email: ' + error.message);
