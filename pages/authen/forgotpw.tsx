@@ -1,13 +1,52 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import '../../app/globals.css';
+import router from 'next/router';
+
 
 const ForgotPW = () => {
     const [email, setEmail] = useState('');
-    const [resetToken, setResetToken] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [emailSubmitted, setEmailSubmitted] = useState(false);
+    const [showPasswordFields, setShowPasswordFields] = useState(false);
+
+    const handleEmailSubmit = async () => {
+        try {
+            const response = await fetch('/api/resetpassword/checkemail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email })
+            });
+            const data = await response.json();
+            setMessage(data.message);
+            setEmailSubmitted(true); 
+            setShowPasswordFields(true); 
+        } catch (error: any) { 
+            setMessage('Error checking email: ' + error.message);
+        }
+    };
+
+    const handlePasswordSubmit = async () => {
+        try {
+            const response = await fetch('/api/resetpassword', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, newPassword, confirmPassword })
+            });
+            const data = await response.json();
+            setMessage(data.message);
+            router.push('/authen/login');
+        } catch (error: any) { 
+            setMessage('Error resetting password: ' + error.message);
+        }
+    };
+
 
     return (
         <div>
@@ -29,35 +68,54 @@ const ForgotPW = () => {
                         </div>
                     </div>
 
+                    {emailSubmitted ? null : (
                     <div>
                         <h1 className='text-center font-semibold text-xl mt-2 text-[#3B3B3B]'>ENTER YOUR EMAIL</h1>
                         
                         <div className='mt-8'>
                             <label className='text-[#3B3B3B]'>YOUR EMAIL</label><br />
-                            <input className='mt-1 border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='Enter your new password'></input>
+                            <input className='mt-1 border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' 
+                            type='email' 
+                            placeholder='Enter your email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                         
                         <div className='mt-10'>
-                            <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]">NEXT STEP</button>
+                            <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]"
+                            onClick={handleEmailSubmit} >NEXT STEP</button>
                         </div>
                     </div>
+                    )}
 
+                    {showPasswordFields && (
                     <div>
                         <h1 className='text-center font-semibold text-xl mt-2 text-[#3B3B3B]'>ENTER YOUR NEW PASSWORD</h1>
                         
                         <div className='mt-8'>
                             <label className='text-[#3B3B3B]'>NEW PASSWORD</label><br />
-                            <input className='mt-1 border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='Enter your new password'></input>
+                            <input className='mt-1 border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' 
+                            type='password' 
+                            placeholder='Enter your new password'
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}/>
                         </div>
                         <div className='mt-5'>
                             <label className='text-[#3B3B3B]'>CONFIRM NEW PASSWORD</label><br />
-                            <input className='mt-1 border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='Confirm your new password'></input>
+                            <input className='mt-1 border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' 
+                            type='password' 
+                            placeholder='Confirm your new password'
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
                         </div>
                         
                         <div className='mt-10'>
-                            <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]">SAVE NEW PASSWORD</button>
+                            <button className=" border-y-2 border-r-2 border-2 border-[#3B3B3B] rounded-lg p-2  w-full h-10  bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]"
+                            onClick={handlePasswordSubmit}>SAVE NEW PASSWORD</button>
                         </div>
                     </div>
+                    )}
 
                 </div>
             </div>
