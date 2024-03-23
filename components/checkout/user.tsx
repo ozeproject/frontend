@@ -22,6 +22,8 @@ const UserCheckout = () => {
   const [Authenticated, setIsAuthenticated] = useState(false);
   const [userDetail, setUserDetail] = useState<MyToken | null>(null);
   const data = router.query.detail && JSON.parse(router.query.detail as string);
+  const [addressError,setAddressError] = useState<string | null>(null)
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -69,6 +71,10 @@ const UserCheckout = () => {
     return { product, countProduct, totalAmount };
   }
   function checkout() {
+    if (!userDetail?.Address || userDetail.Address === '') {
+      setAddressError('Please input address.');
+      return; // Exit function if address is empty
+    }  
     fetch("https://capstone23.sit.kmutt.ac.th/sj3/api/checkout", {
       method: "POST",
       headers: {
@@ -115,6 +121,9 @@ const UserCheckout = () => {
                 }))}
               />
             </div>
+            {addressError && (
+              <div className="text-red-500">{addressError}</div>
+            )}
           </div>
 
             <div className="mt-8">
