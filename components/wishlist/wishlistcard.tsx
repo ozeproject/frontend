@@ -45,7 +45,7 @@ const WishlistCard = () => {
     const fetchWishlist = async () => {
         try {
             const userId = getUserId(); 
-            const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist?userId=${userId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist?userId=${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -66,7 +66,7 @@ const WishlistCard = () => {
 
     const handleDelete = async (item: WishlistItem) => {
         try {
-            const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${item.wishlist_id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/wishlist/${item.wishlist_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -76,7 +76,6 @@ const WishlistCard = () => {
             if (response.ok) {
                 setWishlistItems(prevItems => prevItems.filter(wishlistItem => wishlistItem.wishlist_id !== item.wishlist_id));
                 console.log('Product deleted successfully from the wishlist.');
-                // window.location.reload();
             } else {
                 setError('Failed to delete product. Please try again.');
             }
@@ -154,7 +153,7 @@ const closeModal = () => {
 
                 const userId = getUserId(); 
                 if (userId) {
-                    const deleteResponse = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/${product.wishlist_id}`, {
+                    const deleteResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/wishlist/${product.wishlist_id}`, {
                         method: 'DELETE',
                         headers: {
                             'Authorization': `Bearer ${token}`,
@@ -163,7 +162,7 @@ const closeModal = () => {
                     
                     if (deleteResponse.ok) {
                         console.log(selectedSize + " " + quantity);
-                        const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
+                        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/add`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

@@ -6,13 +6,11 @@ import Fail from '../../components/validation/SignupFail';
 
 const Signup = () => {
     const router = useRouter();
-    const [error, setError] = useState<null | string>(null);
 
-     // State to hold form data
     const [user, setFormData] = useState({
         Username: '',
         Password: '',
-        ConfirmPassword: '', // New field for password confirmation
+        ConfirmPassword: '', 
         Email: '',
         Name: '',
         Address: '',
@@ -27,39 +25,29 @@ const Signup = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
 
-    // Handler to update form data on input change
     const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
         setFormData({
           ...user,
           [e.target.name]: e.target.value,
         });
-    
-        // Validate email format
         if (e.target.name === 'Email') {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           const isValidEmail = emailRegex.test(e.target.value);
     
           setEmailError(isValidEmail ? null : 'Invalid email format');
         }
-         // Validate password confirmation
         if (e.target.name === 'ConfirmPassword') {
             const isPasswordMatch = e.target.value === user.Password;
             setPasswordError(isPasswordMatch ? null : 'Passwords do not match');
          }
-         // Validate username confirmation
         if (e.target.name === 'Name') {
-
             setNameError(e.target.value === '' ? 'Please input name.' : null);
          }
-         // Validate password confirmation
          if (e.target.name === 'Username') {
-
             setUserNameError(e.target.value === '' ? 'Please input username.' : null);
          }
-         
       };
 
-  // Handler for form submission
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -69,18 +57,14 @@ const Signup = () => {
         setEmailError(isValidEmail ? null : 'Invalid email format');
       }
       if(user.Name === '') {
-  
         setNameError( 'Please input name.');
       }
       if(user.Username === '') {
-  
         setUserNameError( 'Please input username.');
       }
-    // Your email and password validation logic here
     if( emailRegex.test(user.Email) && user.Name !== '' && user.Username !== ''){
-
     try {
-        const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/signup', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -89,18 +73,16 @@ const Signup = () => {
         });
 
         if (response.ok) {
-            console.log("create success")
-            router.push('/authen/login'); // Redirect to login page after successful signup
+            router.push('/authen/login'); 
         } else {
-            console.error('Failed to create user');
             const data = await response.json();
-            setErrorMessage(data.error); // Set the error message from the response
-            setShowModal(true); // Show the modal
+            setErrorMessage(data.error); 
+            setShowModal(true); 
         }
     } catch (error) {
         console.error('Error creating user:', error);
         setErrorMessage('Error creating user. Please try again.');
-        setShowModal(true); // Show the modal
+        setShowModal(true); 
     }}
 };
   
@@ -143,7 +125,6 @@ const Signup = () => {
                         <label className='text-[#3B3B3B]'>Email *</label><br />
                         <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='text' placeholder='Enter your email' name="Email" value={user.Email} onChange={handleInputChange}></input>
                         {emailError && <p className='text-red-700 tracking-wide text-sm mt-2'>{emailError}</p>}
-                        {/* <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid login, please correct your email </p> */}
                     </div>
                     <div className='mt-3'>
                         <label className='text-[#3B3B3B]'>Password *</label><br />
@@ -153,7 +134,6 @@ const Signup = () => {
                         <label className='text-[#3B3B3B]'>Confirm Password *</label><br />
                         <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type='password' placeholder='••••••••' name="ConfirmPassword"  onChange={handleInputChange}></input>
                         {passwordError && <p className='text-red-700 tracking-wide text-sm mt-2'>{passwordError}</p>}
-                        {/* <p className='text-red-700 tracking-wide text-sm mt-2'>Invalid password, please correct your password  </p> */}
                     </div>
 
                     <div className='mt-10'>

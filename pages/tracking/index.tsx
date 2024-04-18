@@ -5,14 +5,9 @@ import '../../app/globals.css';
 
 const TrackingPage = () => {
   const [parcelNumber, setParcelNumber] = useState('');
-
   const handleSearch = () => {
-    // Check if the parcel number is provided
     if (parcelNumber) {
-      // Construct the tracking URL using the provided parcel number
       const trackingURL = `https://track.thailandpost.co.th/?trackNumber=${parcelNumber}`
-      
-      // Open a new tab or window with the tracking URL
       window.open(trackingURL, '_blank');
     }
   };
@@ -41,7 +36,6 @@ const TrackingPage = () => {
           </button>
         </div>
       </div>
-
       <Footer />
     </div>
   );

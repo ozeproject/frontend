@@ -21,7 +21,6 @@ const Create = () => {
     gender:'Male',
     Size:'2',
   });
-  // const [file,setFile] = useState();
   const [file,setFile] = useState<File | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailModal, setShowFailModal] = useState(false);
@@ -66,14 +65,13 @@ const Create = () => {
     if(formData.Price == '') {
       setPriceError( 'Please input Price.');
     }
-    // formData.ImagePath = await uploadImage(formData.ProductName,file)
     if(file == undefined) {
       setFileError( 'Please upload image.');
     }
     if(formData.ProductName !== '' && parseInt(formData.StockQuantity) > 0 && parseInt(formData.Price) > 0 && file != undefined){
       formData.ImagePath = await uploadImage(formData.ProductName,file)
       try {
-      const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/products', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -113,7 +111,6 @@ const Create = () => {
   };
 
   const uploadImage = async (path: string, file: any) => {
-    // const imageRef = storageRef.child(`images/${file.name}`);
     try {
       const storageRef = ref(storage,path);
       const snapshot = await uploadBytes(storageRef,file)
@@ -232,9 +229,7 @@ const Create = () => {
         </form>
       </div>
       <Footer />
-      {/* Success Modal */}
       {showSuccessModal && <Success onClose={handleCloseModal} />}
-      {/* Fail Modal */}
       {showFailModal && <Fail onClose={handleCloseModal} />}
     </div>
   );

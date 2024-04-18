@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
-import { useRouter } from 'next/router';
 import '../../../app/globals.css';
 import Fail from '../../../components/validation/EditFail';
 import Success from '../../../components/validation/EditSuccess';
@@ -9,7 +8,6 @@ import { useSearchParams } from 'next/navigation';
 
 const EditProduct: React.FC = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-    const router = useRouter();
     const searchParams = useSearchParams()
     const productId = searchParams ? searchParams.get('productId') : '';
     const [product, setProduct] = useState({
@@ -32,7 +30,7 @@ const EditProduct: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -45,7 +43,6 @@ const EditProduct: React.FC = () => {
     }
   }, [productId]);
 
-  // const [ProductNameError, setProductNameError] = useState<string | null>(null);
   const [PriceError, setPriceError] = useState<string | null>(null);
   const [StockError, setStockQuantityError] = useState<string | null>(null);
 
@@ -78,7 +75,7 @@ const EditProduct: React.FC = () => {
     }
     if(parseInt(product.Price) > 0 && parseInt(product.StockQuantity) > 0){
       try {
-      const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

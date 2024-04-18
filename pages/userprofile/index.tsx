@@ -7,7 +7,6 @@ import Navbar from '../../components/Navbar';
 
 const UserProfile = () => {
   const [activeTab, setActiveTab] = useState('information');
-
   const handleTabChange = (tab: React.SetStateAction<string>) => {
     setActiveTab(tab);
   };
@@ -22,7 +21,6 @@ const UserProfile = () => {
               <h1 className='text-center text-5xl text-[#3B3B3B]'>PROFILE</h1>
             </div>
           </div>
-
           <div className='menutitle m-auto w-1/2 p-2 lay1 flex flex-row '>
             <span
               className={`m-4 text-[#3B3B3B] hover:underline ${activeTab === 'information' ? 'underline' : ''
@@ -38,7 +36,6 @@ const UserProfile = () => {
             >
               Order History
             </span>
-
           </div>
         </div>
       </div>

@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { jwtDecode } from "jwt-decode";
-import Fail from "../../components/validation/PaymentFail";
-import Success from "../../components/validation/PaymetnSuccess";
 import { useRouter } from "next/router";
 
 interface MyToken {
@@ -73,9 +69,9 @@ const UserCheckout = () => {
   function checkout() {
     if (!userDetail?.Address || userDetail.Address === '') {
       setAddressError('Please input address.');
-      return; // Exit function if address is empty
+      return; 
     }  
-    fetch("https://capstone23.sit.kmutt.ac.th/sj3/api/checkout", {
+    fetch(`${process.env.REACT_APP_API_URL}/checkout `, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -114,7 +110,7 @@ const UserCheckout = () => {
                 className="border border-[#B9B9B9] w-4/6  rounded h-28 placeholder:pl-3 mt-1 bg-[#F2EEE3]"
                 name="Address"
                 placeholder="Address"
-                value={userDetail?.Address || ''} // Ensure value is not undefined
+                value={userDetail?.Address || ''} 
                 onChange={(e) => setUserDetail((prevUserDetail) => ({
                   ...prevUserDetail!,
                   Address: e.target.value

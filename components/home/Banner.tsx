@@ -2,28 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 const Banner = () => {
-  const [productCount, setProductCount] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const images = [
     'https://assets-global.website-files.com/5fb85f26f126ce08d792d2d9/628a5e3eebec8808b407eefc_72331280_1375222229300944_3110216239734063104_n.jpg',
-    'https://www.smartt.com/sites/default/files/2020-06/uniqlo-logo-banner.jpg'
-    // Add additional image URLs here...
+    'https://www.smartt.com/sites/default/files/2020-06/uniqlo-logo-banner.jpg',
   ];
   useEffect(() => {
-    fetchProductCount();
     const interval = setInterval(() => {
       nextSlide();
-    }, 2000); // Change slide every 5 seconds
-      console.log(`${process.env.NEXT_PUBLIC_BASEPATH}/shop/`)
+    }, 2000); 
     return () => clearInterval(interval);
   }, []);
-
-  const fetchProductCount = () => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/productCount')
-      .then((response) => response.json())
-      .then((data) => setProductCount(data.count))
-      .catch((error) => console.error('Error fetching product count:', error));
-  };
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));

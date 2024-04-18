@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import '../../app/globals.css';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Guest from '../../components/checkout/guest';
 import User from '../../components/checkout/user';
 
 
@@ -28,7 +27,7 @@ const CheckoutPage = () => {
         {isAuthenticated ? (
             <User /> 
                 ) : (
-            <Guest /> 
+            <div></div>
                 )}
          <Footer /> 
         

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter ,} from 'next/router';
-import Image from 'next/image'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Link from 'next/link';
 import { jwtDecode } from "jwt-decode";
 import '../../app/globals.css';
 import SizeValidate from '../../components/validation/SizeShop';
 import { useSearchParams } from 'next/navigation';
-
 
 interface MyToken {
     userId: string;
@@ -16,8 +13,6 @@ interface MyToken {
     role: string;
     exp: number;
   }
-
-
 
 const ProductDetail = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
@@ -78,7 +73,7 @@ const ProductDetail = () => {
 
             const userId = getUserId(); 
             if (userId) {
-                const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -118,7 +113,7 @@ const ProductDetail = () => {
 
             const userId = getUserId(); 
             if (userId) {
-                const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -166,7 +161,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productId}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}products/${productId}`);
         const data = await response.json();
         setProduct(data);
 

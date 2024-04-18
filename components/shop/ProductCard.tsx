@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image'
-import '../../app/globals.css';
+import React, { useState, useEffect } from 'react'; 
+import Link from 'next/link'; 
+import { jwtDecode } from "jwt-decode"; 
+import { useRouter } from "next/navigation";  
+import '../../app/globals.css'; 
+import Filter from './Filter'; 
 import Delete from '../../components/validation/DeleteValidate';
-import { jwtDecode } from "jwt-decode";
-import Filter from './Filter';
 import SizeValidate from '../../components/validation/SizeShop';
-import { useRouter } from "next/navigation";
 
 interface Product {
   ProductId: number;
@@ -53,7 +52,7 @@ const ProductCard = () => {
 
 const fetchProducts = async (sortBy: string = '') => {
   try {
-    const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products?sortBy=${sortBy}`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/products?sortBy=${sortBy}`);
     if (response.ok) {
       const data = await response.json();
       setProducts(data);
@@ -81,13 +80,9 @@ const fetchProducts = async (sortBy: string = '') => {
 
 
   useEffect(() => {
-    fetchProducts(); // Pass an empty string or default value for sortBy
+    fetchProducts(); 
   }, [])
   
-  const handleSortChange = (sortBy: string) => {
-      fetchProducts(sortBy);
-    };
-
   const handleSizeClick = (size: string) => {
       setSelectedSize(prevSize => (prevSize === size ? null : size));
   };
@@ -121,7 +116,7 @@ const handleDecrement = () => {
 
         const userId = getUserId(); 
         if (userId) {
-            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -161,7 +156,7 @@ const addToWishlist = async (product: Product) => {
 
         const userId = getUserId(); 
         if (userId) {
-            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -209,7 +204,7 @@ function getUserId() {
   const handleDelete = async () => {
     if (productToDelete) {
       try {
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/products/${productToDelete.ProductId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${productToDelete.ProductId}`, {
           method: 'DELETE',
         });
 

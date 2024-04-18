@@ -17,7 +17,7 @@ const Edit = () => {
     useEffect(() => {
       const fetchUserProfile = async () => {
           try {
-              const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/user/profile', {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
                   method: 'GET',
                   headers: {
                       'Authorization': `Bearer ${token}`
@@ -58,24 +58,20 @@ const Edit = () => {
     setUserNameError(null);
     setEmailError(null);
 
-
     if (userData.Email) {
-      
       const isValidEmail = emailRegex.test(userData.Email);
       setEmailError(isValidEmail ? null : 'Invalid email format');
     }
     if(userData.Name === '') {
-
       setNameError( 'Please input name.');
     }
     if(userData.Username === '') {
-
       setUserNameError( 'Please input Username.');
     }
    
     if(emailRegex.test(userData.Email) && userData.Name !== '' && userData.Username !== ''){
       try {
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/user/profile`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',

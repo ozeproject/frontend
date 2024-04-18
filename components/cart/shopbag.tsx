@@ -29,7 +29,6 @@ const ShopBags = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const [subtotal, setSubtotal] = useState(0); 
     const [total, setTotal] = useState(0);
-    const [cartToDelete, setCartToDelete] = useState<CartItem | null>(null); 
     const [error, setError] = useState<string | null>(null); 
     const [editingIndex, setEditingIndex] = useState<number | null>(null); 
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -59,7 +58,7 @@ const handleDecrement =  async (item: CartItem) => {
   const fetchCart = async () => {
     try {
         const userId = getUserId(); 
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/cart?userId=${userId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cart?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -80,7 +79,7 @@ const handleDecrement =  async (item: CartItem) => {
 
   const handleUpdateCartItem = async (item: CartItem) => {
     try {
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/cart/${item.cart_id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/${item.cart_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -107,7 +106,7 @@ const handleDecrement =  async (item: CartItem) => {
 
   const handleDelete = async (item: CartItem) => {
     try {
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/cart/${item.cart_id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/${item.cart_id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,

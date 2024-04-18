@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image'
 import { jwtDecode } from "jwt-decode";
 import SizeValidate from '../../components/validation/SizeShop';
 import { useRouter } from "next/navigation";
@@ -37,7 +36,7 @@ const AccessoriesCollection = () => {
   const [showSizeValidModal, setSizeValidModal] = useState(false);
 
   useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/pd/accessories')
+    fetch(`${process.env.REACT_APP_API_URL}/pd/accessories`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -122,7 +121,7 @@ const closeModal = () => {
       }
         const userId = getUserId(); 
         if (userId) {
-            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -162,7 +161,7 @@ const addToWishlist = async (product: Product) => {
 
         const userId = getUserId(); 
         if (userId) {
-            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

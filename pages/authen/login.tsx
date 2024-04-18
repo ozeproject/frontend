@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import '../../app/globals.css';
-import Shopbag from '../../components/cart/shopbag';
 import Fail from '../../components/validation/LoginFail';
 import Success from '../../components/validation/LoginSuccess';
 
@@ -34,7 +33,7 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
   e.preventDefault();
 
   try {
-      const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/login', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/login` , {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -45,22 +44,16 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
       if (response.ok) {
           const data = await response.json();
           localStorage.setItem('accessToken', data.token);
-          console.log(data); // Log the token
+          console.log(data); 
           setShowSuccessModal(true);
           setSuccessMessage('Login successful!');
-
-        //   setTimeout(() => {
-        //     window.location.href = '/sj3/shop';
-        // }, 1000);
 
       } else {
           const errorData = await response.json();
           console.log(errorData);
           if (response.status === 401) {
-              // Handle invalid credentials
               setFailMessage(errorData.error || 'Invalid username or password');
           } else {
-              // Handle other errors
               console.error('Login failed');
               setFailMessage('Login failed. Please try again later.');
           }
@@ -72,17 +65,14 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
       setShowFailModal(true);
   }
 };
-      
 
     return (
         <div>
             <div className='mx-auto w-1/6'>
               
-             {/* Fail Modal */}
-             {showFailModal && <Fail onClose={handleCloseFailModal} message={failMessage} />}
+            {showFailModal && <Fail onClose={handleCloseFailModal} message={failMessage} />}
 
-              {/* Success Modal */}
-              {showSuccessModal && <Success onClose={handleCloseSuccessModal} message={successMessage} />}
+            {showSuccessModal && <Success onClose={handleCloseSuccessModal} message={successMessage} />}
 
             <form onSubmit={handleSubmit}>
                 <div className='mt-20'>

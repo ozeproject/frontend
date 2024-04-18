@@ -5,9 +5,8 @@ const Filter = ({onChangeFilter}:{onChangeFilter:(sortBy:string)=>void}) => {
     const [selectedSort, setSelectedSort] = useState<string>('');
 
   useEffect(() => {
-    // console.log(selectedSort)
     onChangeFilter(selectedSort)
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/productCount')
+    fetch(`${process.env.REACT_APP_API_URL}/productCount`)
       .then((response) => response.json())
       .then((data) => setProductCount(data.count))
       .catch((error) => console.error('Error fetching product count:', error));

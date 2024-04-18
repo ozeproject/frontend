@@ -25,7 +25,7 @@ const ForgotPW = () => {
         }
         try {
             
-            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/checkemail', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/checkemail`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const ForgotPW = () => {
             return;
         }
         try {
-            const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/resetpassword', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/resetpassword`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

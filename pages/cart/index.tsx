@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Shopbag from '../../components/cart/shopbag';
-import EmtyBag from '../../components/cart/emtybag';
+import Link from 'next/link';
 import '../../app/globals.css';
 import { jwtDecode } from "jwt-decode";
 
@@ -35,7 +35,7 @@ useEffect(() => {
 const fetchCart = async () => {
   try {
       const userId = getUserId(); 
-      const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/cart?userId=${userId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/cart?userId=${userId}`, {
           method: 'GET',
           headers: {
               'Authorization': `Bearer ${token}`,
@@ -84,7 +84,19 @@ function getUserId() {
         </div>
         {cartItems.length == 0 ? (
         <>
-          <EmtyBag />
+          <div className='m-auto p-40'>
+            <div className="text-center">
+                <div className='text-xl font-semibold text-center'>Your cart is empty</div>
+                <div className='mt-8 text-base'>
+                <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/shop/`}><button
+                        className='m-auto rounded-lg p-3 border border-gray-600 text-center bg-[#3B3B3B] hover:bg-black text-[#FAF9F6]'
+                        type="button"
+                    >
+                        GO SHOPPING
+                    </button></Link>
+                </div>
+            </div>
+          </div>
         </>
       ) : (
         <>

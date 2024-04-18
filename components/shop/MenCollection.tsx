@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image'
 import { jwtDecode } from "jwt-decode";
 import SizeValidate from '../../components/validation/SizeShop';
 import { useRouter } from "next/navigation";
@@ -30,14 +29,13 @@ const MenCollection = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   const [products, setProducts] = useState<Product[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [error, setError] = useState<string | null>(null); 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [showSizeValidModal, setSizeValidModal] = useState(false);
 
   useEffect(() => {
-    fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/pd/male')
+    fetch(`${process.env.REACT_APP_API_URL}/pd/male`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -112,7 +110,7 @@ const closeModal = () => {
 
           const userId = getUserId(); 
           if (userId) {
-              const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/cart/add', {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
@@ -152,7 +150,7 @@ const closeModal = () => {
 
           const userId = getUserId(); 
           if (userId) {
-              const response = await fetch('https://capstone23.sit.kmutt.ac.th/sj3/api/wishlist/add', {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',

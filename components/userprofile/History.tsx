@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { jwtDecode } from "jwt-decode";
 
 interface MyToken {
@@ -22,7 +21,6 @@ type OrderHistoryItem = {
 const History = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   const [orderHistory, setOrderHistory] = useState<OrderHistoryItem[]>([]);
-  // const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   useEffect(() => {
     fetchHistory();
@@ -31,7 +29,7 @@ const History = () => {
 const fetchHistory = async () => {
     try {
         const userId = getUserId(); 
-        const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/order/history?userId=${userId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/order/history?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -71,7 +69,7 @@ const fetchHistory = async () => {
   return (
     <div className=''>
       {orderHistory
-      .filter(order => order.status === 'success') //add filter check status 'success' only can show
+      .filter(order => order.status === 'success') 
       .map((order, index) => (
         <div key={index} className={`m-auto border-x-2 ${index !== orderHistory.length - 1 ? 'border-b-2' : ''} w-7/12 border-gray-500`}> 
           <div className='p-2 flex '>
