@@ -24,7 +24,7 @@ const ProductDetail = () => {
     const [showSizeValidModal, setSizeValidModal] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-    const tooltipTextLines = ['L  w31 h41', 'XL w33 h43'];
+    const tooltipTextLines = ['L:chest 42 length 26', 'XL:chest 44 length 28'];
     const [product, setProduct] = useState({
         ProductId: productId,
         ProductName: '',

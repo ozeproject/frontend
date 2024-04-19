@@ -35,7 +35,7 @@ const AccessoriesCollection = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [showSizeValidModal, setSizeValidModal] = useState(false);
-  const tooltipTextLines = ['L  w31 h41', 'XL w33 h43'];
+  const tooltipTextLines = ['L:chest 42 length 26', 'XL:chest 44 length 28'];
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const apiUrl = process.env.REACT_APP_API_URL;
 

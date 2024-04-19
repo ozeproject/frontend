@@ -180,7 +180,7 @@ const UserCheckout = () => {
           </div>
           <div className="mt-4   flex justify-between text-2xl">
             <div className=" ">TOTAL</div>
-            <div className=" ">฿{initProduct().totalAmount + 50}</div>
+            <div className=" ">฿{initProduct().totalAmount}</div>
           </div>
         </div>
       </div>

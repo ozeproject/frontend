@@ -96,7 +96,7 @@ const fetchHistory = async () => {
                     </div>
                 </div>
                 <div className=' w-1/12 ml-3 text-xl'>
-                    <div>฿{parseInt(order.Price) * order.Quantity + 50}</div> 
+                    <div>฿{parseInt(order.Price) * order.Quantity}</div> 
                 </div>
           </div>
         </div>
