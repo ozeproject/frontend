@@ -1,3 +1,4 @@
+
 /** @type {import('next').NextConfig} */
 const isProduction = process.env.NODE_ENV === 'production';
 const nextConfig = {}
@@ -28,6 +29,7 @@ module.exports = {
         firebaseStoageBucket: process.env.FIREBASE_STORAGE_BUCKET,
         firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
         firebaseAppId: process.env.FIREBASE_APP_ID,
+        REACT_APP_API_URL: process.env.REACT_APP_API_URL, 
     }
   };
   
