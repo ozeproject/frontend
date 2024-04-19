@@ -33,6 +33,7 @@ const ShopBags = () => {
     const [editingIndex, setEditingIndex] = useState<number | null>(null); 
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [quantity, setQuantity] = useState(1);
+    const apiUrl = process.env.REACT_APP_API_URL;
   
   useEffect(() => {
     fetchCart();
@@ -58,7 +59,7 @@ const handleDecrement =  async (item: CartItem) => {
   const fetchCart = async () => {
     try {
         const userId = getUserId(); 
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cart?userId=${userId}`, {
+        const response = await fetch(`${apiUrl}/cart?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -79,7 +80,7 @@ const handleDecrement =  async (item: CartItem) => {
 
   const handleUpdateCartItem = async (item: CartItem) => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/${item.cart_id}`, {
+        const response = await fetch(`${apiUrl}/cart/${item.cart_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -106,7 +107,7 @@ const handleDecrement =  async (item: CartItem) => {
 
   const handleDelete = async (item: CartItem) => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/${item.cart_id}`, {
+        const response = await fetch(`${apiUrl}/cart/${item.cart_id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,

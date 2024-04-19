@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 const Filter = ({onChangeFilter}:{onChangeFilter:(sortBy:string)=>void}) => {
     const [productCount, setProductCount] = useState<number>(0);
     const [selectedSort, setSelectedSort] = useState<string>('');
+    const apiUrl = process.env.REACT_APP_API_URL;
+    
 
   useEffect(() => {
     onChangeFilter(selectedSort)
-    fetch(`${process.env.REACT_APP_API_URL}/productCount`)
+    fetch(`${apiUrl}/productCount`)
       .then((response) => response.json())
       .then((data) => setProductCount(data.count))
       .catch((error) => console.error('Error fetching product count:', error));

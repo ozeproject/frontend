@@ -35,7 +35,7 @@ useEffect(() => {
 const fetchCart = async () => {
   try {
       const userId = getUserId(); 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/cart?userId=${userId}`, {
+      const response = await fetch(`https://capstone23.sit.kmutt.ac.th/sj3/api/cart?userId=${userId}`, {
           method: 'GET',
           headers: {
               'Authorization': `Bearer ${token}`,

@@ -37,6 +37,7 @@ const WishlistCard = () => {
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [showSizeValidModal, setSizeValidModal] = useState(false);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         fetchWishlist();
@@ -45,7 +46,7 @@ const WishlistCard = () => {
     const fetchWishlist = async () => {
         try {
             const userId = getUserId(); 
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist?userId=${userId}`, {
+            const response = await fetch(`${apiUrl}/wishlist?userId=${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -66,7 +67,7 @@ const WishlistCard = () => {
 
     const handleDelete = async (item: WishlistItem) => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/wishlist/${item.wishlist_id}`, {
+            const response = await fetch(`${apiUrl}/wishlist/${item.wishlist_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -153,7 +154,7 @@ const closeModal = () => {
 
                 const userId = getUserId(); 
                 if (userId) {
-                    const deleteResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/wishlist/${product.wishlist_id}`, {
+                    const deleteResponse = await fetch(`${apiUrl}/wishlist/${product.wishlist_id}`, {
                         method: 'DELETE',
                         headers: {
                             'Authorization': `Bearer ${token}`,
@@ -162,7 +163,7 @@ const closeModal = () => {
                     
                     if (deleteResponse.ok) {
                         console.log(selectedSize + " " + quantity);
-                        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/cart/add`, {
+                        const response = await fetch(`${apiUrl}/cart/add`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

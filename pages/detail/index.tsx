@@ -73,6 +73,8 @@ const ProductDetail = () => {
 
             const userId = getUserId(); 
             if (userId) {
+                
+                console.log(`${process.env.REACT_APP_API_URL}/cart/add`);
                 const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
                     method: 'POST',
                     headers: {

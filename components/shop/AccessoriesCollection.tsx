@@ -34,9 +34,10 @@ const AccessoriesCollection = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [showSizeValidModal, setSizeValidModal] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/pd/accessories`)
+    fetch(`${apiUrl}/pd/accessories`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -161,7 +162,7 @@ const addToWishlist = async (product: Product) => {
 
         const userId = getUserId(); 
         if (userId) {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
+            const response = await fetch(`${apiUrl}/wishlist/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

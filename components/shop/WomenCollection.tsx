@@ -34,9 +34,10 @@ const WomenCollection = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [showSizeValidModal, setSizeValidModal] = useState(false);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/pd/female`)
+    fetch(`${apiUrl}/pd/female`)
         .then(response => response.json())
         .then(data => {
             setProducts(data);
@@ -111,7 +112,9 @@ const closeModal = () => {
 
             const userId = getUserId(); 
             if (userId) {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
+                
+                console.log(`${apiUrl}/cart/add`);
+                const response = await fetch(`${apiUrl}/cart/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -151,7 +154,7 @@ const closeModal = () => {
 
             const userId = getUserId(); 
             if (userId) {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
+                const response = await fetch(`${apiUrl}/wishlist/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -21,6 +21,7 @@ type OrderHistoryItem = {
 const History = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   const [orderHistory, setOrderHistory] = useState<OrderHistoryItem[]>([]);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetchHistory();
@@ -29,7 +30,7 @@ const History = () => {
 const fetchHistory = async () => {
     try {
         const userId = getUserId(); 
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/order/history?userId=${userId}`, {
+        const response = await fetch(`${apiUrl}/order/history?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
