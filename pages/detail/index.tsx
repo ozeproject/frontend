@@ -36,6 +36,7 @@ const ProductDetail = () => {
         gender: '',
         Size: '',
       });
+      const apiUrl = process.env.REACT_APP_API_URL;
 
     const handleSizeClick = (size: string) => {
         setSelectedSize(prevSize => (prevSize === size ? null : size));
@@ -74,8 +75,8 @@ const ProductDetail = () => {
             const userId = getUserId(); 
             if (userId) {
                 
-                console.log(`${process.env.REACT_APP_API_URL}/cart/add`);
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
+                console.log(`${apiUrl}/cart/add`);
+                const response = await fetch(`${apiUrl}/cart/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -115,7 +116,7 @@ const ProductDetail = () => {
 
             const userId = getUserId(); 
             if (userId) {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
+                const response = await fetch(`${apiUrl}/wishlist/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -161,9 +162,10 @@ const ProductDetail = () => {
     }
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_API_URL);
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}products/${productId}`);
+        const response = await fetch(`${apiUrl}/products/${productId}`);
         const data = await response.json();
         setProduct(data);
 
