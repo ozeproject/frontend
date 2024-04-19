@@ -8,7 +8,7 @@ const Filter = ({onChangeFilter}:{onChangeFilter:(sortBy:string)=>void}) => {
 
   useEffect(() => {
     onChangeFilter(selectedSort)
-    fetch(`${apiUrl}/productCount`)
+    fetch(`${process.env.REACT_APP_API_URL}/productCount`)
       .then((response) => response.json())
       .then((data) => setProductCount(data.count))
       .catch((error) => console.error('Error fetching product count:', error));

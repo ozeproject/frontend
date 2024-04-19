@@ -37,7 +37,7 @@ const WomenCollection = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch(`${apiUrl}/pd/female`)
+    fetch(`${process.env.REACT_APP_API_URL}/pd/female`)
         .then(response => response.json())
         .then(data => {
             setProducts(data);
@@ -113,8 +113,8 @@ const closeModal = () => {
             const userId = getUserId(); 
             if (userId) {
                 
-                console.log(`${apiUrl}/cart/add`);
-                const response = await fetch(`${apiUrl}/cart/add`, {
+                console.log(`${process.env.REACT_APP_API_URL}/cart/add`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ const closeModal = () => {
 
             const userId = getUserId(); 
             if (userId) {
-                const response = await fetch(`${apiUrl}/wishlist/add`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

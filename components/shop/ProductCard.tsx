@@ -53,7 +53,7 @@ const ProductCard = () => {
 
 const fetchProducts = async (sortBy: string = '') => {
   try {
-    const response = await fetch(`${apiUrl}/products?sortBy=${sortBy}`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/products?sortBy=${sortBy}`);
     if (response.ok) {
       const data = await response.json();
       setProducts(data);
@@ -117,7 +117,7 @@ const handleDecrement = () => {
 
         const userId = getUserId(); 
         if (userId) {
-            const response = await fetch(`${apiUrl}/cart/add`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ const addToWishlist = async (product: Product) => {
 
         const userId = getUserId(); 
         if (userId) {
-            const response = await fetch(`${apiUrl}/wishlist/add`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -205,7 +205,7 @@ function getUserId() {
   const handleDelete = async () => {
     if (productToDelete) {
       try {
-        const response = await fetch(`${apiUrl}/products/${productToDelete.ProductId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${productToDelete.ProductId}`, {
           method: 'DELETE',
         });
 

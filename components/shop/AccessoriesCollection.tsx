@@ -37,7 +37,7 @@ const AccessoriesCollection = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch(`${apiUrl}/pd/accessories`)
+    fetch(`${process.env.REACT_APP_API_URL}/pd/accessories`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -162,7 +162,7 @@ const addToWishlist = async (product: Product) => {
 
         const userId = getUserId(); 
         if (userId) {
-            const response = await fetch(`${apiUrl}/wishlist/add`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

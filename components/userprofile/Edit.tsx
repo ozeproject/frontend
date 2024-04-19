@@ -18,7 +18,7 @@ const Edit = () => {
     useEffect(() => {
       const fetchUserProfile = async () => {
           try {
-              const response = await fetch(`${apiUrl}/user/profile`, {
+              const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
                   method: 'GET',
                   headers: {
                       'Authorization': `Bearer ${token}`
@@ -72,7 +72,7 @@ const Edit = () => {
    
     if(emailRegex.test(userData.Email) && userData.Name !== '' && userData.Username !== ''){
       try {
-        const response = await fetch(`${apiUrl}/user/profile`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
