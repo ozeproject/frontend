@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { jwtDecode } from "jwt-decode";
 import SizeValidate from '../../components/validation/SizeShop';
 import { useRouter } from "next/navigation";
+import Tooltip from '../../components/Tooltip';
 
 interface Product {
   ProductId: number;
@@ -34,7 +35,9 @@ const WomenCollection = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [showSizeValidModal, setSizeValidModal] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const tooltipTextLines = ['L  w31 h41', 'XL w33 h43'];
+  
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/pd/female`)
@@ -212,6 +215,14 @@ const closeModal = () => {
     }));
   }
 
+  const handleMouseEnter = () => {
+    setIsTooltipVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsTooltipVisible(false);
+  };
+
   return (
     <div className=''>
     <div className={`grid grid-cols-4   border-gray-500`}>
@@ -328,7 +339,16 @@ const closeModal = () => {
                                             </>
                                         )}
                                     </div>
-                                  <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
+                                    <div className="mt-6">
+                                        <p
+                                        className="underline tracking-wide text-sm mt-1"
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
+                                        >
+                                        Size guide
+                                        </p>
+                                        {isTooltipVisible && <Tooltip text={tooltipTextLines} />}
+                                    </div>
                               </div>
 
                               <div>

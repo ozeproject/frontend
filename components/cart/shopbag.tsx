@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
+import Tooltip from '../../components/Tooltip';
 
 interface MyToken {
     userId: string;
@@ -33,6 +34,8 @@ const ShopBags = () => {
     const [editingIndex, setEditingIndex] = useState<number | null>(null); 
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [quantity, setQuantity] = useState(1);
+    const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+    const tooltipTextLines = ['L  w31 h41', 'XL w33 h43'];
     const apiUrl = process.env.REACT_APP_API_URL;
   
   useEffect(() => {
@@ -178,6 +181,14 @@ const handleDecrement =  async (item: CartItem) => {
         });
     };
     
+    const handleMouseEnter = () => {
+        setIsTooltipVisible(true);
+      };
+    
+      const handleMouseLeave = () => {
+        setIsTooltipVisible(false);
+      };
+    
 
   return (
     <div className='flex'>
@@ -259,7 +270,17 @@ const handleDecrement =  async (item: CartItem) => {
                                                         )}
                                                     </div>
 
-                                    <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
+                                    <div className="mt-6">
+                                        <p
+                                        className="underline tracking-wide text-sm mt-1"
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
+                                        >
+                                        Size guide
+                                        </p>
+                                        {isTooltipVisible && <Tooltip text={tooltipTextLines} />}
+                                    </div>
+
                                     </div>
                                     <div className="mt-5">
                                         <p className="font-semibold tracking-normal mt-5">QUANTITY:</p>

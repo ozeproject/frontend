@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import '../../app/globals.css';
 import SizeValidate from '../../components/validation/SizeShop';
 import { useSearchParams } from 'next/navigation';
+import Tooltip from '../../components/Tooltip';
 
 interface MyToken {
     userId: string;
@@ -22,6 +23,8 @@ const ProductDetail = () => {
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [showSizeValidModal, setSizeValidModal] = useState(false);
     const [quantity, setQuantity] = useState(1);
+    const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+    const tooltipTextLines = ['L  w31 h41', 'XL w33 h43'];
     const [product, setProduct] = useState({
         ProductId: productId,
         ProductName: '',
@@ -197,6 +200,15 @@ const ProductDetail = () => {
     }));
   }
 
+  const handleMouseEnter = () => {
+    setIsTooltipVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsTooltipVisible(false);
+  };
+
+
     return (
         <div>
             <Navbar />
@@ -267,7 +279,16 @@ const ProductDetail = () => {
                                       )}
                                   </div>
 
-                <p className='underline tracking-wide text-sm mt-1'>Size guide</p>
+                                  <div className="mt-6">
+                                        <p
+                                        className="underline tracking-wide text-sm mt-1"
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
+                                        >
+                                        Size guide
+                                        </p>
+                                        {isTooltipVisible && <Tooltip text={tooltipTextLines} />}
+                                    </div>
             </div>
 
                         <div>
