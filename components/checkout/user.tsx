@@ -81,7 +81,7 @@ const UserCheckout = () => {
           user_id: userDetail?.userId,
           address: userDetail?.Address,
         },
-        total_amount: initProduct().totalAmount + 50,
+        total_amount: initProduct().totalAmount + 0,
         total_quantity: initProduct().countProduct,
         product: initProduct().product,
         isQuickBuy: data.isQuickBuy,
@@ -176,7 +176,7 @@ const UserCheckout = () => {
           </div>
           <div className="flex justify-between text-base">
             <div className=" ">SHIPPING</div>
-            <div className=" ">฿50</div>
+            <div className=" ">฿0</div>
           </div>
           <div className="mt-4   flex justify-between text-2xl">
             <div className=" ">TOTAL</div>
