@@ -158,7 +158,7 @@ const handleDecrement =  async (item: CartItem) => {
         };
 
         const calculateTotal = () => {
-            setTotal(subtotal + 50 ); 
+            setTotal(subtotal + 0 ); 
         };
 
         calculateSubtotal();
@@ -351,7 +351,7 @@ const handleDecrement =  async (item: CartItem) => {
             </div>
             <div className='flex justify-between text-base'>
                 <div className=' '>SHIPPING</div>
-                <div className=' '>฿50</div>
+                <div className=' '>฿0</div>
             </div>
             <div className='mt-4  flex justify-between text-2xl'>
                 <div className=' '>TOTAL</div>
