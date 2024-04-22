@@ -98,6 +98,7 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
         setIsAuthenticated(false);
+        window.location.reload();
     }
 
     function getUserId() {
