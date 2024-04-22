@@ -56,7 +56,6 @@ const WishlistCard = () => {
             if (response.ok) {
                 const wishlistItems = await response.json();
                 setWishlistItems(wishlistItems);
-                console.log('Hey Wishlist Items:', wishlistItems);
             } else {
                 console.error('Error fetching wishlist items:', response.status);
             }
@@ -91,7 +90,6 @@ const WishlistCard = () => {
   };
   
   useEffect(() => {
-      console.log(selectedSize);
   }, [selectedSize]);
   
 
@@ -162,7 +160,6 @@ const closeModal = () => {
                     });
                     
                     if (deleteResponse.ok) {
-                        console.log(selectedSize + " " + quantity);
                         const response = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
                             method: 'POST',
                             headers: {
