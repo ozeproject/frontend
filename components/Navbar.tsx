@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from 'next/router';
+import Tooltip from './Tooltip';
 
 
 interface MyToken {
@@ -22,6 +23,17 @@ const Navbar = () => {
     const [searchValue, setSearchValue] = useState(false);
     const [userName, setUserName] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+    const tooltipTextLines = [userName];
+    
+    const handleMouseEnter = () => {
+        setIsTooltipVisible(true);
+      };
+    
+      const handleMouseLeave = () => {
+        setIsTooltipVisible(false);
+      };
+    
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -109,8 +121,21 @@ const Navbar = () => {
                 </div>
 
                 <div className='lay3 w-2/12'>
-                    <div className='flex justify-between'>
-                        <div className='m-4 pt-2'><Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/userprofile/`}>{userName}</Link></div>
+                    <div className='flex justify-between '>
+                        <div className='m-4 pt-2'>
+                            {userName ? (  
+                            <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/userprofile/`}>
+                                <img
+                                    src="https://www.svgrepo.com/show/213788/avatar-user.svg"
+                                    alt="Avatar"
+                                    className="w-8 h-8 rounded-full pb-2"
+                                    onMouseEnter={handleMouseEnter}
+                                    onMouseLeave={handleMouseLeave}
+                                />
+                            </Link>
+                             ) : null}  
+                            {isTooltipVisible && <Tooltip text={tooltipTextLines} />}
+                        </div>
 
                         <div className='m-4'>
                             <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/wishlist/`}>
@@ -135,23 +160,6 @@ const Navbar = () => {
                                 </svg></Link>
                         </div>
                     </div>
-                    {searchValue ?
-                        <div className='w-60'>
-                            <div className="flex justify-end items-end">
-                                <input
-                                    type="text"
-                                    placeholder="WHAT ARE YOU LOOKING FOR?"
-                                    className="border rounded-md p-2"
-                                    style={{
-                                        backgroundColor: '#f2eee3',
-                                        width: '420px',
-                                        height: '46px',
-                                        border: '1px solid #ccc',
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        : null}
                 </div>
             </div>
         </div>
