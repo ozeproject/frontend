@@ -113,7 +113,7 @@ const Edit = () => {
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Phone:</label>
-            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="number" value={userData.Phone } name="Phone" placeholder="132-456-789" readOnly={!isEditMode} onChange={handleInputChange}  />
+            <input className='border border-[#B9B9B9] w-full rounded h-8 placeholder:pl-3 bg-[#F2EEE3]' type="tel" value={userData.Phone } name="Phone" placeholder="093-456-789" readOnly={!isEditMode} onChange={handleInputChange}  />
           </div>
           <div className='mt-3'>
             <label className='text-[#3B3B3B]'>Address:</label>

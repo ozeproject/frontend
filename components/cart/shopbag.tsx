@@ -25,7 +25,6 @@ interface CartItem {
 
 const ShopBags = () => {
     const router: any = useRouter();
-
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
     const [subtotal, setSubtotal] = useState(0); 
@@ -36,6 +35,7 @@ const ShopBags = () => {
     const [quantity, setQuantity] = useState(1);
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const tooltipTextLines = ['L  w31 h41', 'XL w33 h43'];
+    const [totalQuantity, setTotalQuantity] = useState(0);
     const apiUrl = process.env.REACT_APP_API_URL;
   
   useEffect(() => {
@@ -148,22 +148,27 @@ const handleDecrement =  async (item: CartItem) => {
   }
 
     
-    useEffect(() => {
-        const calculateSubtotal = () => {
-            let total = 0;
-            cartItems.forEach((item) => {
-                total += item.Price * item.Quantity ;
-            });
-            setSubtotal(total);
-        };
+  useEffect(() => {
+    const calculateSubtotal = () => {
+      let total = 0;
+      cartItems.forEach((item) => {
+        total += item.Price * item.Quantity;
+      });
+      setSubtotal(total);
+    };
 
-        const calculateTotal = () => {
-            setTotal(subtotal + 0 ); 
-        };
+    const calculateTotal = () => {
+      // Calculate total quantity of items in the cart
+      const totalQuantity = cartItems.reduce((acc, item) => acc + item.Quantity, 0);
+      setTotalQuantity(totalQuantity);
 
-        calculateSubtotal();
-        calculateTotal();
-    }, [cartItems, subtotal]);
+      // Calculate total price (subtotal + shipping)
+      setTotal(subtotal + 0);
+    };
+
+    calculateSubtotal();
+    calculateTotal();
+  }, [cartItems, subtotal]);
 
     const toggleEditing = (index: number | null, item: CartItem | null) => {
         setEditingIndex(prevIndex => {
@@ -343,7 +348,7 @@ const handleDecrement =  async (item: CartItem) => {
         <div className='border-b-2  border-gray-500 p-16'>
             <div className='flex justify-between text-lg'>
                 <div className=' '>YOUR ORDER SUMMARY</div>
-                <div className=' '>{'[ '}[ {cartItems.length} ]{' ]'}</div>
+                <div className=' '>{'[ '}[ {totalQuantity} ]{' ]'}</div>
             </div>
             <div className='flex justify-between text-base mt-4'>
                 <div className=' '>SUBTOTAL</div>

@@ -18,24 +18,35 @@ const UserCheckout = () => {
   const [Authenticated, setIsAuthenticated] = useState(false);
   const [userDetail, setUserDetail] = useState<MyToken | null>(null);
   const data = router.query.detail && JSON.parse(router.query.detail as string);
-  const [addressError,setAddressError] = useState<string | null>(null)
+  const [addressError, setAddressError] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      setIsAuthenticated(true);
-    }
-
-    if (token) {
+    const fetchUserProfile = async () => {
       try {
-        const decodedToken = jwtDecode<MyToken>(token);
-        setUserDetail(decodedToken);
-        console.log(decodedToken);
+        const token = localStorage.getItem("accessToken");
+        if (!token) {
+          return;
+        }
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`
+          }
+        });
+        if (response.ok) {
+          const userProfile = await response.json();
+          setUserDetail(userProfile);
+        } else {
+          // Handle error when fetching user profile
+          console.error("Failed to fetch user profile");
+        }
       } catch (error) {
-        console.error("Error decoding JWT token:", error);
+        console.error("Error fetching user profile:", error);
       }
-    }
-  }, [token]);
+    };
+
+    fetchUserProfile();
+  }, []);
 
   function initProduct() {
     let countProduct = 0;
