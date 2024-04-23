@@ -98,8 +98,8 @@ const calculateOrderTotal = (items: OrderHistoryItem[]): number => {
             <div className=' '>
               <div className=' '>
                 <div className='text-xl text-center border-b-2 border-gray-500 p-12  flex justify-between' onClick={() => toggleExpand(orderId)}>
-                  <div className='hover:underline'>แสดงรายการที่ {index + 1}</div>
-                  <div>ราคารวม ฿{calculateOrderTotal(items)}</div>
+                  <div className='hover:underline'>Order {index + 1}</div>
+                  <div>Total ฿{calculateOrderTotal(items)}</div>
                 </div>
                 {expandedOrderId === orderId && (
                   <div className="order-items">
