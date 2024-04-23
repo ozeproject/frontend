@@ -153,7 +153,7 @@ const UserCheckout = () => {
                 type="button"
                 onClick={() => checkout()}
               >
-                PLACCE ORDER
+                PLACE ORDER
               </button>
             </div>
           </div>
