@@ -38,21 +38,20 @@ const Navbar = () => {
       };
     
 
-    useEffect(() => {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-            setIsAuthenticated(true);
-        }
+      useEffect(() => {
+          const token = localStorage.getItem('accessToken');
+          if (token) {
+              const decodedToken = jwtDecode<MyToken>(token);
+              const username = decodedToken.username;
+              setUserName(username);
+          }
+        setUserName
+        setIsAuthenticated(!!token); 
 
-        if (token) {
-            try {
-                const decodedToken = jwtDecode<MyToken>(token);
-                setUserName(decodedToken.username);
-            } catch (error) {
-                console.error('Error decoding JWT token:', error);
-            }
-        }
-    }, [token]);
+        return () => {
+            setIsAuthenticated(false); 
+        };
+    }, []);
 
      const fetchCartCount = async () => {
         try {
@@ -98,7 +97,6 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
         setIsAuthenticated(false);
-        window.location.reload();
     }
 
     function getUserId() {
@@ -186,7 +184,7 @@ const Navbar = () => {
                 <div className='lay3 w-2/12'>
                     <div className='flex justify-between '>
                         <div className='m-4 pt-2'>
-                            {userName ? (  
+                            {isAuthenticated ? (  
                             <Link href={`${process.env.NEXT_PUBLIC_BASEPATH}/userprofile/`}>
                                 <img
                                     src="https://www.svgrepo.com/show/213788/avatar-user.svg"
